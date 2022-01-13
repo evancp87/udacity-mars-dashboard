@@ -1,25 +1,25 @@
 let store = {
-    user: { name: "Student" },
+    user: { name: 'Student' },
     apod: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit'],
-}
+};
 
 // add our markup to the page
 const root = document.getElementById('root')
 
 const updateStore = (store, newState) => {
-    store = Object.assign(store, newState)
-    render(root, store)
-}
+    store = Object.assign(store, newState);
+    render(root, store);
+};
 
 const render = async (root, state) => {
-    root.innerHTML = App(state)
+    root.innerHTML = App(state);
 }
 
 
 // create content
 const App = (state) => {
-    let { rovers, apod } = state
+    let { rovers, apod } = state;
 
     return `
         <header></header>
