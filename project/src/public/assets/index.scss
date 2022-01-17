@@ -20,6 +20,10 @@ body {
     /* footer styles */
   }
   
+  img {
+      max-width: 100%;
+      height: auto;
+  }
   /* -------------------  TABLET  --------------------- */
   @media (min-width: 768px) {
     /* use mobile */
