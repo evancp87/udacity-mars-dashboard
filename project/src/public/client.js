@@ -14,7 +14,7 @@ const updateStore = (store, newState) => {
 
 const render = async (root, state) => {
     root.innerHTML = App(state);
-}
+};
 
 
 // create content
@@ -38,15 +38,46 @@ const App = (state) => {
                 </p>
                 ${ImageOfTheDay(apod)}
             </section>
+
+    <section>
+    
+     <aside class='sidebar green'>
+      <h2>Sidebar Content</h2>
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, repellat voluptas in velit esse impedit. Cumque, aliquam minus tenetur libero dolore distinctio officiis quaerat quod? Hic itaque quod sed repellat deserunt mollitia eaque reprehenderit quam minus aut inventore iure, maiores quos rem odio optio nulla earum est, incidunt dolore modi. </p>
+      
+    </aside>
+<div>
+    <h2>Main Content</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, repellat voluptas in velit esse impedit. Cumque, aliquam minus tenetur libero dolore distinctio officiis quaerat quod? Hic itaque quod sed repellat deserunt mollitia eaque reprehenderit quam minus aut inventore iure, maiores quos rem odio optio nulla earum est, incidunt dolore modi. </p>
+</div>
+      </section>
         </main>
         <footer></footer>
-    `
-}
+        
+    `;
+};
+
+// `<aside class='sidebar'>
+// <p></p>
+// </aside>
+// <div class="mars-rover-section-desktop">
+// <h2>
+//     <p></p>
+// </h2>`
+// `<section class="rover-section-mobile">
+//                 <h2></h2>
+//                 <h2></h2>
+//                 <h2></h2>
+//                 <img src="" alt="">
+//             </section>`
+
+
 
 // listening for load event because page should load before any JS is called
 window.addEventListener('load', () => {
-    render(root, store)
-})
+    render(root, store);
+});
 
 // ------------------------------------------------------  COMPONENTS
 
@@ -55,13 +86,13 @@ const Greeting = (name) => {
     if (name) {
         return `
             <h1>Welcome, ${name}!</h1>
-        `
+        `;
     }
 
     return `
         <h1>Hello!</h1>
-    `
-}
+    `;
+};
 
 // Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
