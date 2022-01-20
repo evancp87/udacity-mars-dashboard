@@ -13,6 +13,7 @@
   }
   body {
    font-size: 0.8rem;
+   max-width: 1800px;
   }
 
   *, *:before, *:after {
@@ -29,18 +30,22 @@
     list-style: none;
   }
   
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+  // svg {
+  //   width: 100%;
+  //   height: auto;
+  // }
 
+
+  // img {
+    // max-width: 100%;
+    // height: auto;}
   a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
-}
+//   img {
+//     max-width: 100%;
+//     height: auto;
+// }

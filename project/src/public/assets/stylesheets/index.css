@@ -354,6 +354,7 @@ html {
 
 body {
   font-size: 0.8rem;
+  max-width: 1800px;
 }
 
 *, *:before, *:after {
@@ -370,20 +371,167 @@ ol, ul {
   list-style: none;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
 a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
 
-img {
-  max-width: 100%;
+footer {
+  background-color: #BC2732;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
   height: auto;
+  padding: 1em;
+}
+
+/* -------------------  MOBILE  --------------------- */
+svg {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial;
+  min-height: 100vh;
+}
+
+header {
+  /* header styles */
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  /* footer styles */
+}
+
+.landscape {
+  display: inline-block;
+  width: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+/* -------------------  TABLET  --------------------- */
+@media (max-width: 768px) {
+  .mars-intro {
+    background-color: #253C8B;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0 1rem 0;
+  }
+
+  .title {
+    font-size: 5rem;
+    padding: 0.2em;
+    color: #ffffff;
+    margin-bottom: 1em;
+  }
+
+  .intro-text {
+    color: #ffffff;
+    padding: 0 5em 0 5em;
+    white-space: no-wrap;
+  }
+}
+/* -------------------  DESKTOP  -------------------- */
+/* -------------------  LARGE SCREENS  -------------- */
+@media (min-width: 1824px) {
+  /* use mobile */
+}
+.hero {
+  background-color: #BC2732;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #003b59;
+  /* background: {
+     image: 
+       url("https://codetheweb.blog/assets/img/posts/full-image-hero/image.jpg");
+     size: cover;
+     position: center center;
+   }
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+  */
+}
+
+.scroll-animation {
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .mars-intro {
+    background-color: #253C8B;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 8rem 0 1rem 0;
+  }
+
+  .title {
+    font-size: 10rem;
+    padding: 0.2em;
+    color: #ffffff;
+    margin-bottom: 1em;
+  }
+
+  .intro-text {
+    color: #ffffff;
+    padding: 0 5em 0 5em;
+    white-space: no-wrap;
+  }
+}
+@media (min-width: 1224px) {
+  /* use mobile */
+  .mars-intro {
+    background-color: #253C8B;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 8rem 0 1rem 0;
+  }
+
+  .title {
+    font-size: 10rem;
+    padding: 0.2em;
+    color: #ffffff;
+    margin-bottom: 1em;
+  }
+
+  .intro-text {
+    color: #ffffff;
+    padding: 0 5em 0 5em;
+    white-space: no-wrap;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

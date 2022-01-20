@@ -1,0 +1,13 @@
+@use '../abstracts' as a;
+
+footer {
+    background-color: a.$mars-red;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    padding: 1em;
+}
