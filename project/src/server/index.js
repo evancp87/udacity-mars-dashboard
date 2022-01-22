@@ -41,7 +41,7 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 // example API call
 // If you just want to receive photo data for the most recent Sol for which photos exist for a particular rover, you can visit the /latest_photos endpoint.
 
-// https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos
+// `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${apiKey}`
 // https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos
 // https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/latest_photos
 
@@ -59,7 +59,7 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 // more info here https://github.com/chrisccerami/mars-photo-api#query-for-latest-photos
 
 
-// const roverImages = (rover, index) => { 
+// const latestImages = (rover, earthDate index) => { 
 //app.get(/${rover}/latest_photos, async (req, res) => try { let latestImages = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=apiKey`.then((res) => res.json()).res.send)({image})} catch (error) {console.log('error:', err);})
 //})
 
@@ -86,7 +86,32 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 
 
 
-app.get();
+
+// const latestImages = (rover, earthDate, index) => {
+
+//     app.get(`/${rover}/photos/${index}`, async (req, res) => {
+//         try {
+//             let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?earth_date=${earthDate}&api_key=${apiKey}`)
+//                 .then((res) => res.json()); res.send({image});
+            
+//         } catch (error) {console.log('error:', error);
+//         }
+// });
+// }
+
+
+
+
+
+//         app.get('rovers/${rover}', async (req, res) => {
+//             try {
+//                 let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${apiKey}`)
+//                     .then((res) => res.json()); res.send({rover});
+                
+//             } catch (error) {console.log('error:', error);
+//             }
+//     });
+    
 
 
 app.get('/apod', async (req, res) => {
