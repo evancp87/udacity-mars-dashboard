@@ -126,6 +126,13 @@ const ImageOfTheDay = (apod) => {
 // ------------------------------------------------------  API CALLS
 
 // Example API call
+
+
+// const latestImage = (state) => {
+//     let {image} = state;
+//     fetch(`http://localhost:3000/image`).then(res => res.json()).then(image => updateStore(store, {image: image}));
+//     return data
+// }
 const getImageOfTheDay = (state) => {
     let { apod } = state
 
@@ -135,3 +142,6 @@ const getImageOfTheDay = (state) => {
 
     return data
 }
+
+
+
