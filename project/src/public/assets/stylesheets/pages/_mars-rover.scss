@@ -30,6 +30,7 @@ body {
   //     height: auto;
   // }
 
+
   .landscape {
   display: inline-block;
 	// position: relative;
@@ -43,6 +44,9 @@ body {
   
   }
 
+  .svg-content {
+    background: hsl(202, 75%, 77%);
+  }
   
   /* -------------------  TABLET  --------------------- */
   @media (max-width: a.$tablet-breakpoint) {
