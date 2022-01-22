@@ -3,6 +3,7 @@ let store = {
     apod: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit'],
 };
+// udpate store to Rovers
 
 // add our markup to the page
 const root = document.getElementById('root')
