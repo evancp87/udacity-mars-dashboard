@@ -1,15 +1,18 @@
-let store = {
-    user: { name: 'Student' },
+let store = Immutable.Map({
+    user: Immutable.Map({ name: 'Student' }),
     apod: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit'],
-};
-// udpate store to Rovers
+    selectedRover: 'Curiosity',
+    rovers: Immutable.List(['Curiosity', 'Opportunity', 'Spirit']),
+    roverInfo: Immutable.map({}),
+});
+
 
 // add our markup to the page
 const root = document.getElementById('root')
 
-const updateStore = (store, newState) => {
-    store = Object.assign(store, newState);
+
+const updateStore = (state, newState) => {
+    const store = state.merge(newState);
     render(root, store);
 };
 
@@ -17,11 +20,40 @@ const render = async (root, state) => {
     root.innerHTML = App(state);
 };
 
+// Dashboard components
 
-// create content
+const tabs = (store) => {
+    store.get('rovers').map((name) =>
+         `<button class='btn-tab' onClick=''>${info.name}</button>`
+    )
+}
+const dashboard = (tabs, sidebar, imageGallery) => `
+<section>
+<aside class='sidebar green'>${sidebar}</aside>
+<article class='main-content'>
+<nav>${tabs}</nav>
+${imageGallery}
+</article>
+
+</section>
+`
+
+// const roverbuttons = getElementById('button');
+
+
+// roverButtons.map(rovers => {updateStore(store, {foo})})
+
+// const dashboard (gallery,) {
+//     const roverImage = (params) => {
+//         `<article> </article>`
+//     }
+// }
+
+// const roverButtons = getElementById('')
+
 const App = (state) => {
-    let { rovers, apod } = state;
-
+    let { rovers, apod, roverInfo  } = state;
+// console.log(rovers);
     return `
         <header></header>
         <main>
@@ -38,9 +70,10 @@ const App = (state) => {
                     but generally help with discoverability of relevant imagery.
                 </p>
                 ${ImageOfTheDay(apod)}
+           
             </section>
 
-    <section>
+    <section class='main-content'>
     
      <aside class='sidebar green'>
       <h2>Sidebar Content</h2>
@@ -51,27 +84,13 @@ const App = (state) => {
 <div>
     <h2>Main Content</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, repellat voluptas in velit esse impedit. Cumque, aliquam minus tenetur libero dolore distinctio officiis quaerat quod? Hic itaque quod sed repellat deserunt mollitia eaque reprehenderit quam minus aut inventore iure, maiores quos rem odio optio nulla earum est, incidunt dolore modi. </p>
-</div>
+<p>${roverInfo(rovers)}</p> </div>
       </section>
         </main>
         <footer></footer>
         
     `;
 };
-
-// `<aside class='sidebar'>
-// <p></p>
-// </aside>
-// <div class="mars-rover-section-desktop">
-// <h2>
-//     <p></p>
-// </h2>`
-// `<section class="rover-section-mobile">
-//                 <h2></h2>
-//                 <h2></h2>
-//                 <h2></h2>
-//                 <img src="" alt="">
-//             </section>`
 
 
 
@@ -93,6 +112,13 @@ const Greeting = (name) => {
     return `
         <h1>Hello!</h1>
     `;
+};
+
+const roverSelection = (rover) => {
+    if (selectedRover !== 'curiosity') {
+        return selectedRover;
+    } return 
+       'Curiosity'
 };
 
 // Example of a pure function that renders infomation requested from the backend
@@ -128,20 +154,64 @@ const ImageOfTheDay = (apod) => {
 // Example API call
 
 
-// const latestImage = (state) => {
-//     let {image} = state;
-//     fetch(`http://localhost:3000/image`).then(res => res.json()).then(image => updateStore(store, {image: image}));
-//     return data
-// }
+
 const getImageOfTheDay = (state) => {
     let { apod } = state
-
+    
     fetch(`http://localhost:3000/apod`)
-        .then(res => res.json())
-        .then(apod => updateStore(store, { apod }))
-
+    .then(res => res.json())
+    .then(apod => updateStore(store, { apod }))
+    
     return data
 }
 
 
+const roverInfo = (store, selectedRover) => {
+    if (selectedRover !== 'curiosity') {
+        updateStore(store, { selectedRover})
+    } return {
+        selectedRover === 'Curiosity'
+    }
+}
+
+const imageGallery = (store) => {
+    const imageGallery = store.get('rovers').map('latest_photos')
+    
+}
+
+const selectedRoverImg = (store) => {
+    const selectedRoverImg = (store).store.get('rovers').map(photo => (`<img src'=${img_src}'>`)
+    )}
+
+const sidebar = (store) => {
+    const sidebar = store.get('roverInfo').map(info => 
+        (
+
+            `
+            <h2>${info.name}</h2>
+            <ul><li>Launch Date: ${info.launch_date} </li>
+            <li>Landing Date: ${info.landing_date} </li>
+            <li>Status: ${info.status}  </li>
+            <li>Date of last image taken: ${info} </li>
+            </ul>
+           
+            )
+        
+        )
+
+const roverImage = (state) => {
+    let {rovers} = state;
+    fetch(`http://localhost:3000/${rover}`).then(res => res.json()).then(image => updateStore(store, {image: image}));
+    return rovers
+}
+
+ const getRoverInfo = (state) => {
+
+    let {roverInfo} = state;
+
+    fetch(`http://localhost:3000/${roverInfo}`)
+        .then(res => res.json())
+        .then(roverInfo => updateStore(store, { roverInfo }));
+
+};
 
