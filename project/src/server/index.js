@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, '../public')));
 
 // your API calls
-// const apiKey = process.env.API_KEY;
+const apiKey = process.env.API_KEY;
 
 
 // const Rovers = Immutable.List([Curiosity, Spirit, Opportunity]);
@@ -85,32 +85,33 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 // - Most Recently Available Photos.
 
 
+// Fetching rover photos from the Mars api using dynamic router
 
 
-// const latestImages = (rover, earthDate, index) => {
-
-//     app.get(`/${rover}/photos/${index}`, async (req, res) => {
-//         try {
-//             let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?earth_date=${earthDate}&api_key=${apiKey}`)
-//                 .then((res) => res.json()); res.send({image});
+app.get('/rovers/:rover/', async (req, res) => {
+    console.log(req.params);
+    console.log(req.query);
+    try {
+     let roverImages = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${req.params.rover}/latest_photos?api_key=${apiKey}`)
+                .then((res) => res.json()); res.send({roverImages});
             
-//         } catch (error) {console.log('error:', error);
-//         }
-// });
-// }
+        } catch (error) {console.log('error:', error);
+        }
+});
 
 
 
+// fetching rover info on the selected rover from the Mars api, preserving the Curiosity rover as the default if none of the others are selected
 
-
-//         app.get('rovers/${rover}', async (req, res) => {
-//             try {
-//                 let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${apiKey}`)
-//                     .then((res) => res.json()); res.send({rover});
+app.get('manifests/:chosenRover', async (req, res) => {
+    const rover = req.params.chosenRover ? req.params.chosenRover : 'Curiosity';
+    try {
+        const roverInfo = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${apiKey}`)
+            .then((res) => res.json()); res.send({roverInfo});
                 
-//             } catch (error) {console.log('error:', error);
-//             }
-//     });
+    } catch (error) {console.log('error:', error); }
+            
+});
     
 
 
