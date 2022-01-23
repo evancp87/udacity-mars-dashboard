@@ -48,6 +48,25 @@ body {
     background: hsl(202, 75%, 77%);
   }
   
+  .blue {
+    background-color: a.$medBlue;
+    @include bgGradient(a.$medBlue);  
+  }
+
+
+  .green {
+    background-color: a.$green;
+    @include bgGradient(a.$green);
+  }
+
+
+  .main-content {
+flex: 1;
+  }
+
+  .sidebar {
+    flex: 0 0 300px;
+  }
   /* -------------------  TABLET  --------------------- */
   @media (max-width: a.$tablet-breakpoint) {
     .mars-intro {
