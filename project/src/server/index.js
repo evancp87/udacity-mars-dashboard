@@ -23,12 +23,11 @@ const apiKey = process.env.API_KEY;
 // Fetching rover photos from the Mars api using dynamic router
 
 
-app.get('/rovers/:rover/', async (req, res) => {
-    console.log(req.params);
-    console.log(req.query);
+app.get('/:rover', async (req, res) => {
+   const rover = req.params.rover ? req.params.rover : 'Curiosity';
     try {
-     let roverImage = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${req.params.rover}/latest_photos?api_key=${apiKey}`)
-                .then((res) => res.json()); res.send({roverImage});
+     let roverImages = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${apiKey}`)
+                .then((res) => res.json()); res.send({roverImages});
             
         } catch (error) {console.log('error:', error);
         }
@@ -39,9 +38,9 @@ app.get('/rovers/:rover/', async (req, res) => {
 // fetching rover info on the selected rover from the Mars api, preserving the Curiosity rover as the default if none of the others are selected
 
 app.get('manifests/:chosenRover', async (req, res) => {
-    const rover = req.params.chosenRover ? req.params.chosenRover : 'Curiosity';
+    const chosenRover = req.params.chosenRover ? req.params.chosenRover : 'Curiosity';
     try {
-        let roverInfo = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${apiKey}`)
+        let roverInfo = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`)
             .then((res) => res.json()); res.send({roverInfo});
                 
     } catch (error) {console.log('error:', error); }
