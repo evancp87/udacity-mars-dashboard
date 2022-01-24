@@ -40,7 +40,7 @@ const sidebar =  (info) =>
 )
 
 const displayRoverInfo = (store) => {
-     const roverPanel = sidebar.get(roverInfo);
+     const roverPanel = store.get('roverInfo').map(info => sidebar(info));
 };
 
 const dashboard = (sidebar, tabs, imageGallery) => {
