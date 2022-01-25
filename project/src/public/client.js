@@ -18,18 +18,17 @@ const updateStore = (state, newState) => {
 
 // Dashboard components
 const tabs = (store) => {
-  store
-    .get("rovers")
-    .map(
+  store.get("rovers").map(
       (roverName) =>
         `<button class='btn-tab' onClick='displayRoverInfo('${roverName}')'>${roverName}</button>`
     );
 };
 
 
-const sidebar =  (info) =>
-(
-    `
+const sidebar =  (store) =>
+    store.get(info => 
+        (
+            `
           <h2>${info.name}</h2>
           <ul>
           <li><span>Launch Date:</span> ${info.launch_date} </li>
@@ -37,7 +36,8 @@ const sidebar =  (info) =>
           <li><span>Status:</span> ${info.status} </li>
           <li><span>Date of last image taken:</span> ${info.max_date} </li>
           </ul>`
-)
+        )
+    );
 
 const displayRoverInfo = (store) => {
      const roverPanel = store.get('roverInfo').map(info => sidebar(info));
@@ -74,9 +74,9 @@ const App = (state) => {
   const rovers = state.get("rovers");
   const roverInfo = state.get("roverInfo");
 
-  if (rovers) {
-    return store.get("rovers");
-  }
+//   if (rovers) {
+//     return store.get("rovers");
+//   }
 
   return dashboard(sidebar, tabs, imageGallery);
 };
