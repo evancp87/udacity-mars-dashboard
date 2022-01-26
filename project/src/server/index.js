@@ -23,11 +23,12 @@ const apiKey = process.env.API_KEY;
 // Fetching rover photos from the Mars api using dynamic router
 
 
-app.get('/:rover', async (req, res) => {
-    const rover = req.params;
+app.get('/roverimage/:rover', async (req, res) => {
+    const {rover} = req.params;
     try {
      let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${apiKey}`)
-     .then((res) => res.json()); res.send({image});
+     .then((res) => res.json()); 
+     JSON.stringify(image); res.send({image});
             
         } catch (error) {console.log('error:', error);
         }
@@ -37,7 +38,7 @@ app.get('/:rover', async (req, res) => {
 
 // fetching rover info on the selected rover from the Mars api, preserving the Curiosity rover as the default if none of the others are selected
 
-app.get('manifests/:chosenRover', async (req, res) => {
+app.get('/roverinfo/:chosenRover', async (req, res) => {
     
     const chosenRover = req.params;
     try {

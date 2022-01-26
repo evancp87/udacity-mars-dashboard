@@ -146,7 +146,7 @@ const App = (state) => {
 
 const roverImage =  (store, rover) => {
 //   let { rovers } = state;
-   fetch(`http://localhost:3000/${rover}`)
+   fetch(`http://localhost:3000/roverimage/${rover}`)
     .then((res) => res.json())
     .then((roverData) => console.log(roverData))
     .then((roverData) => updateStore(store, { roverData }));
@@ -177,7 +177,7 @@ const roverImage =  (store, rover) => {
 // };
 
 const getRoverInfo =  ( chosenRover) => {
-    const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+    const roverInfo = fetch(`http://localhost:3000/roverinfo/${chosenRover}`)
         .then((res) => res.json())
         .then((roverInfo) => console.log(roverInfo))
       
