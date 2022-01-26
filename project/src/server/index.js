@@ -24,10 +24,10 @@ const apiKey = process.env.API_KEY;
 
 
 app.get('/:rover', async (req, res) => {
-   const rover = req.params.rover ? req.params.rover : 'Curiosity';
+    const rover = req.params;
     try {
-     let roverImages = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${apiKey}`)
-                .then((res) => res.json()); res.send({roverImages});
+     let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${apiKey}`)
+     .then((res) => res.json()); res.send({image});
             
         } catch (error) {console.log('error:', error);
         }
@@ -38,7 +38,8 @@ app.get('/:rover', async (req, res) => {
 // fetching rover info on the selected rover from the Mars api, preserving the Curiosity rover as the default if none of the others are selected
 
 app.get('manifests/:chosenRover', async (req, res) => {
-    const chosenRover = req.params.chosenRover ? req.params.chosenRover : 'Curiosity';
+    
+    const chosenRover = req.params;
     try {
         let roverInfo = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`)
             .then((res) => res.json()); res.send({roverInfo});
@@ -49,16 +50,16 @@ app.get('manifests/:chosenRover', async (req, res) => {
     
 
 
-app.get('/apod', async (req, res) => {
-    try {
-        let image = await fetch(
-            `https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`
+// app.get('/apod', async (req, res) => {
+//     try {
+//         let image = await fetch(
+//             `https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`
 
-        ).then((res) => res.json());
-        res.send({ image });
-    } catch (err) {
-        console.log('error:', err);
-    }
-});
+//         ).then((res) => res.json());
+//         res.send({ image });
+//     } catch (err) {
+//         console.log('error:', err);
+//     }
+// });
 
 app.listen(port, () => console.log(`Mars Rover Dashboard app listening on port ${port}!`));

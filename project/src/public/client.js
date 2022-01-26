@@ -25,8 +25,12 @@ const tabs = (store) => {
 };
 
 
-const sidebar =  (store) =>
-    store.get(info => 
+const displayRoverInfo = (store) => {
+     const roverPanel = store.get('roverInfo').map(info => sidebar(info));
+};
+
+const sidebar = (store) =>
+    store.get('roverInfo').map(info => 
         (
             `
           <h2>${info.name}</h2>
@@ -38,10 +42,6 @@ const sidebar =  (store) =>
           </ul>`
         )
     );
-
-const displayRoverInfo = (store) => {
-     const roverPanel = store.get('roverInfo').map(info => sidebar(info));
-};
 
 const dashboard = (sidebar, tabs, imageGallery) => {
     ` 
@@ -63,7 +63,6 @@ const dashboard = (sidebar, tabs, imageGallery) => {
 const imageGallery = (store) => {
   const imageGallery = store.get("rovers").map((info) => info.latest_photos).join('');
 
-
 };
 
 const render = async (root, state) => {
@@ -78,7 +77,7 @@ const App = (state) => {
 //     return store.get("rovers");
 //   }
 
-  return dashboard(sidebar, tabs, imageGallery);
+ return dashboard(sidebar, tabs, store.get("rovers").map((info) => info.latest_photos).join(''));
 };
 
 // listening for load event because page should load before any JS is called
@@ -145,22 +144,93 @@ const App = (state) => {
 //     const selectedRoverImg = (store).store.get('rovers').map(photo => (`<img src'=${img_src}'>`)
 //     )}
 
-const roverImage = (state, rover) => {
-  let { rovers } = state;
-  fetch(`http://localhost:3000/${rover}`)
+const roverImage =  (store, rover) => {
+//   let { rovers } = state;
+   fetch(`http://localhost:3000/${rover}`)
     .then((res) => res.json())
-    .then((rovers) => updateStore(store, { rovers }));
-  return rovers;
+    .then((roverData) => console.log(roverData))
+    .then((roverData) => updateStore(store, { roverData }));
+    // return roverData;
 };
 
-const getRoverInfo = (state, chosenRover) => {
-  let { roverInfo } = state;
+// const getRoverInfo =  (state, chosenRover) => {
+//   let { roverInfo } = state;
 
-  fetch(`http://localhost:3000/${chosenRover}`)
-    .then((res) => res.json())
-    .then((roverInfo) => updateStore(store, { roverInfo }));
-  return roverInfo;
-};
+//     fetch(`http://localhost:3000/${chosenRover}`)
+//     .then((res) => res.json())
+//     .then((roverInfo) => console.log(roverInfo))
+    
+//     .then((roverInfo) => updateStore(store, { roverInfo }));
+//     return roverInfo;
+// };
+
+
+// const getRoverInfo = async (chosenRover) => {
+//     try {
+//         const roverInfo = await fetch(`http://localhost:3000/${chosenRover}`)
+//         .then(res => res.json())
+//         // .then((roverInfo) => console.log(roverInfo))
+      
+//         .then(roverInfo => updateStore(store, { roverInfo }));
+//     return roverInfo;
+//     } catch (error) {console.log('error:', error)}
+// };
+
+const getRoverInfo =  ( chosenRover) => {
+    const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+        .then((res) => res.json())
+        .then((roverInfo) => console.log(roverInfo))
+      
+        .then((roverInfo) => updateStore(store, { roverInfo }));
+    return roverInfo;
+  };
+
+
+
+
+// const getRoverInfo = (chosenRover) => {
+//     const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+//         .then((res) => res.json());
+//     console.log(roverInfo)
+//         .then((roverInfo) => updateStore(store, { roverInfo }));
+//     return roverInfo;
+// };
+
+
+// const getRoverInfo = (chosenRover) => {
+//         const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+//             .then((res) => res.json())
+//             .then((roverInfo) => updateStore(store, { roverInfo }));
+//         return roverInfo;
+//     // };
+
+// const getRoverInfo = (chosenRover) => {
+//     const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+//         .then((res) => res.json());
+//     console.log(roverInfo);
+//     .then
+//     return roverInfo;
+// };
+
+// const getRoverInfo = (chosenRover) => {
+//     const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+//         .then((res) => res.json());
+//     console.log(roverInfo);
+//     .then
+//     return roverInfo;
+// };
+
+// const getRoverInfo = (chosenRover) => {
+//     const roverInfo = fetch(`http://localhost:3000/${chosenRover}`)
+//         .then((res) => res.json());
+//     console.log(roverInfo);
+// };
+
+
+
+// const roverInfo = fetch(`http://localhost:3000/${chosenRover}`).then((res) => res.json())
+// console.log(roverInfo);
+
 
 window.addEventListener("load", () => {
   getRoverInfo(store.get("roverInfo"));
