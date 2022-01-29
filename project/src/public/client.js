@@ -3,18 +3,19 @@ let store = Immutable.Map({
   // apod: '',
   selectedRover: "Curiosity",
   rovers: Immutable.List(["Curiosity", "Opportunity", "Spirit"]),
-  roverInfo: Immutable.Map({}),
+  roverInfo: Immutable.Map(''),
+// rovers: ["curiosity", "opportunity", "spirit"],
+// roverInfo: []
 });
-
 
 
 // add our markup to the page
 const root = document.getElementById("root");
 
 const updateStore = (state, newState) => {
-  const store = state.merge(newState);
-  render(root, store);
-};
+    const store = state.merge(newState);
+    render(root, store);
+  };
 
 // Dashboard components
 const tabs = (store) => {
@@ -145,13 +146,27 @@ const App = (state) => {
 //     )}
 
 const roverImage =  (store, rover) => {
-//   let { rovers } = state;
-   fetch(`http://localhost:3000/roverimage/${rover}`)
-    .then((res) => res.json())
-    .then((roverData) => console.log(roverData))
-    .then((roverData) => updateStore(store, { roverData }));
-    // return roverData;
-};
+    //   let { rovers } = state;
+      const images = fetch(`http://localhost:3000/rovers/${rover}`)
+        .then((res) => res.json())
+        .then((rovers) => console.log(rovers))
+        .then((rovers) => updateStore(store, { rovers }));
+        // return roverData;
+    };
+//     const roverImage =  (state) => {
+//           let { rovers } = state;
+//           console.log(state);
+//            const images = fetch(`http://localhost:3000/rovers/${state}`)
+//             .then((res) => res.json())
+//             .then((data) => {console.log(data);
+//             let a = data.data.photos
+//         const newState = store.set("data", a) 
+//     updateStore(store, newState)
+//     processData(newState);
+// })
+//             .then((rovers) => updateStore(store, { rovers }));
+//             // return rovers;
+//         };
 
 // const getRoverInfo =  (state, chosenRover) => {
 //   let { roverInfo } = state;
@@ -177,14 +192,13 @@ const roverImage =  (store, rover) => {
 // };
 
 const getRoverInfo =  ( chosenRover) => {
-    const roverInfo = fetch(`http://localhost:3000/roverinfo/${chosenRover}`)
+    const roverInfo = fetch(`http://localhost:3000/manifests/${chosenRover}`)
         .then((res) => res.json())
         .then((roverInfo) => console.log(roverInfo))
       
         .then((roverInfo) => updateStore(store, { roverInfo }));
-    return roverInfo;
+    // return roverInfo;
   };
-
 
 
 
@@ -233,7 +247,8 @@ const getRoverInfo =  ( chosenRover) => {
 
 
 window.addEventListener("load", () => {
-  getRoverInfo(store.get("roverInfo"));
+  getRoverInfo(store.get("selectedRover"));
+  console.log(store.get('roverInfo'));
   roverImage(store.get("rovers"));
   render(root, store);
 });

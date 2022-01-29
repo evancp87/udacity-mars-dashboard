@@ -23,12 +23,11 @@ const apiKey = process.env.API_KEY;
 // Fetching rover photos from the Mars api using dynamic router
 
 
-app.get('/roverimage/:rover', async (req, res) => {
-    const {rover} = req.params;
+app.get('/rovers/:rover', async (req, res) => {
+    const rover = req.params.rover;
     try {
      let image = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${apiKey}`)
-     .then((res) => res.json()); 
-     JSON.stringify(image); res.send({image});
+     .then((res) => res.json()); res.send({image});
             
         } catch (error) {console.log('error:', error);
         }
@@ -36,18 +35,31 @@ app.get('/roverimage/:rover', async (req, res) => {
 
 
 
+
 // fetching rover info on the selected rover from the Mars api, preserving the Curiosity rover as the default if none of the others are selected
 
-app.get('/roverinfo/:chosenRover', async (req, res) => {
+app.get('/manifests/:chosenRover', async (req, res) => {
     
-    const chosenRover = req.params;
+    const chosenRover = req.params.chosenRover;
     try {
-        let roverInfo = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`)
-            .then((res) => res.json()); res.send({roverInfo});
+        let data = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`)
+            .then((res) => res.json()); res.send({data});
                 
     } catch (error) {console.log('error:', error); }
             
 });
+
+// app.get('/manifests/:chosenRover', async (req, res) => {
+    
+//     const chosenRover = req.params.chosenRover;
+//     try {
+//         const url = `https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`;
+//         let data = await fetch(url).then((res) => res.json()); res.send({data});
+//             // .then((res) => res.json()); res.send({roverInfo});
+                
+//     } catch (error) {console.log('error:', error); }
+            
+// });
     
 
 
