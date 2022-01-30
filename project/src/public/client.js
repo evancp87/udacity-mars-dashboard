@@ -1,3 +1,4 @@
+
 let store = Immutable.Map({
   // user: Immutable.Map({ name: 'Student' }),
   // apod: '',
@@ -71,12 +72,10 @@ const render = async (root, state) => {
 };
 
 const App = (state) => {
-  const rovers = state.get("rovers");
-  const roverInfo = state.get("roverInfo");
+  const rovers = state.get("selectedRover");
+//   const roverInfo = state.get("roverInfo");
 
-//   if (rovers) {
-//     return store.get("rovers");
-//   }
+
 
  return dashboard(sidebar, tabs, store.get("rovers").map((info) => info.latest_photos).join(''));
 };
@@ -146,7 +145,7 @@ const App = (state) => {
 //     )}
 
 const getRoverImage =  (store, rover) => {
-    //   let { rovers } = state;
+    //   let { rovers } = store;
       const images = fetch(`http://localhost:3000/rovers/${rover}`)
         .then((res) => res.json())
         .then((rovers) => console.log(rovers))
@@ -166,8 +165,8 @@ const getRoverInfo =  ( chosenRover) => {
 
 
 window.addEventListener("load", () => {
+    getRoverImage(store, store.get('selectedRover'));
   getRoverInfo(store.get("selectedRover"));
 //   console.log(store.get('roverInfo'));
-  getRoverImage(store.get("selectedRover"));
   render(root, store);
 });
