@@ -3,7 +3,7 @@ let store = Immutable.Map({
   // user: Immutable.Map({ name: 'Student' }),
   // apod: '',
   selectedRover: "Curiosity",
-  rovers: ["Curiosity", "Opportunity", "Spirit"],
+  rovers: ['Curiosity', 'Opportunity', 'Spirit'],
   roverInfo: Immutable.Map(''),
 // rovers: ["curiosity", "opportunity", "spirit"],
 // roverInfo: []
@@ -20,31 +20,36 @@ const updateStore = (state, newState) => {
 
 // Dashboard components
 const tabs = (store) => {
-  store.get("rovers").map(
-      (roverName) =>
-        `<button class='btn-tab' onClick='displayRoverInfo('${roverName}')'>${roverName}</button>`
-    );
+  const tabBtns = () => store.get('rovers');
+  tabBtns.map((el, index) =>
+    {  return    `<button class='btn-tab' onClick='displayRoverInfo(${el[index]})'>${el}</button>`;
+    }).join('');
+    
 };
 
+// function changeIndex(selectedRover)
 
 const displayRoverInfo = (store) => {
      const roverPanel = store.get('roverInfo').map(info => sidebar(info));
 };
 
-const sidebar = (store) =>
-    store.get('roverInfo').map(info => 
+const sidebar = (store, state) => {
+
+    const roverData = state.photo_manifest;
+    // const roverBar = roverData.map(info => 
         (
             `
-          <h2>${info.name}</h2>
-          <ul>
-          <li><span>Launch Date:</span> ${info.launch_date} </li>
-          <li><span>Landing Date:</span> ${info.landing_date} </li>
-          <li><span>Status:</span> ${info.status} </li>
-          <li><span>Date of last image taken:</span> ${info.max_date} </li>
-          </ul>`
+            <h2>${roverData.name}</h2>
+            <ul>
+            <li><span>Launch Date:</span> ${roverData.launch_date} </li>
+            <li><span>Landing Date:</span> ${roverData.landing_date} </li>
+            <li><span>Status:</span> ${roverData.status} </li>
+            <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
+            </ul>`
         )
-    );
-
+    // );
+};
+            
 const dashboard = (sidebar, tabs, imageGallery) => {
     ` 
     <section>
@@ -71,6 +76,7 @@ const render = async (root, state) => {
   root.innerHTML = App(state);
 };
 
+// App higher order function
 const App = (state) => {
   const rovers = state.get("selectedRover");
 //   const roverInfo = state.get("roverInfo");
@@ -166,7 +172,7 @@ const getRoverInfo =  ( chosenRover) => {
 
 window.addEventListener("load", () => {
     // getRoverImage(store, store.get('selectedRover'));
-    getRoverImage(store, store.get('rovers')[0]);
+    getRoverImage(store, store.get('rovers')[2]);
   getRoverInfo(store.get("selectedRover"));
 //   getRoverInfo(store, store.get('rovers')[1]);
    
