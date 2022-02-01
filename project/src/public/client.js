@@ -3,7 +3,7 @@ let store = Immutable.Map({
   // user: Immutable.Map({ name: 'Student' }),
   // apod: '',
   selectedRover: "Curiosity",
-  rovers: Immutable.List(["Curiosity", "Opportunity", "Spirit"]),
+  rovers: ["Curiosity", "Opportunity", "Spirit"],
   roverInfo: Immutable.Map(''),
 // rovers: ["curiosity", "opportunity", "spirit"],
 // roverInfo: []
@@ -165,8 +165,11 @@ const getRoverInfo =  ( chosenRover) => {
 
 
 window.addEventListener("load", () => {
-    getRoverImage(store, store.get('selectedRover'));
+    // getRoverImage(store, store.get('selectedRover'));
+    getRoverImage(store, store.get('rovers')[0]);
   getRoverInfo(store.get("selectedRover"));
+//   getRoverInfo(store, store.get('rovers')[1]);
+   
 //   console.log(store.get('roverInfo'));
   render(root, store);
 });
