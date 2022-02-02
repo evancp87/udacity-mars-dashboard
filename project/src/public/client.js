@@ -67,7 +67,7 @@ const sidebar = (store, state) => {
 
 
             
-const dashboard = (sidebar, tabs, imageGallery) => {
+const dashboard = (sidebar, tabs, imageGallery, selectedRoverImage) => {
     ` 
     <section>
   <aside class='sidebar green'>${sidebar}</aside>
@@ -75,7 +75,8 @@ const dashboard = (sidebar, tabs, imageGallery) => {
   <div class='tabs-container>
   <div class='btn-container>${tabs}</div>
   <div class='tabs-panel>
-  ${imageGallery}
+  <div class='rover-image'>${selectedRoverImage}</div>
+  <div class='latest-photos'>${imageGallery}</div>
   </div>
   </div>
   </article>
@@ -88,13 +89,25 @@ const dashboard = (sidebar, tabs, imageGallery) => {
 const imageGallery = (store) => {
 
     // picture of selected rover here
-  const imageGallery = store.get("rovers").map((info) => info.latest_photos).join('');
+  const imageGallery = store.get("rovers").map((info) => 
+  
+  `<div class='row'> 
+  <div class='column'>
+
+
+  </div>
+  
+  </div>
+  <div><img src='${info.latest_photos}'></div>
+
+  `
+    );
 
 };
 
 
 // App higher order function
-const App = (state) => {
+const App = (state, dashboard) => {
 
     // ${Greeting(store.get('user').get('name'))}
   const rovers = state.get("selectedRover");
@@ -102,7 +115,8 @@ const App = (state) => {
 
 
 
- return dashboard(sidebar, tabs, store.get("rovers").map((info) => info.latest_photos).join(''));
+ return dashboard(sidebar, tabs, imageGallery);
+    // store.get("rovers").map((info) => info.latest_photos).join(''));
 };
 
 // listening for load event because page should load before any JS is called
@@ -170,18 +184,22 @@ const Greeting = (name) => {
 //     return data
 // }
 
-// const roverInfo = (store, selectedRover) => {
-//     if (selectedRover !== 'curiosity') {
-//         updateStore(store, { selectedRover})
-//     } return {
-//         selectedRover === 'Curiosity'
-//     }
-// }
 
-// const selectedRoverImg = (store) => {
-//     const selectedRoverImg = (store).store.get('rovers').map(photo => (`<img src'=${img_src}'>`)
-//     )}
+// function to process rover information
+// const displayRover = (store, selectedRover) => {
+//     if (selectedRover === 'curiosity') {
+//        return rover(store.get('rovers')[0])
+//     } else if  (selectedRover === 'opportunity')
+// return {
+//     selectedRover(store.get('rovers')[1]);
+// } else if (selectedRover === 'Spirit') {
+//     return selectedRover(store.get('rovers')[2]);
+// } else {}
 
+
+
+// function to process rover image array
+// const roverImages
 
 
 // Rover api calls
