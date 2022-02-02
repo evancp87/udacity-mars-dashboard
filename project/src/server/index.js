@@ -41,7 +41,7 @@ app.get('/rovers/:rover', async (req, res) => {
 app.get('/manifests/:chosenRover', async (req, res) => {
     
     const chosenRover = req.params.chosenRover;
-  console.log(req.params)
+  console.log(req.params);
     try {
         let data = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`)
             .then((res) => res.json()); res.send({data});

@@ -1,6 +1,6 @@
-
+// store using ImmutableJS
 let store = Immutable.Map({
-  // user: Immutable.Map({ name: 'Student' }),
+//   user: Immutable.Map({ name: 'cosmonaut' }),
   // apod: '',
   selectedRover: "Curiosity",
   rovers: ['Curiosity', 'Opportunity', 'Spirit'],
@@ -10,13 +10,27 @@ let store = Immutable.Map({
 });
 
 
-// add our markup to the page
+// adds our markup to the page
 const root = document.getElementById("root");
 
+
+// updates Immutable store object
 const updateStore = (state, newState) => {
     const store = state.merge(newState);
     render(root, store);
   };
+
+  const render = async (root, state) => {
+    root.innerHTML = App(state);
+  };
+  
+  //  Listens for load before Javascript loads
+  window.addEventListener("load", () => {
+    getRoverImage(store, store.get('rovers')[0]);
+    getRoverInfo(store.get("selectedRover"));
+    render(root, store);
+  });
+  
 
 // Dashboard components
 const tabs = (store) => {
@@ -28,6 +42,7 @@ const tabs = (store) => {
 };
 
 // function changeIndex(selectedRover)
+// button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
 const displayRoverInfo = (store) => {
      const roverPanel = store.get('roverInfo').map(info => sidebar(info));
@@ -49,6 +64,8 @@ const sidebar = (store, state) => {
         )
     // );
 };
+
+
             
 const dashboard = (sidebar, tabs, imageGallery) => {
     ` 
@@ -67,17 +84,19 @@ const dashboard = (sidebar, tabs, imageGallery) => {
 };
 
 
+
 const imageGallery = (store) => {
+
+    // picture of selected rover here
   const imageGallery = store.get("rovers").map((info) => info.latest_photos).join('');
 
 };
 
-const render = async (root, state) => {
-  root.innerHTML = App(state);
-};
 
 // App higher order function
 const App = (state) => {
+
+    ${Greeting(store.get('user').get('name'))}
   const rovers = state.get("selectedRover");
 //   const roverInfo = state.get("roverInfo");
 
@@ -124,6 +143,19 @@ const App = (state) => {
 //     }
 // }
 
+// Pure function that renders conditional information
+const Greeting = (name) => {
+    if (name) {
+        return `
+            <h1>Dear ${name}, welcome to the Mars dashboard!</h1>
+        `
+    }
+    return `
+        <h1>Hello!</h1>
+    `
+}
+
+
 // ------------------------------------------------------  API CALLS
 
 // Example API call
@@ -150,6 +182,9 @@ const App = (state) => {
 //     const selectedRoverImg = (store).store.get('rovers').map(photo => (`<img src'=${img_src}'>`)
 //     )}
 
+
+
+// Rover api calls
 const getRoverImage =  (store, rover) => {
     //   let { rovers } = store;
       const images = fetch(`http://localhost:3000/rovers/${rover}`)
@@ -170,12 +205,4 @@ const getRoverInfo =  ( chosenRover) => {
   };
 
 
-window.addEventListener("load", () => {
-    // getRoverImage(store, store.get('selectedRover'));
-    getRoverImage(store, store.get('rovers')[2]);
-  getRoverInfo(store.get("selectedRover"));
-//   getRoverInfo(store, store.get('rovers')[1]);
-   
-//   console.log(store.get('roverInfo'));
-  render(root, store);
-});
+
