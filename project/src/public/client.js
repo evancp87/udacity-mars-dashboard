@@ -96,7 +96,7 @@ const imageGallery = (store) => {
 // App higher order function
 const App = (state) => {
 
-    ${Greeting(store.get('user').get('name'))}
+    // ${Greeting(store.get('user').get('name'))}
   const rovers = state.get("selectedRover");
 //   const roverInfo = state.get("roverInfo");
 
