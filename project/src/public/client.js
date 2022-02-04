@@ -55,22 +55,21 @@ const tabs = (store) => {
 // callback()
 // }
 
-// const displayRoverInfo = (state) => {
-//     const selectedRoverInfo = (roverName) => store.get('selectedRover');
-//     const (roverinfo)
+const displayRoverInfo = (state) => {
+    const selectedRoverInfo = (roverName) => store.get('selectedRover');
 
-//     updateStore(state, {selectedRoverInfo});
-//     // selectedRoverInfo.set()
+    updateStore(state, {selectedRoverInfo});
+    // selectedRoverInfo.set()
 
-//     const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
-//     roverImages.find(rover => rover === rover.name);
-//     const rover = (roverName) => filterRovers.find(rover => roverName === rover.name);
+    const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
+    roverImages.find(rover => rover === rover.name);
+    const rover = (roverName) => filterRovers.find(rover => roverName === rover.name);
 
-//     if (rover) {
-//         console.log
-//     }
-//     return filterRovers;
-// };
+    if (rover) {
+        console.log
+    }
+    return filterRovers;
+};
 
 // const roverShow = () => {
 //     roverBtnRover.find(rover => rover === rover.name)
