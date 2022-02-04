@@ -1,69 +1,59 @@
 // store using ImmutableJS
 let store = Immutable.Map({
-  user: Immutable.Map({ name: 'cosmonaut' }),
-  apod: '',
+  user: Immutable.Map({ name: "cosmonaut" }),
+  apod: "",
   selectedRover: "Curiosity",
-  rovers: ['Curiosity', 'Opportunity', 'Spirit'],
-  roverInfo: (''),
+  rovers: ["Curiosity", "Opportunity", "Spirit"],
+  roverInfo: "",
 });
-
 
 // adds our markup to the page
 const root = document.getElementById("root");
 
-
 // updates Immutable store object
 const updateStore = (state, newState) => {
-    const store = state.merge(newState);
-    render(root, store);
-  };
+  const store = state.merge(newState);
+  render(root, store);
+};
 
-  const render = async (root, state) => {
-    root.innerHTML = App(state);
-  };
-  
-  //  Listens for load before Javascript loads
-  window.addEventListener("load", () => {
-    getRoverImage(store, store.get('rovers')[0]);
-    getRoverInfo(store.get("selectedRover"));
-    render(root, store);
-  });
-  
+const render = async (root, state) => {
+  root.innerHTML = App(state);
+};
+
+//  Listens for load before Javascript loads
+window.addEventListener("load", () => {
+  getRoverImage(store, store.get("rovers")[0]);
+  getRoverInfo(store.get("selectedRover"));
+  render(root, store);
+});
 
 // Dashboard components
 
 // const tabs = (store) => {
 //       const tabBtns = () => store.get('selectedRover');
 //       tabBtns().map((el ) =>
-//         {  
+//         {
 //             return    `<button class='btn-tab' onClick='displayRoverInfo(${el.toLowerCase})'>${el.toLowerCase()}</button>
 //         <button class='btn-tab' onClick='displayRoverInfo('Opportunity'})'>Opportunity</button>
 //         <button class='btn-tab' onClick='displayRoverInfo('Spirit'})'>Spirit</button>
-        
+
 //         `;
-    
+
 //         }).join('');
-        
+
 //     };
 
-
-
 const tabs = (store) => {
-
-        return    `<button class='btn-tab' onClick='displayRoverInfo('Curiosity')'>Curiosity</button>
+  return `<button class='btn-tab' onClick='displayRoverInfo('Curiosity')'>Curiosity</button>
     <button class='btn-tab' onClick='displayRoverInfo('Opportunity')'>Opportunity</button>
     <button class='btn-tab' onClick='displayRoverInfo('Spirit')'>Spirit</button>
     
     `;
-
-    };
- 
-
+};
 
 // callbackFunc = (callback) => {
 // callback()
 // }
-
 
 // const displayRoverInfo = (state) => {
 //     const selectedRoverInfo = (roverName) => store.get('selectedRover');
@@ -82,7 +72,6 @@ const tabs = (store) => {
 //     return filterRovers;
 // };
 
-
 // const roverShow = () => {
 //     roverBtnRover.find(rover => rover === rover.name)
 // updateStore(state, roverName)
@@ -90,15 +79,13 @@ const tabs = (store) => {
 //     getRoverInfo, getRoverImage
 // }
 
-
-
 // function changeIndex(selectedRover)
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
 // const sidebar = (store, state) => {
 
 //     const roverData = state.photo_manifest;
-//     // const roverBar = roverData.map(info => 
+//     // const roverBar = roverData.map(info =>
 //         (
 //             `
 //             <h2>${roverData.name}</h2>
@@ -112,33 +99,30 @@ const tabs = (store) => {
 //     // );
 // };
 
-
 const sidebar = (store) => {
-
-    const roverData = store.get('selectedRover');
-    // const roverBar = roverData.map(info => 
-        return `
+  const roverData = store.get("selectedRover").get("Curiosity");
+  // const roverBar = roverData.map(info =>
+  return `
             <h2>${roverData.name}</h2>
             <ul>
             <li><span>Launch Date:</span> ${roverData.launch_date} </li>
             <li><span>Landing Date:</span> ${roverData.landing_date} </li>
             <li><span>Status:</span> ${roverData.status} </li>
             <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
-            </ul>`
-        
-    // );
+            </ul>`;
+
+  // );
 };
 
-            
-const dashboard = (sidebar, tabs, imageGallery, selectedRoverImage) => {
-    ` 
+const dashboard = (sidebar, tabs, imageGallery) => {
+  ` 
     <section>
   <aside class='sidebar green'>${sidebar}</aside>
   <article class='main-content'>
   <div class='tabs-container>
   <div class='btn-container>${tabs}</div>
   <div class='tabs-panel>
-  <div class='rover-image'>${selectedRoverImage}</div>
+  
   <div class='latest-photos'>${imageGallery}</div>
   </div>
   </div>
@@ -147,7 +131,6 @@ const dashboard = (sidebar, tabs, imageGallery, selectedRoverImage) => {
   `;
 };
 
-
 // const selectedRoverImage = () => {
 //     const roverImage = () => store.get('selectedRover');
 //     const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
@@ -155,39 +138,36 @@ const dashboard = (sidebar, tabs, imageGallery, selectedRoverImage) => {
 //     return `<div class='slider'>
 //     <div class='slides'>
 //       <div class='slide'><img src='${roverImageArray}>
-      
+
 //     </div></div></div>`;
-   
+
 // };
 
 const imageGallery = (store) => {
+  const roverImage = () => store.get("selectedRover");
+  const roverImageArray = roverImage.latest_photos.slice(0, 5);
 
-    const roverImage = () => store.get('selectedRover');
-    const roverImageArray = roverImage.latest_photos.slice(0, 5);
-  
-    return `<div class='slider'>
+  return `<div class='slider'>
   <div class='slides'>
     <div class='slide'><img src='${roverImageArray}>
     
   </div></div></div>`;
- 
-
 };
-
 
 // App higher order function
 const App = (state, dashboard) => {
-
-    // ${Greeting(store.get('user').get('name'))}
+  // ${Greeting(store.get('user').get('name'))}
   const rovers = store.get("selectedRover");
-//   const roverInfo = state.get("roverInfo");
+  //   const roverInfo = state.get("roverInfo");
 
-    return `
-<div>${Greeting(store.get('user').get('name'))}</div>
+  // if (selectedRover) {
+  return `
+<div>${Greeting(store.get("user").get("name"))}</div>
 <div>${dashboard}</div>`;
+  // }  return '<p> No rovers available! </p>';
 
-//  return dashboard(sidebar, tabs, imageGallery);
-    // store.get("rovers").map((info) => info.latest_photos).join(''));
+  //  return dashboard(sidebar, tabs, imageGallery);
+  // store.get("rovers").map((info) => info.latest_photos).join(''));
 };
 
 // listening for load event because page should load before any JS is called
@@ -230,16 +210,15 @@ const App = (state, dashboard) => {
 
 // Pure function that renders conditional information
 const Greeting = (name) => {
-    if (name) {
-        return `
-            <h1>Dear ${name}, welcome to the Mars dashboard!</h1>
-        `
-    }
+  if (name) {
     return `
+            <h1>Dear ${name}, welcome to the Mars dashboard!</h1>
+        `;
+  }
+  return `
         <h1>Hello!</h1>
-    `
-}
-
+    `;
+};
 
 // const showRover = (selectedRover) => {
 //     if (selectedRover) {
@@ -261,7 +240,6 @@ const Greeting = (name) => {
 //     return data
 // }
 
-
 // function to process rover information
 // const displayRover = (store, selectedRover) => {
 //     if (selectedRover === 'curiosity') {
@@ -273,31 +251,24 @@ const Greeting = (name) => {
 //     return selectedRover(store.get('rovers')[2]);
 // } else {}
 
-
-
 // function to process rover image array
 // const roverImages
 
-
 // Rover api calls
-const getRoverImage =  (store, rover) => {
-    //   let { rovers } = store;
-      const images = fetch(`http://localhost:3000/rovers/${rover}`)
-        .then((res) => res.json())
-        .then((rovers) => console.log(rovers))
-        .then((rovers) => updateStore(store, { rovers }));
-        // return roverData;
-    };
- 
+const getRoverImage = (store, rover) => {
+  //   let { rovers } = store;
+  const images = fetch(`http://localhost:3000/rovers/${rover}`)
+    .then((res) => res.json())
+    .then((rovers) => console.log(rovers))
+    .then((rovers) => updateStore(store, { rovers }));
+  // return roverData;
+};
 
-const getRoverInfo =  ( chosenRover) => {
-    const roverInfo = fetch(`http://localhost:3000/manifests/${chosenRover}`)
-        .then((res) => res.json())
-        .then((roverInfo) => console.log(roverInfo))
-      
-        .then((roverInfo) => updateStore(store, { roverInfo }));
-    // return roverInfo;
-  };
+const getRoverInfo = (chosenRover) => {
+  const roverInfo = fetch(`http://localhost:3000/manifests/${chosenRover}`)
+    .then((res) => res.json())
+    .then((roverInfo) => console.log(roverInfo))
 
-
-
+    .then((roverInfo) => updateStore(store, { roverInfo }));
+  // return roverInfo;
+};
