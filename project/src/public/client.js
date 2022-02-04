@@ -18,6 +18,7 @@ const updateStore = (state, newState) => {
 
 const render = async (root, state) => {
   root.innerHTML = App(state);
+//   root.innerHTML = dashboard(state);
 };
 
 //  Listens for load before Javascript loads
@@ -29,27 +30,28 @@ window.addEventListener("load", () => {
 
 // Dashboard components
 
+const tabs = () => {
+      const tabBtns = () => store.get('rovers');
+      return tabBtns().map(el  =>
+        {
+            return    `<nav><button class='btn-tab' id='${el.toLowerCase()}' onClick='displayRoverInfo(${el.toLowerCase})'>${el.toLowerCase()}</button>
+            </nav>
+            
+            `;
+            // <button class='btn-tab' onClick='displayRoverInfo('Opportunity'})'>Opportunity</button>
+            // <button class='btn-tab' onClick='displayRoverInfo('Spirit'})'>Spirit</button>
+
+        }).join('');
+
+    };
+
 // const tabs = (store) => {
-//       const tabBtns = () => store.get('selectedRover');
-//       tabBtns().map((el ) =>
-//         {
-//             return    `<button class='btn-tab' onClick='displayRoverInfo(${el.toLowerCase})'>${el.toLowerCase()}</button>
-//         <button class='btn-tab' onClick='displayRoverInfo('Opportunity'})'>Opportunity</button>
-//         <button class='btn-tab' onClick='displayRoverInfo('Spirit'})'>Spirit</button>
-
-//         `;
-
-//         }).join('');
-
-//     };
-
-const tabs = (store) => {
-  return `<button class='btn-tab' onClick='displayRoverInfo('Curiosity')'>Curiosity</button>
-    <button class='btn-tab' onClick='displayRoverInfo('Opportunity')'>Opportunity</button>
-    <button class='btn-tab' onClick='displayRoverInfo('Spirit')'>Spirit</button>
+//   return `<button class='btn-tab' onClick='displayRoverInfo('Curiosity')'>Curiosity</button>
+//     <button class='btn-tab' onClick='displayRoverInfo('Opportunity')'>Opportunity</button>
+//     <button class='btn-tab' onClick='displayRoverInfo('Spirit')'>Spirit</button>
     
-    `;
-};
+//     `;
+// };
 
 // callbackFunc = (callback) => {
 // callback()
@@ -98,8 +100,8 @@ const displayRoverInfo = (state) => {
 //     // );
 // };
 
-const sidebar = (store) => {
-  const roverData = store.get("selectedRover").get("Curiosity");
+const sidebar = () => {
+  const roverData = store.get("selectedRover");
   // const roverBar = roverData.map(info =>
   return `
             <h2>${roverData.name}</h2>
@@ -113,34 +115,24 @@ const sidebar = (store) => {
   // );
 };
 
-const dashboard = (sidebar, tabs, imageGallery) => {
-  ` 
-    <section>
-  <aside class='sidebar green'>${sidebar}</aside>
-  <article class='main-content'>
-  <div class='tabs-container>
-  <div class='btn-container>${tabs}</div>
-  <div class='tabs-panel>
-  
-  <div class='latest-photos'>${imageGallery}</div>
-  </div>
-  </div>
-  </article>
-  </section>
-  `;
-};
 
-// const selectedRoverImage = () => {
-//     const roverImage = () => store.get('selectedRover');
-//     const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
-//     // roverImage.map(rover => rover.)
-//     return `<div class='slider'>
-//     <div class='slides'>
-//       <div class='slide'><img src='${roverImageArray}>
 
-//     </div></div></div>`;
+const selectedRoverImageGallery = (state) => {
+    const roverImage = () => store.get('selectedRover')  
+    const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
+    return roverImageArray.map(r => {
+    return (
+        `<div class='slider'>
+    <div class='slides'> 
+    <div class='slide'><img src='${r.img_src}'> </div></div></div>`);
+    }).join('');
+    };
 
-// };
+const getRoverImages = (state) => {
+    const latestImgs = () => state.latest_photos;
+    const imagesArray = () => latestImgs.slice(0,5);
+}
+
 
 const imageGallery = (store) => {
   const roverImage = () => store.get("selectedRover");
@@ -153,16 +145,34 @@ const imageGallery = (store) => {
   </div></div></div>`;
 };
 
-// App higher order function
-const App = (state, dashboard) => {
-  // ${Greeting(store.get('user').get('name'))}
-  const rovers = store.get("selectedRover");
-  //   const roverInfo = state.get("roverInfo");
 
-  // if (selectedRover) {
-  return `
+
+
+
+// App higher order function
+const App = (state) => {
+  
+return `
+<section>
+<div class='tabs-container>
+<div class='btn-container>${tabs(state)}</div>
 <div>${Greeting(store.get("user").get("name"))}</div>
-<div>${dashboard}</div>`;
+<div class='tabs-panel>
+<aside class='sidebar green'>${sidebar()}</aside>
+<article class='main-content'>
+
+<div class='latest-photos'>${selectedRoverImageGallery(state)}</div>
+</div>
+</div>
+</article>
+</section>
+`;
+
+
+
+
+
+
   // }  return '<p> No rovers available! </p>';
 
   //  return dashboard(sidebar, tabs, imageGallery);
