@@ -42,20 +42,11 @@ const tabs = () => {
             </nav>
             
             `;
-            // <button class='btn-tab' onClick='displayRoverInfo('Opportunity'})'>Opportunity</button>
-            // <button class='btn-tab' onClick='displayRoverInfo('Spirit'})'>Spirit</button>
 
         }).join('');
 
     };
 
-// const tabs = (store) => {
-//   return `<button class='btn-tab' onClick='displayRoverInfo('Curiosity')'>Curiosity</button>
-//     <button class='btn-tab' onClick='displayRoverInfo('Opportunity')'>Opportunity</button>
-//     <button class='btn-tab' onClick='displayRoverInfo('Spirit')'>Spirit</button>
-    
-//     `;
-// };
 
 // callbackFunc = (callback) => {
 // callback()
@@ -105,23 +96,23 @@ const displayRoverInfo = (state) => {
 
 
 
-const roverImageGallery = () => {
-    const roverImage = () => store.get('selectedRover');  
-    const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
-    return roverImageArray.map(r => {
-    return (
-        `<div class='slider'>
-    <div class='slides'> 
-    <div class='slide'><img src='${r.img_src}'> </div></div></div>`);
-    }).join('');
-    };
+// const roverImageGallery = () => {
+//     const roverImage = () => store.get('selectedRover');  
+//     const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
+//     return roverImageArray.map(r => {
+//     return (
+//         `<div class='slider'>
+//     <div class='slides'> 
+//     <div class='slide'><img src='${r.img_src}'> </div></div></div>`);
+//     }).join('');
+//     };
 
 
 
 
 // App higher order function
 const App = (state) => {
-  
+    const apod = state.get('apod');
 return `
 <section>
 <div class='tabs-container>
@@ -131,15 +122,17 @@ return `
 <aside class='sidebar green'>${sidebar(state)}</aside>
 <article class='main-content'>
 
-<div class='latest-photos'>${roverImageGallery(state)}</div>
 </div>
 </div>
 </article>
+<div id='photo'>${ImageOfTheDay(apod, state)}</div>
 </section>
 `;
+}
 
 
-
+//  return dashboard(sidebar, tabs, imageGallery);
+// store.get("rovers").map((info) => info.latest_photos).join(''));
 
 
 
@@ -147,48 +140,34 @@ return `
 
 
 
-  // }  return '<p> No rovers available! </p>';
-
-  //  return dashboard(sidebar, tabs, imageGallery);
-  // store.get("rovers").map((info) => info.latest_photos).join(''));
-};
-
-
-// ------------------------------------------------------  COMPONENTS
-
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-
-// const roverSelection = (rover) => {
-//     rover !== 'curiosity' ?  rover : 'Curiosity'
-// };
 
 // Example of a pure function that renders infomation requested from the backend
-// const ImageOfTheDay = (apod) => {
+const ImageOfTheDay = (apod) => {
 
-//     // If image does not already exist, or it is not from today -- request it again
-//     const today = new Date()
-//     const photodate = new Date(apod.date)
-//     console.log(photodate.getDate(), today.getDate());
+    // If image does not already exist, or it is not from today -- request it again
+    const today = new Date()
+    const photodate = new Date(apod.date)
+    console.log(photodate.getDate(), today.getDate());
 
-//     console.log(photodate.getDate() === today.getDate());
-//     if (!apod || apod.date === today.getDate() ) {
-//         getImageOfTheDay(store)
-//     }
+    console.log(photodate.getDate() === today.getDate());
+    if (!apod || apod.date === today.getDate() ) {
+        getImageOfTheDay(store)
+    }
 
-//     // check if the photo of the day is actually type video!
-//     if (apod.media_type === "video") {
-//         return (`
-//             <p>See today's featured video <a href="${apod.url}">here</a></p>
-//             <p>${apod.title}</p>
-//             <p>${apod.explanation}</p>
-//         `)
-//     } else {
-//         return (`
-//             <img src="${apod.image.url}" height="350px" width="100%" />
-//             <p>${apod.image.explanation}</p>
-//         `)
-//     }
-// }
+    // check if the photo of the day is actually type video!
+    if (apod.media_type === "video") {
+        return (`
+            <p>See today's featured video <a href="${apod.url}">here</a></p>
+            <p>${apod.title}</p>
+            <p>${apod.explanation}</p>
+        `)
+    } else {
+        return (`
+            <img src="${apod.image.url}" height="350px" width="100%" />
+            <p>${apod.image.explanation}</p>
+        `)
+    }
+}
 
 
 
@@ -220,15 +199,15 @@ const Greeting = (name) => {
 
 // Example API call
 
-// const getImageOfTheDay = (state) => {
-//     let { apod } = state
+const getImageOfTheDay = (state) => {
+    let { apod } = state
 
-//     fetch(`http://localhost:3000/apod`)
-//     .then(res => res.json())
-//     .then(apod => updateStore(store, { apod }))
+    fetch(`http://localhost:3000/apod`)
+    .then(res => res.json())
+    .then(apod => updateStore(store, { apod }))
 
-//     return data
-// }
+    return data
+}
 
 // function to process rover information
 // const displayRover = (store, selectedRover) => {
