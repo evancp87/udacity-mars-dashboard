@@ -21,12 +21,16 @@ const render = async (root, state) => {
 //   root.innerHTML = dashboard(state);
 };
 
-//  Listens for load before Javascript loads
+// listening for load event because page should load before any JS is called
 window.addEventListener("load", () => {
   getRoverImage(store, store.get("rovers")[0]);
   getRoverInfo(store.get("selectedRover"));
   render(root, store);
 });
+
+
+
+// ========================================================================================================================================
 
 // Dashboard components
 
@@ -57,6 +61,8 @@ const tabs = () => {
 // callback()
 // }
 
+
+
 const displayRoverInfo = (state) => {
     const selectedRoverInfo = (roverName) => store.get('selectedRover');
 
@@ -73,36 +79,17 @@ const displayRoverInfo = (state) => {
     return filterRovers;
 };
 
-// const roverShow = () => {
-//     roverBtnRover.find(rover => rover === rover.name)
-// updateStore(state, roverName)
-// rovers.set
-//     getRoverInfo, getRoverImage
-// }
 
-// function changeIndex(selectedRover)
+
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
-// const sidebar = (store, state) => {
 
-//     const roverData = state.photo_manifest;
-//     // const roverBar = roverData.map(info =>
-//         (
-//             `
-//             <h2>${roverData.name}</h2>
-//             <ul>
-//             <li><span>Launch Date:</span> ${roverData.launch_date} </li>
-//             <li><span>Landing Date:</span> ${roverData.landing_date} </li>
-//             <li><span>Status:</span> ${roverData.status} </li>
-//             <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
-//             </ul>`
-//         )
-//     // );
-// };
-
-const sidebar = () => {
-  const roverData = store.get("selectedRover");
-  // const roverBar = roverData.map(info =>
+        
+        const sidebar = () => {
+            const roverData = store.get("selectedRover");
+            //     const roverData = state.photo_manifest;
+            //     // const roverBar = roverData.map(info =>
+            // const roverBar = roverData.map(info =>
   return `
             <h2>${roverData.name}</h2>
             <ul>
@@ -117,8 +104,9 @@ const sidebar = () => {
 
 
 
-const selectedRoverImageGallery = (state) => {
-    const roverImage = () => store.get('selectedRover')  
+
+const roverImageGallery = () => {
+    const roverImage = () => store.get('selectedRover');  
     const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
     return roverImageArray.map(r => {
     return (
@@ -127,24 +115,6 @@ const selectedRoverImageGallery = (state) => {
     <div class='slide'><img src='${r.img_src}'> </div></div></div>`);
     }).join('');
     };
-
-const getRoverImages = (state) => {
-    const latestImgs = () => state.latest_photos;
-    const imagesArray = () => latestImgs.slice(0,5);
-}
-
-
-const imageGallery = (store) => {
-  const roverImage = () => store.get("selectedRover");
-  const roverImageArray = roverImage.latest_photos.slice(0, 5);
-
-  return `<div class='slider'>
-  <div class='slides'>
-    <div class='slide'><img src='${roverImageArray}>
-    
-  </div></div></div>`;
-};
-
 
 
 
@@ -155,13 +125,13 @@ const App = (state) => {
 return `
 <section>
 <div class='tabs-container>
-<div class='btn-container>${tabs(state)}</div>
+<div class='btn-container>${tabs()}</div>
 <div>${Greeting(store.get("user").get("name"))}</div>
 <div class='tabs-panel>
-<aside class='sidebar green'>${sidebar()}</aside>
+<aside class='sidebar green'>${sidebar(state)}</aside>
 <article class='main-content'>
 
-<div class='latest-photos'>${selectedRoverImageGallery(state)}</div>
+<div class='latest-photos'>${roverImageGallery(state)}</div>
 </div>
 </div>
 </article>
@@ -173,13 +143,16 @@ return `
 
 
 
+// =======================================================================================================================================================
+
+
+
   // }  return '<p> No rovers available! </p>';
 
   //  return dashboard(sidebar, tabs, imageGallery);
   // store.get("rovers").map((info) => info.latest_photos).join(''));
 };
 
-// listening for load event because page should load before any JS is called
 
 // ------------------------------------------------------  COMPONENTS
 
@@ -216,6 +189,14 @@ return `
 //         `)
 //     }
 // }
+
+
+
+
+
+
+
+// =================================================================================================================================================
 
 // Pure function that renders conditional information
 const Greeting = (name) => {
@@ -262,7 +243,14 @@ const Greeting = (name) => {
 
 // function to process rover image array
 // const roverImages
+// =================================================================================================================================================
 
+
+
+
+
+
+// =============================================================================================================================================================================================
 // Rover api calls
 const getRoverImage = (store, rover) => {
   //   let { rovers } = store;
@@ -281,3 +269,6 @@ const getRoverInfo = (chosenRover) => {
     .then((roverInfo) => updateStore(store, { roverInfo }));
   // return roverInfo;
 };
+
+
+// ================================================================================================================================
