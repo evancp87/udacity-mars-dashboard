@@ -1,6 +1,6 @@
 // store using ImmutableJS
 let store = Immutable.Map({
-  user: Immutable.Map({ name: "cosmonaut" }),
+  user: Immutable.Map({ name: "Cosmonaut" }),
   apod: "",
   selectedRover: "Curiosity",
   rovers: ["Curiosity", "Opportunity", "Spirit"],
@@ -56,9 +56,12 @@ const tabs = () => {
 
 const displayRoverInfo = (state) => {
     const selectedRoverInfo = (roverName) => store.get('selectedRover');
+    const sidebar = store.get('sidebar');
+    const imageGallery = store.get('image');
+    
 
     updateStore(state, {selectedRoverInfo});
-    // selectedRoverInfo.set()
+   
 
     const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
     roverImages.find(rover => rover === rover.name);
@@ -96,16 +99,16 @@ const displayRoverInfo = (state) => {
 
 
 
-// const roverImageGallery = () => {
-//     const roverImage = () => store.get('selectedRover');  
-//     const roverImageArray = () => roverImage.latest_photos.slice(0, 5);
-//     return roverImageArray.map(r => {
-//     return (
-//         `<div class='slider'>
-//     <div class='slides'> 
-//     <div class='slide'><img src='${r.img_src}'> </div></div></div>`);
-//     }).join('');
-//     };
+const renderRoverImages = () => {
+    // const roverImage = () => store.get('rovers');  
+    // const roverImageArray = roverImage.latest_photos.slice(0, 5);
+    // return roverImageArray.map(r => {
+
+    return store.get('rovers').latest_photos.slice(0,5).map(photo => roverImageGallery(photo.get('img_src'))
+// }).join('');
+    ) };
+
+    const roverImageGallery = (src) => ` <img src='${src}' class='galleryImg'>`; 
 
 
 
@@ -121,14 +124,16 @@ return `
 <div class='tabs-panel>
 <aside class='sidebar green'>${sidebar(state)}</aside>
 <article class='main-content'>
-
+<div class='slider'>
+<div class='slides'> 
+<div class='slide'>${roverImageGallery(state)}</div></div>
 </div>
 </div>
 </article>
 <div id='photo'>${ImageOfTheDay(apod, state)}</div>
 </section>
 `;
-}
+};
 
 
 //  return dashboard(sidebar, tabs, imageGallery);
@@ -182,6 +187,7 @@ const Greeting = (name) => {
   if (name) {
     return `
             <h1>Dear ${name}, welcome to the Mars dashboard!</h1>
+            <p>Select your rover below</p>
         `;
   }
   return `
