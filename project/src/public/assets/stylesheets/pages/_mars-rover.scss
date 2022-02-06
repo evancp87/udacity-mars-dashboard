@@ -1,5 +1,13 @@
 @use '../abstracts' as a;
 /* -------------------  MOBILE  --------------------- */
+
+@mixin bgGradient($color){
+  background-image: linear-gradient(lighten($color, 12%) 0%, $color 70%);  
+}
+
+
+$blue: #253C8B;
+
 svg {
   width: 500px;
   height: 500px;
@@ -48,25 +56,49 @@ body {
     background: hsl(202, 75%, 77%);
   }
   
-  .blue {
-    background-color: a.$medBlue;
-    @include bgGradient(a.$medBlue);  
-  }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+}
 
-
-  .green {
-    background-color: a.$green;
-    @include bgGradient(a.$green);
-  }
-
+ 
+.dashboard-content {
+  max-width: 100vw;
+  height: 100vw;
+  display: flex;
+  flex-direction: column
+}
 
   .main-content {
-flex: 1;
+flex: 2;
+background-color: a.$mars-red;
+@include bgGradient(a.$mars-red);
+
   }
 
   .sidebar {
     flex: 0 0 300px;
+    height: 100vh;
   }
+
+
+.tabs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.btn-tab {
+justify-content: center;
+
+}
+  .green {
+    background-color: $blue;
+    @include bgGradient($blue);
+  }
+
   /* -------------------  TABLET  --------------------- */
   @media (max-width: a.$tablet-breakpoint) {
     .mars-intro {

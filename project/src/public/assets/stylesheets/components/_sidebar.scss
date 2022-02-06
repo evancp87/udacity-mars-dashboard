@@ -1,0 +1,10 @@
+@use '../abstracts/' as a;
+
+.sidebar {
+    flex: 0 0 300px;
+}
+
+.green {
+    background-color: a.$green;
+    @include bgGradient(a.$green);
+  }

@@ -425,6 +425,49 @@ footer {
   overflow: hidden;
 }
 
+.svg-content {
+  background: #98d0f0;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.dashboard-content {
+  max-width: 100vw;
+  height: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 2;
+  background-color: #BC2732;
+  background-image: linear-gradient(#d94752 0%, #BC2732 70%);
+}
+
+.sidebar {
+  flex: 0 0 300px;
+  height: 100vh;
+}
+
+.tabs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.btn-tab {
+  justify-content: center;
+}
+
+.green {
+  background-color: #253C8B;
+  background-image: linear-gradient(#3251bb 0%, #253C8B 70%);
+}
+
 /* -------------------  TABLET  --------------------- */
 @media (max-width: 768px) {
   .mars-intro {
