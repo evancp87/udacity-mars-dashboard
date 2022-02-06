@@ -18,7 +18,7 @@ const updateStore = (state, newState) => {
 
 const render = async (root, state) => {
   root.innerHTML = App(state);
-//   root.innerHTML = dashboard(state);
+  //   root.innerHTML = dashboard(state);
 };
 
 // listening for load event because page should load before any JS is called
@@ -28,105 +28,130 @@ window.addEventListener("load", () => {
   render(root, store);
 });
 
-
-
 // ========================================================================================================================================
 
 // Dashboard components
 
 const tabs = () => {
-      const tabBtns = () => store.get('rovers');
-      return tabBtns().map(el  =>
-        {
-            return    `<nav><button class='btn-tab' id='${el.toLowerCase()}' onClick='displayRoverInfo(${el.toLowerCase})'>${el.toLowerCase()}</button>
+  const tabBtns = () => store.get("rovers");
+  return tabBtns()
+    .map((el) => {
+      return `<nav><button class='btn-tab' id='${el.toLowerCase()}' onClick='displayRoverInfo(${
+        el.toLowerCase
+      })'>${el.toLowerCase()}</button>
             </nav>
             
             `;
-
-        }).join('');
-
-    };
-
+    })
+    .join("");
+};
 
 // callbackFunc = (callback) => {
 // callback()
 // }
 
-
-
-const displayRoverInfo = (state) => {
-    const selectedRoverInfo = (roverName) => store.get('selectedRover');
-    const sidebar = store.get('sidebar');
-    const imageGallery = store.get('image');
-    
-
-    updateStore(state, {selectedRoverInfo});
-   
-
-    const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
-    roverImages.find(rover => rover === rover.name);
-    const rover = (roverName) => filterRovers.find(rover => roverName === rover.name);
-
-    if (rover) {
-        console.log
-    }
-    return filterRovers;
-};
-
-
-
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
-
-        
-        const sidebar = () => {
-            const roverData = store.get("selectedRover");
-            //     const roverData = state.photo_manifest;
-            //     // const roverBar = roverData.map(info =>
-            // const roverBar = roverData.map(info =>
-  return `
-            <h2>${roverData.name}</h2>
-            <ul>
-            <li><span>Launch Date:</span> ${roverData.launch_date} </li>
-            <li><span>Landing Date:</span> ${roverData.landing_date} </li>
-            <li><span>Status:</span> ${roverData.status} </li>
-            <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
-            </ul>`;
-
+const sidebar = () => {
+//   const roverData = store.get("selectedRover");
+  const roverData = store.get('selectedRover');
+ 
+  //     const roverData = state.photo_manifest;
+  //     // const roverBar = roverData.map(info =>
+  // const roverBar = roverData.map(info =>
+  return (`
+    <h2>${roverData.name}</h2>
+    <ul>
+    <li><span>Launch Date:</span> ${roverData.launch_date} </li>
+    <li><span>Landing Date:</span> ${roverData.landing_date} </li>
+    <li><span>Status:</span> ${roverData.status} </li>
+    <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
+    </ul>`
+  );
   // );
 };
 
+// const selectedRoverImage = () => {
+// return store.get()
+// }
 
+// const renderSelectedRoverImage = () => {
 
+// }
 
+const displayRoverInfo = ( rover) => {
+  let selectedRoverInfo = store.get("selectedRover");
+  // const sidebar = sidebar();
+  // const imageGallery = store.get('image');
+
+  if (rover.name === "curiosity") {
+    updateStore(store, { selectedRoverInfo });
+  getRoverInfo(store.get("selectedRover"));
+
+  } else if (rover.name === "spirit") {
+    updateStore(store, { selectedRoverInfo });
+  getRoverInfo(store.get("selectedRover"));
+
+  } else if (rover.name === "opportunity") {
+    updateStore(store, { selectedRoverInfo });
+  getRoverInfo(store.get("selectedRover"));
+
+  }
+
+  // const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
+  // roverImages.find(rover => rover === rover.name);
+  // const rover = (roverName) => filterRovers.find(rover => roverName === rover.name);
+
+  // if (rover) {
+  //     console.log
+  // }
+  // return filterRovers;
+};
+
+const roverFact = (store) => {
+  if (store.selectedRover == "opportunity") {
+    return `<p> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
+  } else if (store.selectedRover == "curiosity") {
+    return `<p>Curiositys mission is to determine whether the Red Planet ever was habitable to microbial life. The rover, which is about the size of a MINI Cooper, is equipped with 17 cameras and a robotic arm containing a suite of specialized laboratory-like tools and instruments. </p>`;
+  } else if (store.selectedRover == "spirit") {
+    return `<p>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
+  }
+};
 const renderRoverImages = () => {
-    // const roverImage = () => store.get('rovers');  
-    // const roverImageArray = roverImage.latest_photos.slice(0, 5);
-    // return roverImageArray.map(r => {
+  // const roverImage = () => store.get('rovers');
+  // const roverImageArray = roverImage.latest_photos.slice(0, 5);
+  // return roverImageArray.map(r => {
 
-    return store.get('rovers').latest_photos.slice(0,5).map(photo => roverImageGallery(photo.get('img_src'))
-// }).join('');
-    ) };
+  return store
+    .get("selectedRover")[0]
+    .latest_photos.slice(0, 5)
+    .map(
+      (photo) => roverImageGallery(photo.get("img_src"))
+      // }).join('');
+    );
+};
 
-    const roverImageGallery = (src) => ` <img src='${src}' class='galleryImg'>`; 
-
-
-
+const roverImageGallery = (src) => ` <img src='${src}' class='galleryImg'>`;
 
 // App higher order function
 const App = (state) => {
-    const apod = state.get('apod');
-return `
+  const apod = state.get("apod");
+  return `
 <section>
-<div class='tabs-container>
-<div class='btn-container>${tabs()}</div>
 <div>${Greeting(store.get("user").get("name"))}</div>
-<div class='tabs-panel>
+<div class='flex-container'>
 <aside class='sidebar green'>${sidebar(state)}</aside>
 <article class='main-content'>
+<div class='tabs-container>
+<div class='btn-container>${tabs()}</div>
+<div class='tabs-panel>
+<div>${roverFact(state)}</div>
 <div class='slider'>
 <div class='slides'> 
-<div class='slide'>${roverImageGallery(state)}</div></div>
+<div class='slide'>${roverImageGallery(state)}</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </article>
@@ -135,50 +160,37 @@ return `
 `;
 };
 
-
 //  return dashboard(sidebar, tabs, imageGallery);
 // store.get("rovers").map((info) => info.latest_photos).join(''));
 
-
-
 // =======================================================================================================================================================
-
-
-
 
 // Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
+  // If image does not already exist, or it is not from today -- request it again
+  const today = new Date();
+  const photodate = new Date(apod.date);
+  console.log(photodate.getDate(), today.getDate());
 
-    // If image does not already exist, or it is not from today -- request it again
-    const today = new Date()
-    const photodate = new Date(apod.date)
-    console.log(photodate.getDate(), today.getDate());
+  console.log(photodate.getDate() === today.getDate());
+  if (!apod || apod.date === today.getDate()) {
+    getImageOfTheDay(store);
+  }
 
-    console.log(photodate.getDate() === today.getDate());
-    if (!apod || apod.date === today.getDate() ) {
-        getImageOfTheDay(store)
-    }
-
-    // check if the photo of the day is actually type video!
-    if (apod.media_type === "video") {
-        return (`
+  // check if the photo of the day is actually type video!
+  if (apod.media_type === "video") {
+    return `
             <p>See today's featured video <a href="${apod.url}">here</a></p>
             <p>${apod.title}</p>
             <p>${apod.explanation}</p>
-        `)
-    } else {
-        return (`
+        `;
+  } else {
+    return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
-        `)
-    }
-}
-
-
-
-
-
-
+        `;
+  }
+};
 
 // =================================================================================================================================================
 
@@ -206,14 +218,14 @@ const Greeting = (name) => {
 // Example API call
 
 const getImageOfTheDay = (state) => {
-    let { apod } = state
+  let { apod } = state;
 
-    fetch(`http://localhost:3000/apod`)
-    .then(res => res.json())
-    .then(apod => updateStore(store, { apod }))
+  fetch(`http://localhost:3000/apod`)
+    .then((res) => res.json())
+    .then((apod) => updateStore(store, { apod }));
 
-    return data
-}
+  return data;
+};
 
 // function to process rover information
 // const displayRover = (store, selectedRover) => {
@@ -229,11 +241,6 @@ const getImageOfTheDay = (state) => {
 // function to process rover image array
 // const roverImages
 // =================================================================================================================================================
-
-
-
-
-
 
 // =============================================================================================================================================================================================
 // Rover api calls
@@ -254,6 +261,5 @@ const getRoverInfo = (chosenRover) => {
     .then((roverInfo) => updateStore(store, { roverInfo }));
   // return roverInfo;
 };
-
 
 // ================================================================================================================================
