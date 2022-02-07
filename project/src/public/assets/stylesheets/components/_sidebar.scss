@@ -2,9 +2,12 @@
 
 .sidebar {
     flex: 0 0 300px;
-}
+    height: 100vh;
+  }
 
-.green {
-    background-color: a.$green;
-    @include bgGradient(a.$green);
+
+
+  .green {
+    background-color: a.$blue;
+    @include a.bgGradient(a.$blue);
   }

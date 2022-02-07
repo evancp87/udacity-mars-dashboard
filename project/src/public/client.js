@@ -36,10 +36,10 @@ const tabs = () => {
   const tabBtns = () => store.get("rovers");
   return tabBtns()
     .map((el) => {
-      return `<nav><button class='btn-tab' id='${el.toLowerCase()}' onClick='displayRoverInfo(${
+      return `<button class='btn-tab' id='${el.toLowerCase()}' onClick='displayRoverInfo(${
         el.toLowerCase
       })'>${el.toLowerCase()}</button>
-            </nav>
+           
             
             `;
     })
@@ -55,6 +55,7 @@ const tabs = () => {
 const sidebar = () => {
 //   const roverData = store.get("selectedRover");
   const roverData = store.get('selectedRover');
+
  
   //     const roverData = state.photo_manifest;
   //     // const roverBar = roverData.map(info =>
@@ -62,8 +63,8 @@ const sidebar = () => {
   return (`
     <h2>${roverData.name}</h2>
     <ul>
-    <li><span>Launch Date:</span> ${roverData.launch_date} </li>
     <li><span>Landing Date:</span> ${roverData.landing_date} </li>
+    <li><span>Launch Date:</span> ${roverData.launch_date} </li>
     <li><span>Status:</span> ${roverData.status} </li>
     <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
     </ul>`
@@ -81,18 +82,19 @@ const sidebar = () => {
 
 const displayRoverInfo = ( rover) => {
   let selectedRoverInfo = store.get("selectedRover");
+  let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
-  if (rover.name === "curiosity") {
+  if (button.id === "curiosity") {
     updateStore(store, { selectedRoverInfo });
   getRoverInfo(store.get("selectedRover"));
 
-  } else if (rover.name === "spirit") {
+  } else if (button.id === "spirit") {
     updateStore(store, { selectedRoverInfo });
   getRoverInfo(store.get("selectedRover"));
 
-  } else if (rover.name === "opportunity") {
+  } else if (button.id === "opportunity") {
     updateStore(store, { selectedRoverInfo });
   getRoverInfo(store.get("selectedRover"));
 
@@ -117,13 +119,14 @@ const roverFact = (store) => {
     return `<p>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
   }
 };
-const renderRoverImages = () => {
+
+const renderRoverImages = (state) => {
   // const roverImage = () => store.get('rovers');
   // const roverImageArray = roverImage.latest_photos.slice(0, 5);
   // return roverImageArray.map(r => {
 
   return store
-    .get("selectedRover")[0]
+    .get("rovers")[0]
     .latest_photos.slice(0, 5)
     .map(
       (photo) => roverImageGallery(photo.get("img_src"))
@@ -137,7 +140,7 @@ const roverImageGallery = (src) => ` <img src='${src}' class='galleryImg'>`;
 const App = (state) => {
   const apod = state.get("apod");
   return `
-<section>
+
 <div>${Greeting(store.get("user").get("name"))}</div>
 <div class='flex-container'>
 <aside class='sidebar green'>${sidebar(state)}</aside>
@@ -156,7 +159,7 @@ const App = (state) => {
 </div>
 </article>
 <div id='photo'>${ImageOfTheDay(apod, state)}</div>
-</section>
+
 `;
 };
 
