@@ -109,11 +109,13 @@ body {
     background-color: a.$mars-red;
     // width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
     background-color: #003b59;
+    background: radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%);
+
     // position: relative;
     // object-fit: cover;
 
@@ -128,12 +130,7 @@ body {
    */
   }
 
-  .scroll-animation {
-    position: absolute;
-    z-index: 100;
-    left: 50%;
-    top: 50%;
-  }
+
 
 
   // .intro-wrapper {
