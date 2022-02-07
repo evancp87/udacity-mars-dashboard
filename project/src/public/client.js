@@ -52,7 +52,7 @@ const tabs = () => {
 
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
-const sidebar = () => {
+const sidebar = (state) => {
 //   const roverData = store.get("selectedRover");
   const roverData = store.get('selectedRover');
 
@@ -61,12 +61,13 @@ const sidebar = () => {
   //     // const roverBar = roverData.map(info =>
   // const roverBar = roverData.map(info =>
   return (`
-    <h2>${roverData.name}</h2>
-    <ul>
-    <li><span>Landing Date:</span> ${roverData.landing_date} </li>
-    <li><span>Launch Date:</span> ${roverData.launch_date} </li>
-    <li><span>Status:</span> ${roverData.status} </li>
-    <li><span>Date of last image taken:</span> ${roverData.max_date} </li>
+    <h2 class='rover-name'>${roverData.name}</h2>
+    <ul class='rover-info'>
+    <li class='roverinfo-item'><span>Landing Date:</span> ${roverData.landing_date} </li>
+    <li class='roverinfo-item'><span>Launch Date:</span> ${roverData.launch_date} </li>
+    <li class='roverinfo-item'><span>Status:</span> ${roverData.status} </li>
+    <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.max_date} </li>
+    <li class='roverinfo-item'>${roverFact(state)}</li>
     </ul>`
   );
   // );
@@ -86,17 +87,17 @@ const displayRoverInfo = ( rover) => {
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
-  if (button.id === "curiosity") {
-    updateStore(store, { selectedRoverInfo });
-  getRoverInfo(store.get("selectedRover"));
+  if (event.target.id === "curiosity") {
+    updateStore(store, { selectedRoverInfo: 'curiosity' });
+//   getRoverInfo(store.get("selectedRover"));
 
-  } else if (button.id === "spirit") {
-    updateStore(store, { selectedRoverInfo });
-  getRoverInfo(store.get("selectedRover"));
+  } else if (event.target.id === "spirit") {
+    updateStore(store, { selectedRoverInfo: 'spirit' });
+//   getRoverInfo(store.get("selectedRover"));
 
-  } else if (button.id === "opportunity") {
-    updateStore(store, { selectedRoverInfo });
-  getRoverInfo(store.get("selectedRover"));
+  } else if (event.target.id === "opportunity") {
+    updateStore(store, { selectedRoverInfo: 'opportunity' });
+//   getRoverInfo(store.get("selectedRover"));
 
   }
 
@@ -112,11 +113,11 @@ const displayRoverInfo = ( rover) => {
 
 const roverFact = (store) => {
   if (store.selectedRover == "opportunity") {
-    return `<p> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
+    return `<p class='rover-fact'> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
   } else if (store.selectedRover == "curiosity") {
-    return `<p>Curiositys mission is to determine whether the Red Planet ever was habitable to microbial life. The rover, which is about the size of a MINI Cooper, is equipped with 17 cameras and a robotic arm containing a suite of specialized laboratory-like tools and instruments. </p>`;
+    return `<p class='rover-fact'>Curiositys mission is to determine whether the Red Planet ever was habitable to microbial life. The rover, which is about the size of a MINI Cooper, is equipped with 17 cameras and a robotic arm containing a suite of specialized laboratory-like tools and instruments. </p>`;
   } else if (store.selectedRover == "spirit") {
-    return `<p>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
+    return `<p class='rover-fact'>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
   }
 };
 
@@ -134,32 +135,46 @@ const renderRoverImages = (state) => {
     );
 };
 
-const roverImageGallery = (src) => ` <img src='${src}' class='galleryImg'>`;
+const roverImageGallery = (src) => ` <div class='scroll-item'> <img src='${src}'>`;
 
 // App higher order function
 const App = (state) => {
   const apod = state.get("apod");
   return `
+  <main>
+  <section id="intro-wrapper">
+      <div class="mars-intro">
+          <h1 class="title">
+              Mars Rover
+          </h1>
+          <div>${Greeting(store.get("user").get("name"))}</div>
+          <p class="intro-text">
+          Since the 1960s, humans have set out to discover what Mars can teach us about how planets grow and evolve, and whether it has ever hosted alien life. Mars has captivated humans since we first set eyes on it as a star-like object in the night sky. Early on, its reddish hue set the planet apart from its shimmering siblings, each compelling in its own way, but none other tracing a ruddy arc through Earth’s heavens. Then, in the late 1800s, telescopes first revealed a surface full of intriguing features—patterns and landforms that scientists at first wrongly ascribed to a bustling Martian civilization. Now, we know there are no artificial constructions on Mars. But we’ve also learned that, until 3.5 billion years ago, the dry, toxic planet we see today might have once been as habitable as Earth.
+          Mars exploration at NASA "follows the water." Earlier missions had found that liquid water existed on Mars in the distant past. The Curiosity rover explored the “habitability” of Mars. It found nutrients and energy sources that microbes could have used, and established that Mars indeed had regions that could have been friendly to life in the ancient past. Did life take hold on the Red Planet? Future rovers will take the next step by looking for the signs of past life itself.
+          With data from the rovers, mission scientists have reconstructed an ancient past when Mars was awash in water. Spirit and Opportunity each found evidence for past wet conditions that possibly could have supported microbial life.
+          </p>
 
-<div>${Greeting(store.get("user").get("name"))}</div>
-<div class='flex-container'>
-<aside class='sidebar green'>${sidebar(state)}</aside>
-<article class='main-content'>
+         
+
+      </div>
+  </section>
+<section>
 <div class='tabs-container>
 <div class='btn-container>${tabs()}</div>
+<div class='flex-container'>
+<aside class='sidebar blue'>${sidebar(state)}</aside>
+<article class='main-content red'>
 <div class='tabs-panel>
-<div>${roverFact(state)}</div>
-<div class='slider'>
-<div class='slides'> 
-<div class='slide'>${roverImageGallery(state)}</div>
-</div>
+<div class='scroller'>
+${roverImageGallery(state)}
 </div>
 </div>
 </div>
 </div>
 </article>
 <div id='photo'>${ImageOfTheDay(apod, state)}</div>
-
+</section>
+</main>
 `;
 };
 
