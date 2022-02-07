@@ -5,7 +5,7 @@
 
 var regex = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/,
   landscape = document.getElementById("landscape"),
-  landscapeLayers = landscape.querySelectorAll("g"),
+  landscapeLayers = landscape.querySelectorAll("path"),
   // SVGoffsettop = landscape.getBoundingClientRect().top,
   vertHeight = landscape.getBoundingClientRect().height,
   sun = document.getElementById("sun");

@@ -428,7 +428,7 @@ footer {
 }
 
 button {
-  width: 33.3333333333%;
+  width: 33.4%;
   margin: -2px;
   padding: 0;
   border: none;
@@ -508,6 +508,12 @@ li > span {
   height: auto;
 }
 
+@media screen and (max-width: 400px) {
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
 /* -------------------  MOBILE  --------------------- */
 svg {
   width: 500px;

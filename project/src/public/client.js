@@ -55,13 +55,14 @@ const tabs = () => {
 const sidebar = (state) => {
 //   const roverData = store.get("selectedRover");
   const roverData = store.get('selectedRover');
-
+console.log(roverData);
  
   //     const roverData = state.photo_manifest;
   //     // const roverBar = roverData.map(info =>
   // const roverBar = roverData.map(info =>
   return (`
     <h2 class='rover-name'>${roverData.name}</h2>
+    <div><img src='./assets/images/${roverData.name + '.jpg'} alt='rover image' class='main-rover-img'>
     <ul class='rover-info'>
     <li class='roverinfo-item'><span>Landing Date:</span> ${roverData.landing_date} </li>
     <li class='roverinfo-item'><span>Launch Date:</span> ${roverData.launch_date} </li>
@@ -92,7 +93,7 @@ const displayRoverInfo = ( rover) => {
 //   getRoverInfo(store.get("selectedRover"));
 
   } else if (event.target.id === "spirit") {
-    updateStore(store, { selectedRoverInfo: 'spirit' });
+    updateStore(store, { selectedRoverInfo: 'spirit'});
 //   getRoverInfo(store.get("selectedRover"));
 
   } else if (event.target.id === "opportunity") {
@@ -152,9 +153,7 @@ const App = (state) => {
           Since the 1960s, humans have set out to discover what Mars can teach us about how planets grow and evolve, and whether it has ever hosted alien life. Mars has captivated humans since we first set eyes on it as a star-like object in the night sky. Early on, its reddish hue set the planet apart from its shimmering siblings, each compelling in its own way, but none other tracing a ruddy arc through Earth’s heavens. Then, in the late 1800s, telescopes first revealed a surface full of intriguing features—patterns and landforms that scientists at first wrongly ascribed to a bustling Martian civilization. Now, we know there are no artificial constructions on Mars. But we’ve also learned that, until 3.5 billion years ago, the dry, toxic planet we see today might have once been as habitable as Earth.
           Mars exploration at NASA "follows the water." Earlier missions had found that liquid water existed on Mars in the distant past. The Curiosity rover explored the “habitability” of Mars. It found nutrients and energy sources that microbes could have used, and established that Mars indeed had regions that could have been friendly to life in the ancient past. Did life take hold on the Red Planet? Future rovers will take the next step by looking for the signs of past life itself.
           With data from the rovers, mission scientists have reconstructed an ancient past when Mars was awash in water. Spirit and Opportunity each found evidence for past wet conditions that possibly could have supported microbial life.
-          </p>
-
-         
+          </p> 
 
       </div>
   </section>
@@ -165,6 +164,8 @@ const App = (state) => {
 <aside class='sidebar blue'>${sidebar(state)}</aside>
 <article class='main-content red'>
 <div class='tabs-panel>
+<div><h3>Latest Photos</h3></div>
+
 <div class='scroller'>
 ${roverImageGallery(state)}
 </div>

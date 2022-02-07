@@ -17,6 +17,10 @@
   }
 }
 
+// .main-rover-img { 
+
+// }
+
 li {
     margin: 2em 0 2em 0;
     padding: 1;
@@ -49,3 +53,5 @@ li > span {
   background-color: a.$blue;
   @include a.bgGradient(a.$blue);
 }
+
+
