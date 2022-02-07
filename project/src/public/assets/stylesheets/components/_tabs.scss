@@ -4,8 +4,55 @@
 .tabs-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     max-width: 100%;
+    top: 0;
+    left: 0;
   }
   
 
+// .btn-container {
+
+//     height: 30%;
+//     .btn-tab {
+//         width: 33.333333%;
+//         margin: -2px;
+//         padding: 0;
+//         border: none;
+//         color: white;
+//         background-color: #544E4E;
+//         height: 100px;
+//     cursor: pointer;
+
+//     // &:hover {
+//     //     background-color: scale-color()
+//     // }
+
+//     &:active {
+//         background-color: a.$orange;
+//     }
+    
+    
+//     }
+// }
+
+button {
+    width: 33.3333333333%;
+    margin: -2px;
+    padding: 0;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    background-color: a.$tabs;
+    height: 100px;
+cursor: pointer;
+
+&:hover {
+    background-color: scale-color(a.$tabs, $lightness: -10%);
+}
+
+&:active {
+    background-color: a.$orange;
+}
+
+
+}

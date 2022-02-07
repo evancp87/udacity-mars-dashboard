@@ -1,13 +1,51 @@
 @use '../abstracts/' as a;
 
 .sidebar {
-    flex: 0 0 300px;
-    height: 100vh;
+  flex: 0 0 300px;
+  padding: 1rem;
+  height: 100vh;
+
+  .rover-name {
+    font-size: 3em;
+    color: a.$white;
+    margin: {
+      top: 0;
+      bottom: 1em;
+    }
+
+     
   }
+}
 
+li {
+    margin: 2em 0 2em 0;
+    padding: 1;
+    font-size: 1.5em;
+    color: a.$white;
+    border-bottom: 1px solid a.$white;
+    white-space: nowrap;
 
+    
 
-  .green {
-    background-color: a.$blue;
-    @include a.bgGradient(a.$blue);
-  }
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
+
+li > span {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    color: a.$orange;
+    // margin-right: 1em;
+    // d
+}
+
+.rover-fact {
+  margin-top: 5em;
+}
+
+.blue {
+  background-color: a.$blue;
+  @include a.bgGradient(a.$blue);
+}

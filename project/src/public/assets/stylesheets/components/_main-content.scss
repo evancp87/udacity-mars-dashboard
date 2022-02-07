@@ -15,9 +15,15 @@
 
 
 
-.main-content {
+.red {
     flex: 1;
     background-color: a.$mars-red;
     @include a.bgGradient(a.$mars-red);
     
+      }
+
+
+      #photo {
+          max-width: 100%;
+          height: auto;
       }

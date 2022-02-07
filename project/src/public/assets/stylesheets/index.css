@@ -377,10 +377,40 @@ a {
   cursor: pointer;
 }
 
+.scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 21%;
+  gap: 1em;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 2em;
+}
+.scroller .scroll-item {
+  display: grid;
+  grid-template-columns: min-content;
+  gap: 2em;
+  padding: 2em;
+}
+.scroller .scroll-item > img {
+  inline-size: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.snaps-inline {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 1em;
+}
+.snaps-inline > * {
+  scroll-snap-align: start;
+}
+
 footer {
   background-color: #BC2732;
   bottom: 0;
   left: 0;
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -392,16 +422,65 @@ footer {
 .tabs-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   max-width: 100%;
+  top: 0;
+  left: 0;
+}
+
+button {
+  width: 33.3333333333%;
+  margin: -2px;
+  padding: 0;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #544E4E;
+  height: 100px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #4c4646;
+}
+button:active {
+  background-color: #CE980B;
 }
 
 .sidebar {
   flex: 0 0 300px;
+  padding: 1rem;
   height: 100vh;
 }
+.sidebar .rover-name {
+  font-size: 3em;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
 
-.green {
+li {
+  margin: 2em 0 2em 0;
+  padding: 1;
+  font-size: 1.5em;
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+  white-space: nowrap;
+}
+li:last-of-type {
+  border-bottom: none;
+}
+
+li > span {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+  color: #CE980B;
+}
+
+.rover-fact {
+  margin-top: 5em;
+}
+
+.blue {
   background-color: #253C8B;
   background-image: linear-gradient(#3251bb 0%, #253C8B 70%);
 }
@@ -418,10 +497,15 @@ footer {
   flex-direction: row;
 }
 
-.main-content {
+.red {
   flex: 1;
   background-color: #BC2732;
   background-image: linear-gradient(#d94752 0%, #BC2732 70%);
+}
+
+#photo {
+  max-width: 100%;
+  height: auto;
 }
 
 /* -------------------  MOBILE  --------------------- */
