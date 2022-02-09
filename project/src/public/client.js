@@ -4,7 +4,7 @@ let store = Immutable.Map({
   apod: "",
   selectedRover: "Curiosity",
   rovers: ["Curiosity", "Opportunity", "Spirit"],
-  roverInfo: "",
+  roverData: "",
 });
 
 // adds our markup to the page
@@ -17,7 +17,8 @@ const updateStore = (state, newState) => {
 };
 
 const render = async (root, state) => {
-  root.innerHTML = App(state);
+  root.innerHTML = App(state, sidebar, tabs, roverImageGallery);
+  
   //   root.innerHTML = dashboard(state);
 };
 
@@ -53,9 +54,11 @@ const tabs = () => {
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
 const sidebar = (state) => {
-//   const roverData = store.get("selectedRover");
-  const roverData = store.get('selectedRover');
-console.log(roverData);
+  const roverData = store.get("selectedRover");
+//   const roverData = store.get('selectedRover');
+console.log(roverData);  
+
+
  
   //     const roverData = state.photo_manifest;
   //     // const roverBar = roverData.map(info =>
@@ -74,6 +77,14 @@ console.log(roverData);
   // );
 };
 
+
+function renderRoversCars(rovers) {
+    if (!rovers.length) {
+      return `
+              <h4>Loading rovers...</h4>
+          `;
+    }
+}
 // const selectedRoverImage = () => {
 // return store.get()
 // }
@@ -83,21 +94,21 @@ console.log(roverData);
 // }
 
 const displayRoverInfo = ( rover) => {
-  let selectedRoverInfo = store.get("selectedRover");
+  let selectedRover = store.get("selectedRover");
   let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
   if (event.target.id === "curiosity") {
-    updateStore(store, { selectedRoverInfo: 'curiosity' });
+    updateStore(store, { selectedRover: 'curiosity' });
 //   getRoverInfo(store.get("selectedRover"));
 
   } else if (event.target.id === "spirit") {
-    updateStore(store, { selectedRoverInfo: 'spirit'});
+    updateStore(store, { selectedRover: 'spirit'});
 //   getRoverInfo(store.get("selectedRover"));
 
   } else if (event.target.id === "opportunity") {
-    updateStore(store, { selectedRoverInfo: 'opportunity' });
+    updateStore(store, { selectedRover: 'opportunity' });
 //   getRoverInfo(store.get("selectedRover"));
 
   }
@@ -128,7 +139,7 @@ const renderRoverImages = (state) => {
   // return roverImageArray.map(r => {
 
   return store
-    .get("rovers")[0]
+    .get("selectedRover")
     .latest_photos.slice(0, 5)
     .map(
       (photo) => roverImageGallery(photo.get("img_src"))
@@ -136,7 +147,7 @@ const renderRoverImages = (state) => {
     );
 };
 
-const roverImageGallery = (src) => ` <div class='scroll-item'> <img src='${src}'>`;
+const roverImageGallery = (src) => ` <div class='scroll-item'> <img src='${src}'></div>`;
 
 // App higher order function
 const App = (state) => {
@@ -275,10 +286,19 @@ const getRoverImage = (store, rover) => {
 const getRoverInfo = (chosenRover) => {
   const roverInfo = fetch(`http://localhost:3000/manifests/${chosenRover}`)
     .then((res) => res.json())
-    .then((roverInfo) => console.log(roverInfo))
+//     .then((rover) => {
+//         const roverData = rover.data;
+// console.log(roverData);
+//     }
+//     )
 
-    .then((roverInfo) => updateStore(store, { roverInfo }));
-  // return roverInfo;
+    .then((rover) => {
+        const roverData = rover.data;
+        console.log(roverData);
+         updateStore(store, { roverData: roverData.photo_manifest})
+    });
+       console.log(store);
+//   return roverInfo;
 };
 
 // ================================================================================================================================
