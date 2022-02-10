@@ -4,7 +4,7 @@ let store = Immutable.Map({
   apod: "",
   selectedRover: "Curiosity",
   rovers: ["Curiosity", "Opportunity", "Spirit"],
-  roverData: "",
+  roverData: {},
 });
 
 // adds our markup to the page
@@ -26,6 +26,7 @@ const render = async (root, state) => {
 window.addEventListener("load", () => {
   getRoverImage(store, store.get("rovers")[0]);
   getRoverInfo(store.get("selectedRover"));
+  getRoverInfo(store.get('roverData'));
   render(root, store);
 });
 
@@ -93,7 +94,7 @@ function renderRoversCars(rovers) {
 
 // }
 
-const displayRoverInfo = ( rover) => {
+const displayRoverInfo = ( rover, event) => {
   let selectedRover = store.get("selectedRover");
   let button = button.id;
   // const sidebar = sidebar();
@@ -110,6 +111,7 @@ const displayRoverInfo = ( rover) => {
   } else if (event.target.id === "opportunity") {
     updateStore(store, { selectedRover: 'opportunity' });
 //   getRoverInfo(store.get("selectedRover"));
+
 
   }
 
@@ -279,7 +281,7 @@ const getRoverImage = (store, rover) => {
   const images = fetch(`http://localhost:3000/rovers/${rover}`)
     .then((res) => res.json())
     .then((rovers) => console.log(rovers))
-    .then((rovers) => updateStore(store, { rovers }));
+    .then((rovers) => updateStore(store, { rovers: rovers }));
   // return roverData;
 };
 
@@ -293,12 +295,28 @@ const getRoverInfo = (chosenRover) => {
 //     )
 
     .then((rover) => {
-        const roverData = rover.data;
+        const roverData = rover.data.photo_manifest;
+        const {landing_date,
+          launch_date,
+          max_date,
+          max_sol, 
+          name,
+          status} = roverData;
         console.log(roverData);
-         updateStore(store, { roverData: roverData.photo_manifest})
+         updateStore(store, { roverData: {
+           rover: Immutable.Map({
+           landing_date,
+           launch_date,
+           max_date,
+           max_sol, 
+           name,
+           status,
+         })
+        
+         }});
+         console.log(store);
     });
-       console.log(store);
-//   return roverInfo;
+
 };
 
 // ================================================================================================================================
