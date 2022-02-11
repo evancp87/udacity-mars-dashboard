@@ -12,7 +12,7 @@ const root = document.getElementById("root");
 
 // updates Immutable store object
 const updateStore = (state, newState) => {
-  const store = state.merge(newState);
+   store = state.merge(newState);
   render(root, store);
 };
 
@@ -26,7 +26,7 @@ const render = async (root, state) => {
 window.addEventListener("load", () => {
   getRoverImage(store, store.get("rovers")[0]);
   getRoverInfo(store.get("selectedRover"));
-  getRoverInfo(store.get('roverData'));
+  // getRoverInfo(store.get('roverData'));
   render(root, store);
 });
 
@@ -55,9 +55,11 @@ const tabs = () => {
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
 const sidebar = (state) => {
-  const roverData = store.get("selectedRover");
+  const roverData = store.get("roverData");
 //   const roverData = store.get('selectedRover');
 console.log(roverData);  
+
+
 
 
  
@@ -281,7 +283,12 @@ const getRoverImage = (store, rover) => {
   const images = fetch(`http://localhost:3000/rovers/${rover}`)
     .then((res) => res.json())
     .then((rovers) => console.log(rovers))
-    .then((rovers) => updateStore(store, { rovers: rovers }));
+    .then((data) => {
+    const oldStore = store.toJS();
+    oldStore.roverData = data.image.latest_photos;
+    updateStore(store, Immutable.Map({...oldStore }));
+    });
+    console.log(store);
   // return roverData;
 };
 
@@ -317,6 +324,22 @@ const getRoverInfo = (chosenRover) => {
          console.log(store);
     });
 
+  //   .then((photo_manifest) => {
+  //     const {landing_date, launch_date, max_date, max_sol, name, status} = photo_manifest;
+  //     console.log(photo_manifest);
+  //      updateStore(store, { roverData: Immutable.Map({
+  //        rover: { 
+  //          landing_date,
+  //          launch_date,
+  //          max_date,
+  //          max_sol,
+  //          name,
+  //          status
+  //        }
+  //      })});
+  //      console.log(store);
+  // });
+//   return roverInfo;
 };
 
 // ================================================================================================================================
