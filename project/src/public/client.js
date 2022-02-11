@@ -25,6 +25,7 @@ const render = async (root, state) => {
 // listening for load event because page should load before any JS is called
 window.addEventListener("load", () => {
   getRoverImage(store, store.get("rovers")[0]);
+
   getRoverInfo(store.get("selectedRover"));
   // getRoverInfo(store.get('roverData'));
   render(root, store);
@@ -56,7 +57,7 @@ const tabs = () => {
 
 const sidebar = (state) => {
   const roverData = store.get("roverData");
-//   const roverData = store.get('selectedRover');
+  const selectedRover = store.get('selectedRover');
 console.log(roverData);  
 
 
@@ -64,6 +65,7 @@ console.log(roverData);
 
  
   //     const roverData = state.photo_manifest;
+  
   //     // const roverBar = roverData.map(info =>
   // const roverBar = roverData.map(info =>
   return (`
@@ -81,7 +83,7 @@ console.log(roverData);
 };
 
 
-function renderRoversCars(rovers) {
+function renderRovers(rovers) {
     if (!rovers.length) {
       return `
               <h4>Loading rovers...</h4>
@@ -143,7 +145,7 @@ const renderRoverImages = (state) => {
   // return roverImageArray.map(r => {
 
   return store
-    .get("selectedRover")
+    .get("roverData")
     .latest_photos.slice(0, 5)
     .map(
       (photo) => roverImageGallery(photo.get("img_src"))
@@ -158,6 +160,17 @@ const App = (state) => {
   const apod = state.get("apod");
   return `
   <main>
+  <section class="hero" id="parallex">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="hero-title"><span>Scroll</span></div>
+
+        <div class="scroll-animation">
+                    <p>Scroll</p>
+                </div>
+
+         </section>
   <section id="intro-wrapper">
       <div class="mars-intro">
           <h1 class="title">
@@ -295,11 +308,6 @@ const getRoverImage = (store, rover) => {
 const getRoverInfo = (chosenRover) => {
   const roverInfo = fetch(`http://localhost:3000/manifests/${chosenRover}`)
     .then((res) => res.json())
-//     .then((rover) => {
-//         const roverData = rover.data;
-// console.log(roverData);
-//     }
-//     )
 
     .then((rover) => {
         const roverData = rover.data.photo_manifest;
@@ -324,22 +332,7 @@ const getRoverInfo = (chosenRover) => {
          console.log(store);
     });
 
-  //   .then((photo_manifest) => {
-  //     const {landing_date, launch_date, max_date, max_sol, name, status} = photo_manifest;
-  //     console.log(photo_manifest);
-  //      updateStore(store, { roverData: Immutable.Map({
-  //        rover: { 
-  //          landing_date,
-  //          launch_date,
-  //          max_date,
-  //          max_sol,
-  //          name,
-  //          status
-  //        }
-  //      })});
-  //      console.log(store);
-  // });
-//   return roverInfo;
+  
 };
 
 // ================================================================================================================================
