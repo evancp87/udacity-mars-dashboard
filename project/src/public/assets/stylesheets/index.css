@@ -637,6 +637,11 @@ footer {
   background-image: linear-gradient(#3251bb 0%, #253C8B 70%);
 }
 
+.main-rover-img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* -------------------  TABLET  --------------------- */
 /* -------------------  DESKTOP  -------------------- */
 /* -------------------  LARGE SCREENS  -------------- */
