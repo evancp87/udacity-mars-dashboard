@@ -79,7 +79,7 @@ const sidebar = (state) => {
   <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.rover.get(
     "max_date"
   )} </li>
-  <li class='roverinfo-item'>${roverFact(roverData.rover.get("name"))}</li>
+  <li class='roverinfo-item'>${roverFact(roverData.rover.get('name'))}</li>
 
   </ul>`;
     // );
@@ -102,7 +102,8 @@ function renderRovers(rovers) {
 // }
 
 const displayRoverInfo = (rover, event) => {
-  let selectedRover = store.get("selectedRover");
+  let roverData = store.get("roverData");
+  let selectedRover = store.get("selectedRover")
   let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
@@ -128,12 +129,12 @@ const displayRoverInfo = (rover, event) => {
   // return filterRovers;
 };
 
-const roverFact = (roverData) => {
-  if (roverData.name == "opportunity") {
+const roverFact = (rover) => {
+  if (rover == "opportunity") {
     return `<p class='rover-fact'> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
-  } else if (roverData.name == "curiosity") {
+  } else if (rover == "curiosity") {
     return `<p class='rover-fact'>Curiositys mission is to determine whether the Red Planet ever was habitable to microbial life. The rover, which is about the size of a MINI Cooper, is equipped with 17 cameras and a robotic arm containing a suite of specialized laboratory-like tools and instruments. </p>`;
-  } else if (roverData.name == "spirit") {
+  } else if (rover == "spirit") {
     return `<p class='rover-fact'>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
   }
 };
@@ -156,7 +157,7 @@ const roverImageGallery = (src) =>
   ` <div class='scroll-item'> <img src='${src}' alt=''></div>`;
 
 // App higher order function
-const App = (state) => {
+const App = (state, roverFact) => {
   const apod = state.get("apod");
   const selectedRover = state.get("selectedRover");
   const roverData = state.get("roverData");
@@ -167,7 +168,7 @@ const App = (state) => {
         <div class="stars"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
-        <button class='scroll-down'><span class='crater 1'></span><span class='crater 2'></span><span class='crater 3'></span></button>
+        <button class='scroll-down'><span class='crater1'></span><span class='crater2'></span><span class='crater3'></span></button>
          </header>
          <main>
   <section id="intro-wrapper">
@@ -187,13 +188,13 @@ const App = (state) => {
 <div class='tabs-container'>
 <div class='btn-container'>${tabs()}</div>
 <div class='flex-container'>
-<aside class='sidebar blue'>${sidebar( state)}</aside>
+<aside class='sidebar blue'>${sidebar(roverFact, state)}</aside>
 <article class='main-content red'>
 <div class='tabs-panel'>
 <div><h3>Latest Photos</h3></div>
 
 <div class='scroller'>
-${roverImageGallery(roverData, rovers, state)}
+${roverImageGallery(roverData, state)}
 </div>
 </div>
 </div>
