@@ -12,13 +12,13 @@ const root = document.getElementById("root");
 
 // updates Immutable store object
 const updateStore = (state, newState) => {
-   store = state.merge(newState);
+  store = state.merge(newState);
   render(root, store);
 };
 
 const render = async (root, state) => {
   root.innerHTML = App(state, sidebar, tabs, roverImageGallery);
-  
+
   //   root.innerHTML = dashboard(state);
 };
 
@@ -57,32 +57,41 @@ const tabs = () => {
 
 const sidebar = (state) => {
   const roverData = store.get("roverData");
-  const selectedRover = store.get('selectedRover');
-console.log(roverData);  
+  const selectedRover = store.get("selectedRover");
+  console.log(roverData);
 
-if (roverData.hasOwnProperty("rover")) {
-  return (`
-    <h2 class='rover-name'>${roverData.get('name')}</h2>
-    <img src='./assets/images/${roverData.get('name') + '.jpg'}' alt='rover image' class='main-rover-img'>
-    <ul class='rover-info'>
-    <li class='roverinfo-item'><span>Landing Date:</span> ${roverData.get('landing_date')} </li>
-    <li class='roverinfo-item'><span>Launch Date:</span> ${roverData.get('launch_date')} </li>
-    <li class='roverinfo-item'><span>Status:</span> ${roverData.get('status')} </li>
-    <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.get('max_date')} </li>
-    <li class='roverinfo-item'>${roverFact(state)}</li>
-    </ul>`
-  );
-  // );
-} 
+  if (roverData.hasOwnProperty("rover")) {
+    return `
+  <h2 class='rover-name'>${roverData.rover.get("name")}</h2>
+  <div><img src='/assets/images/${
+    roverData.rover.get("name") + ".jpg"
+  }' alt='rover image' class='main-rover-img'>
+  <ul class='rover-info'>
+  <li class='roverinfo-item'><span>Landing Date:</span> ${roverData.rover.get(
+    "landing_date"
+  )} </li>
+  <li class='roverinfo-item'><span>Launch Date:</span> ${roverData.rover.get(
+    "launch_date"
+  )} </li>
+  <li class='roverinfo-item'><span>Status:</span> ${roverData.rover.get(
+    "status"
+  )} </li>
+  <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.rover.get(
+    "max_date"
+  )} </li>
+  <li class='roverinfo-item'>${roverFact(roverData.rover.get("name"))}</li>
+
+  </ul>`;
+    // );
+  }
 };
 
-
 function renderRovers(rovers) {
-    if (!rovers.length) {
-      return `
+  if (!rovers.length) {
+    return `
               <h4>Loading rovers...</h4>
           `;
-    }
+  }
 }
 // const selectedRoverImage = () => {
 // return store.get()
@@ -92,26 +101,21 @@ function renderRovers(rovers) {
 
 // }
 
-const displayRoverInfo = ( rover, event) => {
- 
+const displayRoverInfo = (rover, event) => {
   let selectedRover = store.get("selectedRover");
   let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
   if (event.target.id === "curiosity") {
-    updateStore(store, { selectedRover: 'curiosity' });
-//   getRoverInfo(store.get("selectedRover"));
-
+    updateStore(store, { selectedRover: "curiosity" });
+    //   getRoverInfo(store.get("selectedRover"));
   } else if (event.target.id === "spirit") {
-    updateStore(store, { selectedRover: 'spirit'});
-//   getRoverInfo(store.get("selectedRover"));
-
+    updateStore(store, { selectedRover: "spirit" });
+    //   getRoverInfo(store.get("selectedRover"));
   } else if (event.target.id === "opportunity") {
-    updateStore(store, { selectedRover: 'opportunity' });
-//   getRoverInfo(store.get("selectedRover"));
-
-
+    updateStore(store, { selectedRover: "opportunity" });
+    //   getRoverInfo(store.get("selectedRover"));
   }
 
   // const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
@@ -124,12 +128,12 @@ const displayRoverInfo = ( rover, event) => {
   // return filterRovers;
 };
 
-const roverFact = (store) => {
-  if (store.selectedRover == "opportunity") {
+const roverFact = (roverData) => {
+  if (roverData.name == "opportunity") {
     return `<p class='rover-fact'> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
-  } else if (store.selectedRover == "curiosity") {
+  } else if (roverData.name == "curiosity") {
     return `<p class='rover-fact'>Curiositys mission is to determine whether the Red Planet ever was habitable to microbial life. The rover, which is about the size of a MINI Cooper, is equipped with 17 cameras and a robotic arm containing a suite of specialized laboratory-like tools and instruments. </p>`;
-  } else if (store.selectedRover == "spirit") {
+  } else if (roverData.name == "spirit") {
     return `<p class='rover-fact'>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
   }
 };
@@ -148,14 +152,15 @@ const renderRoverImages = (state) => {
     );
 };
 
-const roverImageGallery = (src) => ` <div class='scroll-item'> <img src='${src}'></div>`;
+const roverImageGallery = (src) =>
+  ` <div class='scroll-item'> <img src='${src}' alt=''></div>`;
 
 // App higher order function
 const App = (state) => {
   const apod = state.get("apod");
-const selectedRover = state.get('selectedRover');
-const roverData = state.get('roverData');
-const rovers = state.get('rovers');
+  const selectedRover = state.get("selectedRover");
+  const roverData = state.get("roverData");
+  const rovers = state.get("rovers");
   return `
   
   <header class="hero" id="parallex">
@@ -182,7 +187,7 @@ const rovers = state.get('rovers');
 <div class='tabs-container'>
 <div class='btn-container'>${tabs()}</div>
 <div class='flex-container'>
-<aside class='sidebar blue'>${sidebar(roverData, selectedRover, state)}</aside>
+<aside class='sidebar blue'>${sidebar( state)}</aside>
 <article class='main-content red'>
 <div class='tabs-panel'>
 <div><h3>Latest Photos</h3></div>
@@ -205,8 +210,9 @@ ${roverImageGallery(roverData, rovers, state)}
 `;
 };
 
-
-{/* <div>${Greeting(store.get("user").get("name"))}</div> */}
+{
+  /* <div>${Greeting(store.get("user").get("name"))}</div> */
+}
 
 //  return dashboard(sidebar, tabs, imageGallery);
 // store.get("rovers").map((info) => info.latest_photos).join(''));
@@ -232,9 +238,7 @@ const ImageOfTheDay = (apod) => {
             <p>${apod.title}</p>
             <p>${apod.explanation}</p>
         `;
-  } else if (apod.hasOwnProperty("image")) { 
-
-    
+  } else if (apod.hasOwnProperty("image")) {
     return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
@@ -302,8 +306,9 @@ const getRoverImage = (store, rover) => {
       console.log(rovers);
       let roverData = rovers.image.latest_photos;
       updateStore(store, { roverData: roverData });
+      console.log(store);
     });
-    // console.log(store);
+  // console.log(store);
   // return roverData;
 };
 
@@ -312,29 +317,24 @@ const getRoverInfo = (chosenRover) => {
     .then((res) => res.json())
 
     .then((rover) => {
-        const roverData = rover.data.photo_manifest;
-        const {landing_date,
-          launch_date,
-          max_date,
-          max_sol, 
-          name,
-          status} = roverData;
-        console.log(roverData);
-         updateStore(store, { roverData: {
-           rover: Immutable.Map({
-           landing_date,
-           launch_date,
-           max_date,
-           max_sol, 
-           name,
-           status,
-         })
-        
-         }});
-         console.log(store);
+      const roverData = rover.data.photo_manifest;
+      const { landing_date, launch_date, max_date, max_sol, name, status } =
+        roverData;
+      console.log(roverData);
+      updateStore(store, {
+        roverData: {
+          rover: Immutable.Map({
+            landing_date,
+            launch_date,
+            max_date,
+            max_sol,
+            name,
+            status,
+          }),
+        },
+      });
+      console.log(store);
     });
-
-  
 };
 
 // ================================================================================================================================
