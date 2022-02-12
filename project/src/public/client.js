@@ -60,26 +60,20 @@ const sidebar = (state) => {
   const selectedRover = store.get('selectedRover');
 console.log(roverData);  
 
-
-
-
- 
-  //     const roverData = state.photo_manifest;
-  
-  //     // const roverBar = roverData.map(info =>
-  // const roverBar = roverData.map(info =>
+if (roverData.hasOwnProperty("rover")) {
   return (`
-    <h2 class='rover-name'>${roverData.name}</h2>
-    <div><img src='./assets/images/${roverData.name + '.jpg'} alt='rover image' class='main-rover-img'>
+    <h2 class='rover-name'>${roverData.get('name')}</h2>
+    <img src='./assets/images/${roverData.get('name') + '.jpg'}' alt='rover image' class='main-rover-img'>
     <ul class='rover-info'>
-    <li class='roverinfo-item'><span>Landing Date:</span> ${roverData.landing_date} </li>
-    <li class='roverinfo-item'><span>Launch Date:</span> ${roverData.launch_date} </li>
-    <li class='roverinfo-item'><span>Status:</span> ${roverData.status} </li>
-    <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.max_date} </li>
+    <li class='roverinfo-item'><span>Landing Date:</span> ${roverData.get('landing_date')} </li>
+    <li class='roverinfo-item'><span>Launch Date:</span> ${roverData.get('launch_date')} </li>
+    <li class='roverinfo-item'><span>Status:</span> ${roverData.get('status')} </li>
+    <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.get('max_date')} </li>
     <li class='roverinfo-item'>${roverFact(state)}</li>
     </ul>`
   );
   // );
+} 
 };
 
 
@@ -99,6 +93,7 @@ function renderRovers(rovers) {
 // }
 
 const displayRoverInfo = ( rover, event) => {
+ 
   let selectedRover = store.get("selectedRover");
   let button = button.id;
   // const sidebar = sidebar();
@@ -158,44 +153,42 @@ const roverImageGallery = (src) => ` <div class='scroll-item'> <img src='${src}'
 // App higher order function
 const App = (state) => {
   const apod = state.get("apod");
+const selectedRover = state.get('selectedRover');
+const roverData = state.get('roverData');
+const rovers = state.get('rovers');
   return `
-  <main>
-  <section class="hero" id="parallex">
+  
+  <header class="hero" id="parallex">
         <div class="stars"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
-        <div class="hero-title"><span>Scroll</span></div>
-
-        <div class="scroll-animation">
-                    <p>Scroll</p>
-                </div>
-
-         </section>
+        <button class='scroll-down'><span class='crater 1'></span><span class='crater 2'></span><span class='crater 3'></span></button>
+         </header>
+         <main>
   <section id="intro-wrapper">
       <div class="mars-intro">
           <h1 class="title">
               Mars Rover
           </h1>
-          <div>${Greeting(store.get("user").get("name"))}</div>
+         
           <p class="intro-text">
           Since the 1960s, humans have set out to discover what Mars can teach us about how planets grow and evolve, and whether it has ever hosted alien life. Mars has captivated humans since we first set eyes on it as a star-like object in the night sky. Early on, its reddish hue set the planet apart from its shimmering siblings, each compelling in its own way, but none other tracing a ruddy arc through Earth’s heavens. Then, in the late 1800s, telescopes first revealed a surface full of intriguing features—patterns and landforms that scientists at first wrongly ascribed to a bustling Martian civilization. Now, we know there are no artificial constructions on Mars. But we’ve also learned that, until 3.5 billion years ago, the dry, toxic planet we see today might have once been as habitable as Earth.
-          Mars exploration at NASA "follows the water." Earlier missions had found that liquid water existed on Mars in the distant past. The Curiosity rover explored the “habitability” of Mars. It found nutrients and energy sources that microbes could have used, and established that Mars indeed had regions that could have been friendly to life in the ancient past. Did life take hold on the Red Planet? Future rovers will take the next step by looking for the signs of past life itself.
-          With data from the rovers, mission scientists have reconstructed an ancient past when Mars was awash in water. Spirit and Opportunity each found evidence for past wet conditions that possibly could have supported microbial life.
+          Mars exploration at NASA "follows the water." Earlier missions had found that liquid water existed on Mars in the distant past.</br></br> The Curiosity rover explored the “habitability” of Mars. It found nutrients and energy sources that microbes could have used, and established that Mars indeed had regions that could have been friendly to life in the ancient past. Did life take hold on the Red Planet? Future rovers will take the next step by looking for the signs of past life itself.
           </p> 
 
       </div>
   </section>
-<section>
-<div class='tabs-container>
-<div class='btn-container>${tabs()}</div>
+<section class='tabs'>
+<div class='tabs-container'>
+<div class='btn-container'>${tabs()}</div>
 <div class='flex-container'>
-<aside class='sidebar blue'>${sidebar(state)}</aside>
+<aside class='sidebar blue'>${sidebar(roverData, selectedRover, state)}</aside>
 <article class='main-content red'>
-<div class='tabs-panel>
+<div class='tabs-panel'>
 <div><h3>Latest Photos</h3></div>
 
 <div class='scroller'>
-${roverImageGallery(state)}
+${roverImageGallery(roverData, rovers, state)}
 </div>
 </div>
 </div>
@@ -204,8 +197,16 @@ ${roverImageGallery(state)}
 <div id='photo'>${ImageOfTheDay(apod, state)}</div>
 </section>
 </main>
+<footer>
+        <div class="copyright">Made on 🌎 in 2022 by Evan Parker 🚀🪐</div>
+        <div class="info">All images and information from the Nasa Api. <a
+            href="https://api.nasa.gov/">More information</a></div>
+    </footer>
 `;
 };
+
+
+{/* <div>${Greeting(store.get("user").get("name"))}</div> */}
 
 //  return dashboard(sidebar, tabs, imageGallery);
 // store.get("rovers").map((info) => info.latest_photos).join(''));
@@ -231,7 +232,9 @@ const ImageOfTheDay = (apod) => {
             <p>${apod.title}</p>
             <p>${apod.explanation}</p>
         `;
-  } else {
+  } else if (apod.hasOwnProperty("image")) { 
+
+    
     return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
@@ -295,13 +298,12 @@ const getRoverImage = (store, rover) => {
   //   let { rovers } = store;
   const images = fetch(`http://localhost:3000/rovers/${rover}`)
     .then((res) => res.json())
-    .then((rovers) => console.log(rovers))
-    .then((data) => {
-    const oldStore = store.toJS();
-    oldStore.roverData = data.image.latest_photos;
-    updateStore(store, Immutable.Map({...oldStore }));
+    .then((rovers) => {
+      console.log(rovers);
+      let roverData = rovers.image.latest_photos;
+      updateStore(store, { roverData: roverData });
     });
-    console.log(store);
+    // console.log(store);
   // return roverData;
 };
 
