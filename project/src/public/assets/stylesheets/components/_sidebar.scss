@@ -1,5 +1,8 @@
 @use '../abstracts/' as a;
 
+// mobile first styles
+
+
 .sidebar {
   flex: 0 0 300px;
   padding: 1rem;
@@ -16,10 +19,6 @@
      
   }
 }
-
-// .main-rover-img { 
-
-// }
 
 .roverinfo-item {
     margin: 2em 0 2em 0;

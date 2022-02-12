@@ -2,6 +2,9 @@
 /* -------------------  MOBILE  --------------------- */
 
 
+// mobile first styles
+
+
 
 body {
     display: flex;
@@ -81,7 +84,8 @@ body {
 
 
   .hero {
-    height: 100vh;  
+    height: 100vh; 
+    width: 100vw;
     background-color: #003b59;
     background: radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%);
 

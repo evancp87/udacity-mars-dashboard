@@ -164,14 +164,14 @@ const App = (state, roverFact) => {
   const rovers = state.get("rovers");
   return `
   
-  <header class="hero" id="parallex">
+  <header class="hero" >
         <div class="stars"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
         <button class='scroll-down'><span class='crater1'></span><span class='crater2'></span><span class='crater3'></span></button>
          </header>
          <main>
-  <section id="intro-wrapper">
+  <section>
       <div class="mars-intro">
           <h1 class="title">
               Mars Rover
@@ -191,8 +191,7 @@ const App = (state, roverFact) => {
 <aside class='sidebar blue'>${sidebar(roverFact, state)}</aside>
 <article class='main-content red'>
 <div class='tabs-panel'>
-<div><h3>Latest Photos</h3></div>
-
+<h3>Latest Photos</h3>
 <div class='scroller'>
 ${roverImageGallery(roverData, state)}
 </div>
