@@ -1,23 +1,23 @@
 @use '../abstracts' as a;
 
-  .hero-title {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    color: #fff;
-    font-family: lato;
-    font-weight: 300;
-font-size: 50px;
-letter-spacing: 10px;
-padding-left: 10px;
+//   .hero-title {
+//     position: absolute;
+//     top: 50%;
+//     left: 0;
+//     right: 0;
+//     color: #fff;
+//     font-family: lato;
+//     font-weight: 300;
+// font-size: 50px;
+// letter-spacing: 10px;
+// padding-left: 10px;
 
-& span {
-  background: -webkit-linear-gradient(a.$white, #38495a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-  }
+// & span {
+//   background: -webkit-linear-gradient(a.$white, #38495a);
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+// }
+//   }
 
 .stars {
   width: 1px;
@@ -35,13 +35,13 @@ padding-left: 10px;
   364px 230px #fff, 739px 302px #fff, 636px 459px #fff, 304px 686px #fff,
   1614px 721px #fff, 535px 516px #fff, 428px 60px #fff, 355px 335px #fff,
   1594px 158px #fff, 90px 60px #fff, 553px 162px #fff, 239px 715px #fff,
-  455px 587px #fff, 1749px 715px #fff, 587px 172px #fff, 1301px 237px #fff,
-  039px 342px #fff, 585px 481px #fff, 695px 48px #fff, 524px 632px #fff,
+  1455px 587px #fff, 1749px 715px #fff, 587px 172px #fff, 1301px 237px #fff,
+  1039px 342px #fff, 585px 481px #fff, 695px 48px #fff, 524px 632px #fff,
   214px 413px #fff, 101px 300px #fff, 537px 613px #fff, 671px 596px #fff,
-  360px 635px #fff, 110px 313px #fff, 412px 783px #fff, 1949px 177px #fff,
-  903px 854px #fff, 700px 936px #fff, 378px 125px #fff, 308px 834px #fff,
+  1360px 635px #fff, 110px 313px #fff, 412px 783px #fff, 1949px 177px #fff,
+  1903px 854px #fff, 700px 936px #fff, 1378px 125px #fff, 308px 834px #fff,
   118px 962px #fff, 1350px 929px #fff, 781px 511px #fff, 561px 137px #fff,
-  757px 148px #fff, 1670px 979px #fff, 343px 739px #fff, 945px 795px #fff,
+  1757px 148px #fff, 1670px 979px #fff, 343px 739px #fff, 945px 795px #fff,
   576px 903px #fff, 1078px 436px #fff, 1583px 450px #fff, 1366px 474px #fff,
   297px 873px #fff, 192px 162px #fff, 1624px 633px #fff, 59px 453px #fff,
   82px 872px #fff, 1933px 498px #fff, 1966px 574px #fff, 1975px 688px #fff,

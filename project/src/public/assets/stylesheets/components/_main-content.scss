@@ -1,16 +1,20 @@
 @use '../abstracts' as a;
 
-.dashboard-content {
-  max-width: 100vw;
-  height: 100vw;
+// .dashboard-content {
+//   max-width: 100vw;
+//   height: 100vw;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+.flex-container {
   display: flex;
   flex-direction: column;
 }
 
-.flex-container {
-  display: flex;
-  flex-direction: row;
-}
+
+
+
 
 .red {
   flex: 1;
@@ -23,11 +27,45 @@
   height: auto;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: a.$tablet-breakpoint) {
   .flex-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
 
+
+
+
+/* -------------------  TABLET  --------------------- */
+
+@media (min-width: a.$tablet-breakpoint) {
+
+  
+  
+  
+}
+
+
+/* -------------------  DESKTOP  -------------------- */
+@media (min-width: a.$desktop-breakpoint) {
+
+  
+    
+// .title {
+// padding: 0;
+//   font-size: 2.5em;
+// }
+
+
+}
+
+
+/* -------------------  LARGE SCREENS  -------------- */
+
+@media (min-width: a.$lg-breakpoint) {
+  // .title {padding: 0;
+  // font-size: 2.5em;
+  // }
+ }

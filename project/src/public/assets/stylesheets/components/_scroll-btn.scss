@@ -1,0 +1,118 @@
+@use '../abstracts' as a;
+
+.scroll-down {
+    
+    height: 120px;
+    width: 120px;
+    border: 2px solid a.$black;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    // cursor: pointer;
+    animation:  colour-change 10s ease-in-out infinite;
+    z-index: 10;
+  
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      border: 2px solid a.$black;
+      height: 10px;
+      width: 10px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border: {
+        top: transparent;
+        left: transparent;
+      }
+      animation: scroll-down 1s ease-in-out infinite;
+    }
+  }
+  
+  .scroll-down::after {
+    top: 20%;
+    animation-delay: 0.3s;
+  }
+  
+  @keyframes scroll-down {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      top: 90%;
+    }
+  }
+
+
+  @keyframes colour-change {
+      0% {
+background-color: #3f99d2;
+      }
+      30% {
+        background-color: #7649fe;
+
+      }
+      60% {
+background-color: #ba1ec8;
+
+    }
+    100%{
+background-color: #5643fd;
+
+        
+    }
+  }
+
+
+  .crater1, .crater2, .crater3 {
+      position: absolute;
+      border-radius: 100%;
+      width: 20px;
+      z-index: 20;
+  }
+
+
+  .crater1 {
+      top: 50%;
+      left: 50%;
+
+  }
+
+  .crater2 {
+    top: 70%;
+    left: 70%;
+
+}
+
+.crater3 {
+    top: 20%;
+    left: 20%;
+
+}
+/* -------------------  TABLET  --------------------- */
+
+@media (max-width: a.$tablet-breakpoint) {
+
+}
+
+
+/* -------------------  DESKTOP  -------------------- */
+@media (min-width: a.$desktop-breakpoint) {
+    
+}
+
+
+/* -------------------  LARGE SCREENS  -------------- */
+
+@media (min-width: a.$lg-breakpoint) {
+   /* use mobile */
+ }

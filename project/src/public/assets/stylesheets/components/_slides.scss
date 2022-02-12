@@ -8,7 +8,7 @@ grid-auto-columns: 21%;
 gap: 1em;
 overflow-x: auto;
 overscroll-behavior-inline: contain;
-padding: 2em;
+padding: 10em;
 
 .scroll-item {
     display: grid;
@@ -35,3 +35,35 @@ scroll-snap-align: start;
     }
 }
 
+
+
+
+/* -------------------  TABLET  --------------------- */
+
+@media (min-width: a.$tablet-breakpoint) {
+
+
+.scroller {
+
+    padding: 10em;
+}
+}
+
+/* -------------------  DESKTOP  -------------------- */
+@media (min-width: a.$desktop-breakpoint) {
+
+    .scroller {
+
+        padding: 15em;
+    }
+}
+
+
+/* -------------------  LARGE SCREENS  -------------- */
+
+@media (min-width: a.$lg-breakpoint) {
+    .scroller {
+
+        padding: 20em;
+    }
+ }
