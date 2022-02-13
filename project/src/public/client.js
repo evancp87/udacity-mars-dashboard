@@ -187,7 +187,6 @@ const App = (state) => {
           Since the 1960s, humans have set out to discover what Mars can teach us about how planets grow and evolve, and whether it has ever hosted alien life. Mars has captivated humans since we first set eyes on it as a star-like object in the night sky. Early on, its reddish hue set the planet apart from its shimmering siblings, each compelling in its own way, but none other tracing a ruddy arc through Earth’s heavens. Then, in the late 1800s, telescopes first revealed a surface full of intriguing features—patterns and landforms that scientists at first wrongly ascribed to a bustling Martian civilization. Now, we know there are no artificial constructions on Mars. But we’ve also learned that, until 3.5 billion years ago, the dry, toxic planet we see today might have once been as habitable as Earth.
           Mars exploration at NASA "follows the water." Earlier missions had found that liquid water existed on Mars in the distant past.</br></br> The Curiosity rover explored the “habitability” of Mars. It found nutrients and energy sources that microbes could have used, and established that Mars indeed had regions that could have been friendly to life in the ancient past. Did life take hold on the Red Planet? Future rovers will take the next step by looking for the signs of past life itself.
           </p>
-  <div>${Greeting(store.get("user").get("name"))}</div> 
 
 
       </div>
@@ -255,17 +254,6 @@ const ImageOfTheDay = (apod) => {
 // =================================================================================================================================================
 
 // Pure function that renders conditional information
-const Greeting = (name) => {
-  if (name) {
-    return `
-            <h2>${name}, welcome to the Mars dashboard!</h2>
-            <p>Select your rover below</p>
-        `;
-  }
-  return `
-        <h1>Hello!</h1>
-    `;
-};
 
 // const showRover = (selectedRover) => {
 //     if (selectedRover) {
