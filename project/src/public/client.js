@@ -79,11 +79,12 @@ const sidebar = (state) => {
   <li class='roverinfo-item'><span>Date of last image taken:</span> ${roverData.rover.get(
     "max_date"
   )} </li>
-  <li class='roverinfo-item'>${roverFact(roverData.rover.get('name'))}</li>
+  ${roverFact(roverData.rover.get('name'))}
 
   </ul>`;
     // );
-  }
+  } 
+  return `<p class='loading-rovers'>Loading Data</p>`
 };
 
 function renderRovers(rovers) {
@@ -108,14 +109,14 @@ const displayRoverInfo = (rover, event) => {
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
-  if (event.target.id === "curiosity") {
-    updateStore(store, { selectedRover: "curiosity" });
+  if (event.target.id === "Curiosity") {
+    updateStore(store, { selectedRover: "Curiosity" });
     //   getRoverInfo(store.get("selectedRover"));
-  } else if (event.target.id === "spirit") {
-    updateStore(store, { selectedRover: "spirit" });
+  } else if (event.target.id === "Spirit") {
+    updateStore(store, { selectedRover: "Spirit" });
     //   getRoverInfo(store.get("selectedRover"));
-  } else if (event.target.id === "opportunity") {
-    updateStore(store, { selectedRover: "opportunity" });
+  } else if (event.target.id === "Opportunity") {
+    updateStore(store, { selectedRover: "Opportunity" });
     //   getRoverInfo(store.get("selectedRover"));
   }
 
@@ -129,26 +130,31 @@ const displayRoverInfo = (rover, event) => {
   // return filterRovers;
 };
 
-const roverFact = (rover) => {
-  if (rover == "opportunity") {
-    return `<p class='rover-fact'> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
-  } else if (rover == "curiosity") {
+const roverFact = (roverData) => {
+  if (roverData == "Curiosity") {
     return `<p class='rover-fact'>Curiositys mission is to determine whether the Red Planet ever was habitable to microbial life. The rover, which is about the size of a MINI Cooper, is equipped with 17 cameras and a robotic arm containing a suite of specialized laboratory-like tools and instruments. </p>`;
-  } else if (rover == "spirit") {
+  }  else if (roverData == "Opportunity") {
+    return `<p class='rover-fact'> Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.</p>`;
+  } 
+  else if (roverData == "Spirit") {
     return `<p class='rover-fact'>Spirit is just north of a low plateau called "Home Plate." It spent 2008 on a north-facing slope on the edge of Home Plate so that its solar panels stayed tilted toward the winter sun for maximum electrical output.</p>`;
   }
 };
 
 const renderRoverImages = (state) => {
-  // const roverImage = () => store.get('rovers');
-  // const roverImageArray = roverImage.latest_photos.slice(0, 5);
-  // return roverImageArray.map(r => {
+  // const roverImageArray = store.get('roverData');
+  // // const roverImageArray = roverImage.latest_photos.slice(0, 5);
+  // // return roverImageArray.map(r => {
+  // if (roverImageArray.hasOwnProperty('img_src')) {
+  //   return ` <div class='scroll-item'> <img src='${src}' alt=''></div>`;
 
+  // } return `<p>Loading Images</p>`
+
+  // }
   return store
-    .get("roverData")
-    .latest_photos.slice(0, 5)
+    .get("roverData").slice(0, 5)
     .map(
-      (photo) => roverImageGallery(photo.get("img_src"))
+      (img_src) => roverImageGallery(img_src.get("img_src"))
       // }).join('');
     );
 };
@@ -157,7 +163,7 @@ const roverImageGallery = (src) =>
   ` <div class='scroll-item'> <img src='${src}' alt=''></div>`;
 
 // App higher order function
-const App = (state, roverFact) => {
+const App = (state) => {
   const apod = state.get("apod");
   const selectedRover = state.get("selectedRover");
   const roverData = state.get("roverData");
@@ -180,18 +186,20 @@ const App = (state, roverFact) => {
           <p class="intro-text">
           Since the 1960s, humans have set out to discover what Mars can teach us about how planets grow and evolve, and whether it has ever hosted alien life. Mars has captivated humans since we first set eyes on it as a star-like object in the night sky. Early on, its reddish hue set the planet apart from its shimmering siblings, each compelling in its own way, but none other tracing a ruddy arc through Earth’s heavens. Then, in the late 1800s, telescopes first revealed a surface full of intriguing features—patterns and landforms that scientists at first wrongly ascribed to a bustling Martian civilization. Now, we know there are no artificial constructions on Mars. But we’ve also learned that, until 3.5 billion years ago, the dry, toxic planet we see today might have once been as habitable as Earth.
           Mars exploration at NASA "follows the water." Earlier missions had found that liquid water existed on Mars in the distant past.</br></br> The Curiosity rover explored the “habitability” of Mars. It found nutrients and energy sources that microbes could have used, and established that Mars indeed had regions that could have been friendly to life in the ancient past. Did life take hold on the Red Planet? Future rovers will take the next step by looking for the signs of past life itself.
-          </p> 
+          </p>
+  <div>${Greeting(store.get("user").get("name"))}</div> 
+
 
       </div>
   </section>
-<section class='tabs'>
+<section class='rover-section'>
 <div class='tabs-container'>
 <div class='btn-container'>${tabs()}</div>
 <div class='flex-container'>
 <aside class='sidebar blue'>${sidebar(roverFact, state)}</aside>
 <article class='main-content red'>
 <div class='tabs-panel'>
-<h3>Latest Photos</h3>
+<div><h3>Latest Photos</h3></div>
 <div class='scroller'>
 ${roverImageGallery(roverData, state)}
 </div>
@@ -199,7 +207,7 @@ ${roverImageGallery(roverData, state)}
 </div>
 </div>
 </article>
-<div id='photo'>${ImageOfTheDay(apod, state)}</div>
+<div id='photo' class='imgOfDayWrapper' >${ImageOfTheDay(apod, state)}</div>
 </section>
 </main>
 <footer>
@@ -210,9 +218,7 @@ ${roverImageGallery(roverData, state)}
 `;
 };
 
-{
-  /* <div>${Greeting(store.get("user").get("name"))}</div> */
-}
+
 
 //  return dashboard(sidebar, tabs, imageGallery);
 // store.get("rovers").map((info) => info.latest_photos).join(''));
@@ -235,13 +241,13 @@ const ImageOfTheDay = (apod) => {
   if (apod.media_type === "video") {
     return `
             <p>See today's featured video <a href="${apod.url}">here</a></p>
-            <p>${apod.title}</p>
-            <p>${apod.explanation}</p>
+            <p class=''>${apod.title}</p>
+            <p class=''>${apod.explanation}</p>
         `;
   } else if (apod.hasOwnProperty("image")) {
     return `
-            <img src="${apod.image.url}" height="350px" width="100%" />
-            <p>${apod.image.explanation}</p>
+            <img class='imgOfDay' src="${apod.image.url}" height="350px" width="100%" />
+            <p class='imgOfDayTxt'>${apod.image.explanation}</p>
         `;
   }
 };
@@ -252,7 +258,7 @@ const ImageOfTheDay = (apod) => {
 const Greeting = (name) => {
   if (name) {
     return `
-            <h1>Dear ${name}, welcome to the Mars dashboard!</h1>
+            <h2>${name}, welcome to the Mars dashboard!</h2>
             <p>Select your rover below</p>
         `;
   }
@@ -278,7 +284,6 @@ const getImageOfTheDay = (state) => {
     .then((res) => res.json())
     .then((apod) => updateStore(store, { apod }));
 
-  return data;
 };
 
 // function to process rover information
