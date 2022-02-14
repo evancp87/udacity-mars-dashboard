@@ -23,8 +23,9 @@ const render = async (root, state) => {
 
 // listening for load event because page should load before any JS is called
 window.addEventListener("load", () => {
-  getRoverImage(store, store.get("rovers")[0]);
-
+  // getRoverImage(store, store.get("rovers")[0]);
+  getRoverImage(store, store.get("selectedRover"));
+ 
   getRoverInfo(store.get("selectedRover"));
   // getRoverInfo(store.get('roverData'));
   render(root, store);
@@ -80,26 +81,27 @@ const sidebar = (state) => {
 
 
 
-const displayRoverInfo = (el, e) => {
+const displayRoverInfo = (el) => {
   // let roverData = store.get("roverData");
 
    let selectedRover = store.get("selectedRover");
+   let roverData = store.get("roverData");
   // let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
 
   if (el.id === "Curiosity") {
-    updateStore(store, { selectedRover: "Curiosity" });
+    updateStore(store, { selectedRover: "Curiosity" , roverData: roverData.rover});
     console.log(store);
     //   getRoverInfo(store.get("selectedRover"));
   } else if (el.id === "Spirit") {
-    updateStore(store, { selectedRover: "Spirit" });
+    updateStore(store, { selectedRover: "Spirit", roverData: roverData.rover });
     console.log(store);
 
     //   getRoverInfo(store.get("selectedRover"));
   } else if (el.id === "Opportunity") {
-    updateStore(store, { selectedRover: "Opportunity" });
+    updateStore(store, { selectedRover: "Opportunity", roverData: roverData.rover });
     console.log(store);
 
     return selectedRover;
