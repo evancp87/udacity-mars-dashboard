@@ -1,6 +1,5 @@
 // store using ImmutableJS
 let store = Immutable.Map({
-  user: Immutable.Map({ name: "Cosmonaut" }),
   apod: "",
   selectedRover: "Curiosity",
   rovers: ["Curiosity", "Opportunity", "Spirit"],
@@ -39,19 +38,11 @@ const tabs = () => {
   const tabBtns = () => store.get("rovers");
   return tabBtns()
     .map((el) => {
-      return `<button class='btn-tab' id='${el.toLowerCase()}' onClick='displayRoverInfo(${
-        el.toLowerCase
-      })'>${el.toLowerCase()}</button>
-           
-            
-            `;
+      return `<button class='btn-tab' id='${el}' onClick='displayRoverInfo(${el})'>${el}</button>`;
     })
     .join("");
 };
 
-// callbackFunc = (callback) => {
-// callback()
-// }
 
 // button for each rover- displays info in sidebar and main section onclick. displayRoverInfo renders sidebar
 
@@ -87,35 +78,23 @@ const sidebar = (state) => {
   return `<p class='loading-rovers'>Loading Data</p>`
 };
 
-function renderRovers(rovers) {
-  if (!rovers.length) {
-    return `
-              <h4>Loading rovers...</h4>
-          `;
-  }
-}
-// const selectedRoverImage = () => {
-// return store.get()
-// }
 
-// const renderSelectedRoverImage = () => {
 
-// }
-
-const displayRoverInfo = (rover, event) => {
-  let roverData = store.get("roverData");
+const displayRoverInfo = (el, event) => {
+  // let roverData = store.get("roverData");
   let selectedRover = store.get("selectedRover")
-  let button = button.id;
+  // let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
-  if (event.target.id === "Curiosity") {
+
+  if (event.target.value === "Curiosity") {
     updateStore(store, { selectedRover: "Curiosity" });
     //   getRoverInfo(store.get("selectedRover"));
-  } else if (event.target.id === "Spirit") {
+  } else if (event.target.value === "Spirit") {
     updateStore(store, { selectedRover: "Spirit" });
     //   getRoverInfo(store.get("selectedRover"));
-  } else if (event.target.id === "Opportunity") {
+  } else if (event.target.value === "Opportunity") {
     updateStore(store, { selectedRover: "Opportunity" });
     //   getRoverInfo(store.get("selectedRover"));
   }
@@ -150,17 +129,27 @@ const renderRoverImages = (state) => {
 
   // } return `<p>Loading Images</p>`
 
+
+
+  const imageGallery = store.get("roverData");
+    console.log(imageGallery);
+  if (imageGallery.hasOwnProperty("img_src")) {    
+  imageGallery.map(img_src => { return roverImageGallery(img_src.get("img_src")).slice(0, 5);}
+  )} return `<p class='loading-images'>Loading Images</p>`
+
+
+  
   // }
-  return store
-    .get("roverData").slice(0, 5)
-    .map(
-      (img_src) => roverImageGallery(img_src.get("img_src"))
-      // }).join('');
-    );
+  // return store
+  //   .get("roverData").slice(0, 5)
+  //   .map(
+  //     (img_src) => roverImageGallery(img_src.get("img_src"))
+  //     // }).join('');
+  //   );
 };
 
 const roverImageGallery = (src) =>
-  ` <div class='scroll-item'> <img src='${src}' alt=''></div>`;
+  ` <div class='scroll-item'> <img src='${src}' alt='One of the rover latest images'></div>`;
 
 // App higher order function
 const App = (state) => {
@@ -193,7 +182,7 @@ const App = (state) => {
   </section>
 <section class='rover-section'>
 <div class='tabs-container'>
-<div class='btn-container'>${tabs()}</div>
+<div class='btn-container'>${tabs(state)}</div>
 <div class='flex-container'>
 <aside class='sidebar blue'>${sidebar(roverFact, state)}</aside>
 <article class='main-content red'>
@@ -218,9 +207,6 @@ ${roverImageGallery(roverData, state)}
 };
 
 
-
-//  return dashboard(sidebar, tabs, imageGallery);
-// store.get("rovers").map((info) => info.latest_photos).join(''));
 
 // =======================================================================================================================================================
 
@@ -248,7 +234,7 @@ const ImageOfTheDay = (apod) => {
             <img class='imgOfDay' src="${apod.image.url}" height="350px" width="100%" />
             <p class='imgOfDayTxt'>${apod.image.explanation}</p>
         `;
-  }
+  } return `<p class='loading-apod'>Loading Picture of the Day</p>`
 };
 
 // =================================================================================================================================================
