@@ -29,12 +29,15 @@ body {
     // flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    padding: 4rem 0 0.5rem 0;
-    
+    padding: {
+      top: clamp(2rem, 10vw, 8rem);
+      bottom: clamp(3rem, 10vw, 8rem)
+      // 4rem 0 4rem 0;
+    }
       }
 
       .title {
-        font-size: 2.5rem;
+        font-size: clamp(2.5rem, 5vw, 7rem);
         padding: 0.2em 0.5em;
         color: a.$white;
         margin: 2rem 0 2rem 0;
@@ -45,7 +48,7 @@ body {
 .intro-text {
   color: a.$white;
   padding: 0 1.8em 0 1.8em;
-  font-size: 0.8em;
+  font-size: clamp(0.8em, 2vw, 2em);
 }
 
 
@@ -53,34 +56,11 @@ body {
   .intro-text {
     padding: 0 1.8em 0 1.8em;
   
-    font-size: 1em;
   }
 }
 
-  /* -------------------  TABLET  --------------------- */
-  @media (max-width: a.$tablet-breakpoint) {
-    .mars-intro {
-      padding: 2rem 0 1rem 0;
-    
-      
-        }
-      
-        .intro-text {
-          margin-bottom: 2em;
-        }
+ 
 
-          // .title {
-          //   font-size: 5rem;
-          //   padding: 0.2em 0.5em;
-          //   color: a.$white;
-          //   margin-bottom: 0.5em;
-          // }
-      
-     
-  }
-  
- 
- 
 
 
   .hero {
@@ -102,13 +82,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8rem 0 1rem 0;
     
       }
     
     
         .title {
-          font-size: 7rem;
           padding: 0;
        
           margin-bottom: 1em;
@@ -116,8 +94,8 @@ body {
 
         .intro-text {
           padding: 0 1.8em 0 1.8em;
-          font-size: 1.2em;
-          margin-bottom: 2em;
+         
+        
         }
     
 } 
@@ -133,7 +111,6 @@ body {
   
   flex-direction: column;
   align-items: center;
-  padding: 8rem 0 1rem 0;
   
     }
 
@@ -142,15 +119,16 @@ body {
   
   
       .title {
-        font-size: 7rem;
+    
         padding: 0.2em;
         color: a.$white;
-        // margin-bottom: 1em;
+      
       }
+
       .intro-text {
         padding: 0 4em 0 4em;
-        font-size: 1.5em;
-        margin-bottom: 2em;
+  
+   
       }
      
   }
@@ -158,13 +136,11 @@ body {
 
 /* -------------------  LARGE SCREENS  -------------- */
   @media (min-width: a.$lg-breakpoint) {
-    .title {padding: 0;
-    font-size: 7em;
+    .title {
+      padding: 0;
+ 
     }
 
-    .intro-text {
-      font-size: 2em;
-      margin-bottom: 2em;
-    }
+   
    }
   

@@ -1,23 +1,7 @@
 @use '../abstracts' as a;
 
-//   .hero-title {
-//     position: absolute;
-//     top: 50%;
-//     left: 0;
-//     right: 0;
-//     color: #fff;
-//     font-family: lato;
-//     font-weight: 300;
-// font-size: 50px;
-// letter-spacing: 10px;
-// padding-left: 10px;
+// mobile first styles
 
-// & span {
-//   background: -webkit-linear-gradient(a.$white, #38495a);
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }
-//   }
 
 .stars {
   width: 1px;
@@ -212,7 +196,6 @@
     width: 2px;
     height: 2px;
     top: 500px;
-    z-index: -10;
     background: transparent;
     box-shadow: 779px 331px #fff, 324px 42px #fff, 303px 586px #fff,
     1312px 276px #fff, 451px 625px #fff, 521px 931px #fff, 1087px 871px #fff,
@@ -430,7 +413,6 @@ position: absolute;
 top: 500px;
 width: 2px;
 height: 2px;
-z-index: -10;
 background: transparent;
 // box-shadow: 448px 320px #fff, 775px 663px #fff, 332px 364px #fff,
 //     878px 340px #fff, 569px 832px #fff, 422px 684px #fff, 546px 907px #fff,
@@ -529,7 +511,6 @@ background: transparent;
     height: 3px;
     border-radius: 50%;
     background: transparent;
-    z-index: -10;
     top: 500px;
     box-shadow: 387px 878px #fff, 760px 564px #fff, 1487px 699px #fff,
     948px 828px #fff, 977px 301px #fff, 284px 963px #fff, 656px 284px #fff,
@@ -572,7 +553,7 @@ background: transparent;
     2% {
         opacity: 0.5
     }
-    10% {
+    5% {
         opacity: 1;
     }
     
@@ -581,7 +562,7 @@ background: transparent;
     }
     
     100% {
-transform: translateY(-200px);
+transform: translateY(-500px);
 opacity: 0;
     }
 }
