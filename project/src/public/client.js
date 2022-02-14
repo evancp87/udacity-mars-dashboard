@@ -80,22 +80,29 @@ const sidebar = (state) => {
 
 
 
-const displayRoverInfo = (el, event) => {
+const displayRoverInfo = (el, e) => {
   // let roverData = store.get("roverData");
-  let selectedRover = store.get("selectedRover")
+
+   let selectedRover = store.get("selectedRover");
   // let button = button.id;
   // const sidebar = sidebar();
   // const imageGallery = store.get('image');
 
 
-  if (event.target.value === "Curiosity") {
+  if (el.id === "Curiosity") {
     updateStore(store, { selectedRover: "Curiosity" });
+    console.log(store);
     //   getRoverInfo(store.get("selectedRover"));
-  } else if (event.target.value === "Spirit") {
+  } else if (el.id === "Spirit") {
     updateStore(store, { selectedRover: "Spirit" });
+    console.log(store);
+
     //   getRoverInfo(store.get("selectedRover"));
-  } else if (event.target.value === "Opportunity") {
+  } else if (el.id === "Opportunity") {
     updateStore(store, { selectedRover: "Opportunity" });
+    console.log(store);
+
+    return selectedRover;
     //   getRoverInfo(store.get("selectedRover"));
   }
 

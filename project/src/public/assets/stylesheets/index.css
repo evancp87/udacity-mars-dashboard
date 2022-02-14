@@ -12,6 +12,12 @@
     opacity: 1;
   }
 }
+.loading-apod, .loading-rovers, .loading-images {
+  color: #0fa03f;
+  font-size: 2.5em;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -562,12 +568,6 @@ a {
   scroll-snap-align: start;
 }
 
-.loading-images {
-  color: #0fa03f;
-  font-size: 2.5em;
-  animation: loading 1.5s ease-in-out infinite;
-}
-
 @keyframes loading {
   0% {
     opacity: 1;
@@ -703,12 +703,6 @@ footer {
 .roverinfo-item + .rover-fact {
   font-size: 1.5em;
   color: #ffffff;
-}
-
-.loading-rovers {
-  color: #0fa03f;
-  font-size: 2.5em;
-  animation: loading 1.5s ease-in-out infinite;
 }
 
 @keyframes loading {
@@ -915,12 +909,6 @@ footer {
   flex: 1;
   background-color: #BC2732;
   background-image: linear-gradient(#d94752 0%, #BC2732 70%);
-}
-
-.loading-apod {
-  color: #0fa03f;
-  font-size: 2.5em;
-  animation: loading 1.5s ease-in-out infinite;
 }
 
 .imgOfDayWrapper {
