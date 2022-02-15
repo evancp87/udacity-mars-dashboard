@@ -193,12 +193,12 @@ const App = (state) => {
 <div class='tabs-container'>
 <div class='btn-container'>${tabs(state)}</div>
 <div class='flex-container'>
-<aside class='sidebar blue'>${sidebar(roverFact, state)}</aside>
+<aside class='sidebar blue'>${sidebar(selectedRover, state)}</aside>
 <article class='main-content red'>
 <div class='tabs-panel'>
 <div><h3>Latest Photos</h3></div>
 <div class='scroller'>
-${roverImageGallery(roverData, state)}
+${renderRoverImages(roverData, roverImageGallery, state)}
 </div>
 </div>
 </div>
