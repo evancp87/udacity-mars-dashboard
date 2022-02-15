@@ -129,7 +129,7 @@ const roverFact = (roverData) => {
   }
 };
 
-const renderRoverImages = (state) => {
+const renderRoverImages = (state, roverImageGallery) => {
   // const roverImageArray = store.get('roverData');
   // // const roverImageArray = roverImage.latest_photos.slice(0, 5);
   // // return roverImageArray.map(r => {
