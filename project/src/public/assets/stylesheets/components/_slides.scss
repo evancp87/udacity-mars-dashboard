@@ -38,6 +38,8 @@ scroll-snap-align: start;
 
 .loading-images {
     @extend %loading;
+    font-size: 2.5em;
+    white-space: nowrap;
     }
 
 
