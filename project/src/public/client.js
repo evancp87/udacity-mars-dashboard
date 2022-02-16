@@ -3,6 +3,7 @@ let store = Immutable.Map({
   apod: "",
   selectedRover: "Curiosity",
   rovers: ["Curiosity", "Opportunity", "Spirit"],
+  // roverImages: [],
   roverData: {},
 });
 
@@ -16,7 +17,7 @@ const updateStore = (state, newState) => {
 };
 
 const render = async (root, state) => {
-  root.innerHTML = App(state, sidebar, tabs, roverImageGallery);
+  root.innerHTML = App(state, sidebar, tabs, renderRoverImages, roverFact);
 
   //   root.innerHTML = dashboard(state);
 };
@@ -25,6 +26,7 @@ const render = async (root, state) => {
 window.addEventListener("load", () => {
   // getRoverImage(store, store.get("rovers")[0]);
   getRoverImage(store, store.get("selectedRover"));
+  // getRoverImage(store, store.get("roverData"));
  
   getRoverInfo(store.get("selectedRover"));
   // getRoverInfo(store.get('roverData'));
@@ -92,16 +94,16 @@ const displayRoverInfo = (el) => {
 
 
   if (el.id === "Curiosity") {
-    updateStore(store, { selectedRover: "Curiosity" , roverData: roverData.rover});
+    updateStore(store, { selectedRover: "Curiosity" , roverData: roverData});
     console.log(store);
     //   getRoverInfo(store.get("selectedRover"));
   } else if (el.id === "Spirit") {
-    updateStore(store, { selectedRover: "Spirit", roverData: roverData.rover });
+    updateStore(store, { selectedRover: "Spirit", roverData: roverData });
     console.log(store);
 
     //   getRoverInfo(store.get("selectedRover"));
   } else if (el.id === "Opportunity") {
-    updateStore(store, { selectedRover: "Opportunity", roverData: roverData.rover });
+    updateStore(store, { selectedRover: "Opportunity", roverData: roverData });
     console.log(store);
 
     return selectedRover;
@@ -143,10 +145,14 @@ const renderRoverImages = (state, roverImageGallery) => {
   const imageGallery = store.get("roverData");
     console.log(imageGallery);
   if (imageGallery.hasOwnProperty("img_src")) {    
-  imageGallery.map(img_src => { return roverImageGallery(img_src.get("img_src")).slice(0, 5);}
+  imageGallery.map(img_src =>  roverImageGallery(img_src.get("img_src")).slice(0, 5).join('') 
+
+ 
+
   )} return `<p class='loading-images'>Loading Images</p>`
 
 
+ 
   
   // }
   // return store
@@ -156,6 +162,7 @@ const renderRoverImages = (state, roverImageGallery) => {
   //     // }).join('');
   //   );
 };
+
 
 const roverImageGallery = (src) =>
   ` <div class='scroll-item'> <img src='${src}' alt='One of the rover latest images'></div>`;
@@ -232,7 +239,7 @@ const ImageOfTheDay = (apod) => {
   }
 
   // check if the photo of the day is actually type video!
-  if (apod.media_type === "video") {
+  if (apod.hasOwnProperty("media_type") || apod.media_type === "video") {
     return `
             <p>See today's featured video <a href="${apod.url}">here</a></p>
             <p class=''>${apod.title}</p>
@@ -299,6 +306,23 @@ const getRoverImage = (store, rover) => {
   // console.log(store);
   // return roverData;
 };
+
+
+// const getRoverImage = (store, rover) => {
+//   //   let { rovers } = store;
+//   const images = fetch(`http://localhost:3000/rovers/${rover}`)
+//     .then((res) => res.json())
+//     .then((rovers) => {
+//       console.log(rovers);
+//       let roverImages = rovers.image.latest_photos;
+//       updateStore(store, { roverImages: roverImages });
+//       console.log(store);
+//     });
+//   // console.log(store);
+//   // return roverData;
+// };
+
+
 
 const getRoverInfo = (chosenRover) => {
   const roverInfo = fetch(`http://localhost:3000/manifests/${chosenRover}`)
