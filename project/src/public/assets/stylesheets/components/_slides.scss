@@ -2,22 +2,28 @@
 
 // mobile first styles
 
+.latest-photos-title {
+display: flex;
+justify-content: center;
+font-size: 2.5em;
+color:a.$white;
+margin-top: 1em;
+
+}
+
 .scroller {
 display: grid;
 grid-auto-flow: column;
-grid-auto-columns: 21%;
+grid-auto-columns: 100%;
 gap: 1em;
 overflow-x: auto;
 overscroll-behavior-inline: contain;
-padding: 10em;
+margin: 3em;
+box-shadow: 19px 15px 15px rgb(0 0 0 / 20%);
 
 .scroll-item {
     display: grid;
-    grid-template-columns: min-content;
-    gap: 2em;
-padding: 2em;
-// bakground: 
-// border-radius
+   
 >img {
     inline-size: 100%;
 aspect-ratio: 16/9;
@@ -31,7 +37,7 @@ object-fit: cover; }
     scroll-snap-type: inline mandatory;
     scroll-padding-inline: 1em;
 
-    & > * {
+    > * {
 scroll-snap-align: start;
     }
 }
@@ -62,8 +68,9 @@ scroll-snap-align: start;
 
 
 .scroller {
-
-    padding: 10em;
+    grid-auto-columns: 40%;
+    margin: 4em;
+   
 }
 }
 
@@ -71,8 +78,10 @@ scroll-snap-align: start;
 @media (min-width: a.$desktop-breakpoint) {
 
     .scroller {
+        grid-auto-columns: 90%;
+        margin: 9em;
 
-        padding: 15em;
+        
     }
 }
 
@@ -81,7 +90,18 @@ scroll-snap-align: start;
 
 @media (min-width: a.$lg-breakpoint) {
     .scroller {
+        grid-auto-columns: 65%;
+        margin: 15em;
+    
+      
+    }
 
-        padding: 20em;
+
+    .scroll-item {
+    >img {
+        inline-size: 100%;
+    aspect-ratio: 20/9;
+    object-fit: cover; }
+    
     }
  }
