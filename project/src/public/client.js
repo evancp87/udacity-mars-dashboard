@@ -95,7 +95,6 @@ const displayRoverInfo = (el) => {
 
   if (el.id === "Curiosity") {
     updateStore({ selectedRover: "Curiosity" , roverData: getRoverInfo("Curiosity"), roverImages: getRoverImage("Curiosity")});
-    console.log(updateStore(store, { selectedRover: "Curiosity", roverData: getRoverInfo(selectedRover), roverImages: getRoverImage(selectedRover)}));
     console.log(store);
   } else if (el.id === "Spirit") {
     updateStore({ selectedRover: "Spirit", roverData: getRoverInfo("Spirit"), roverImages: getRoverImage("Spirit")});
@@ -293,7 +292,7 @@ const getImageOfTheDay = (state) => {
 // };
 
 
-const getRoverImage = (store, rover) => {
+const getRoverImage = ( rover) => {
   //   let { rovers } = store;
   const images = fetch(`http://localhost:3000/rovers/${rover}`)
     .then((res) => res.json())
