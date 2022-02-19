@@ -1,17 +1,6 @@
 /* -------------------  TABLET  --------------------- */
 /* -------------------  DESKTOP  -------------------- */
 /* -------------------  LARGE SCREENS  -------------- */
-@keyframes loading {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .loading-apod, .loading-rovers, .loading-images {
   color: #0fa03f;
   font-size: 2.5em;
@@ -613,7 +602,7 @@ a {
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: 1224px) {
   .scroller {
-    grid-auto-columns: 90%;
+    grid-auto-columns: 45%;
     margin: 9em;
   }
 }
