@@ -17,7 +17,7 @@ const updateStore = (state, newState) => {
 };
 
 const render = async (root, state) => {
-  root.innerHTML = App(state, sidebar, tabs, renderRoverImages, roverFact);
+  root.innerHTML = App(state, sidebar, tabs, renderRoverImages, roverFact, displayRoverInfo);
 
   //   root.innerHTML = dashboard(state);
 };
@@ -90,36 +90,25 @@ const displayRoverInfo = (el) => {
    let selectedRover = store.get("selectedRover");
    let roverData = store.get("roverData");
    let roverImages = store.get("roverImages");
-  // let button = button.id;
-  // const sidebar = sidebar();
-  // const imageGallery = store.get('image');
+  
 
 
   if (el.id === "Curiosity") {
-    updateStore(store, { selectedRover: "Curiosity" , roverData: roverData.rover, roverImages: roverImages});
+    updateStore({ selectedRover: "Curiosity" , roverData: getRoverInfo("Curiosity"), roverImages: getRoverImage("Curiosity")});
+    console.log(updateStore(store, { selectedRover: "Curiosity", roverData: getRoverInfo(selectedRover), roverImages: getRoverImage(selectedRover)}));
     console.log(store);
-    //   getRoverInfo(store.get("selectedRover"));
   } else if (el.id === "Spirit") {
-    updateStore(store, { selectedRover: "Spirit", roverData: roverData.rover, roverImages: roverImages });
+    updateStore({ selectedRover: "Spirit", roverData: getRoverInfo("Spirit"), roverImages: getRoverImage("Spirit")});
     console.log(store);
 
-    //   getRoverInfo(store.get("selectedRover"));
   } else if (el.id === "Opportunity") {
-    updateStore(store, { selectedRover: "Opportunity", roverData: roverData.rover, roverImages: roverImages });
+    updateStore({ selectedRover: "Opportunity", roverData: getRoverInfo("Opportunity"), roverImages: getRoverImage("Opportunity") });
     console.log(store);
 
     return selectedRover;
-    //   getRoverInfo(store.get("selectedRover"));
   }
 
-  // const roverImages = (roverName) => store.get('rovers').filter(r => roverName === r.name);
-  // roverImages.find(rover => rover === rover.name);
-  // const rover = (roverName) => filterRovers.find(rover => roverName === rover.name);
 
-  // if (rover) {
-  //     console.log
-  // }
-  // return filterRovers;
 };
 
 const roverFact = (roverData) => {
@@ -158,7 +147,7 @@ if (imageGallerySlice !== undefined) {
 return imageGallerySlice.map(image => {
   return (`
   <div class='scroll-item'>
-          <img src="${image.img_src}"></img>
+          <img src="${image.img_src}">
       </div>
       `);
 }).join(" ");
@@ -271,17 +260,9 @@ const ImageOfTheDay = (apod) => {
 
 // =================================================================================================================================================
 
-// Pure function that renders conditional information
-
-// const showRover = (selectedRover) => {
-//     if (selectedRover) {
-//         return ``
-//     }
-// }
-
 // ------------------------------------------------------  API CALLS
 
-// Example API call
+
 
 const getImageOfTheDay = (state) => {
   let { apod } = state;
@@ -292,19 +273,7 @@ const getImageOfTheDay = (state) => {
 
 };
 
-// function to process rover information
-// const displayRover = (store, selectedRover) => {
-//     if (selectedRover === 'curiosity') {
-//        return rover(store.get('rovers')[0])
-//     } else if  (selectedRover === 'opportunity')
-// return {
-//     selectedRover(store.get('rovers')[1]);
-// } else if (selectedRover === 'Spirit') {
-//     return selectedRover(store.get('rovers')[2]);
-// } else {}
 
-// function to process rover image array
-// const roverImages
 // =================================================================================================================================================
 
 // =============================================================================================================================================================================================
