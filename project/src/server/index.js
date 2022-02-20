@@ -35,22 +35,23 @@ app.get('/rovers/:rover', async (req, res) => {
 });
 
 
-
-
 // fetching rover info on the selected rover from the Mars api, preserving the Curiosity rover as the default if none of the others are selected
 
 app.get('/manifests/:chosenRover', async (req, res) => {
     
     const chosenRover = req.params.chosenRover;
-  console.log(req.params);
+  console.log(req.params);  
     try {
         let data = await fetch (`https://api.nasa.gov/mars-photos/api/v1/manifests/${chosenRover}?api_key=${apiKey}`)
     
         .then((res) => res.json());  res.send({data}); 
                 
-    } catch (error) {console.log('error:', error); }
+    } catch (error) {console.log('error:', error); }    
             
-});
+});    
+
+
+
 
 
 
