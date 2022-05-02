@@ -557,6 +557,7 @@ a {
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   margin: 3em;
+  cursor: pointer;
   box-shadow: 19px 15px 15px rgba(0, 0, 0, 0.2);
 }
 .scroller .scroll-item {
