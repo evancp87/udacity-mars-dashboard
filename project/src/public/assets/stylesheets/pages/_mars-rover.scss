@@ -22,6 +22,8 @@ body {
 
 
   .mars-intro {
+    position: relative;
+    z-index: 20;
     background-color: a.$blue;
     width: 100vw;
     height: auto;

@@ -631,6 +631,7 @@ footer {
   width: 100%;
   height: auto;
   padding: 1.2em;
+  z-index: 20;
 }
 
 /* -------------------  TABLET  --------------------- */
@@ -1032,6 +1033,8 @@ main {
 }
 
 .mars-intro {
+  position: relative;
+  z-index: 20;
   background-color: #253C8B;
   width: 100vw;
   height: auto;
