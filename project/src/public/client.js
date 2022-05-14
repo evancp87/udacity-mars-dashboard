@@ -71,7 +71,7 @@ const sidebar = () => {
   <li class='sidebar__roverinfo-item'><span>Status:</span> ${roverData.rover.get(
     "status"
   )} </li>
-  <li class='sidebar__roverinfo-item'><span>Date of last image taken:</span> ${roverData.rover.get(
+  <li class='sidebar__roverinfo-item'><span>Date of last image:</span> ${roverData.rover.get(
     "max_date"
   )} </li>
   ${roverFact(roverData.rover.get("name"))}

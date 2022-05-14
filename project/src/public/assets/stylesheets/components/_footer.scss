@@ -1,32 +1,19 @@
 @use '../abstracts' as a;
 
-// footer {
-//   background-color: a.$mars-red;
-//   bottom: 0;
-//   left: 0;
-//   position: fixed;
-//   font-size: 0.8em;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   width: 100%;
-//   height: auto;
-//   padding: 1.2em;
-//   z-index: 20;
-// }
-
 .ftr {
   background-color: a.$mars-red;
   bottom: 0;
   left: 0;
   position: fixed;
-  font-size: 0.8em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  font-size: #{a.$font-size-sm - 0.2};
+  @include a.flexbox-config(
+    $flex-direction: row,
+    $justify-content: space-between
+  );
   width: 100%;
   height: auto;
-  padding: 1.2em;
+  padding: #{a.$padding-rg-em * 1.2};
+
   z-index: 20;
 
   .ftr__copyright {
@@ -39,16 +26,16 @@
 
 @media (min-width: a.$tablet-breakpoint) {
   .ftr {
-    font-size: 1.2em;
-    padding: 1em;
+    font-size: #{a.$font-size-sm - 0.2em};
+    padding: a.$padding-rg-em;
   }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: a.$desktop-breakpoint) {
   .ftr {
-    font-size: 1.2em;
-    padding: 1em;
+    font-size: #{a.$font-size-sm + 0.2em};
+    padding: a.$padding-rg-em;
   }
 }
 
@@ -56,7 +43,7 @@
 
 @media (min-width: a.$lg-breakpoint) {
   .ftr {
-    font-size: 2em;
-    padding: 1.5em;
+    font-size: a.$font-size-md;
+    padding: #{a.$padding-rg-em * 1.5};
   }
 }

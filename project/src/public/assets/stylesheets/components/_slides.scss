@@ -3,11 +3,11 @@
 // mobile first styles
 
 .main-content__latest-photos-title {
-  display: flex;
-  justify-content: center;
-  font-size: 2.5em;
+  @include a.flexbox-config($justify-content: center);
+
+  font-size: #{a.$font-size-sm * 2.5};
   color: a.$white;
-  margin-top: 1em;
+  margin-top: #{a.$margin-em-spacing-sm - 0.4};
 }
 
 .main-content__scroller {
@@ -17,7 +17,7 @@
   gap: 1em;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
-  margin: 3em;
+  margin: a.$margin-em-spacing-lg;
   cursor: pointer;
   box-shadow: 19px 15px 15px rgb(0 0 0 / 20%);
 
@@ -43,7 +43,8 @@
 
 .main-content__loading-images {
   @extend %loading;
-  font-size: 2.5em;
+  font-size: #{a.$font-size-md * 2.5};
+
   white-space: nowrap;
 }
 
@@ -65,15 +66,18 @@
 @media (min-width: a.$tablet-breakpoint) {
   .main-content__scroller {
     grid-auto-columns: 40%;
-    margin: 4em;
+    margin: #{a.$margin-em-spacing-md * 2};
   }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: a.$desktop-breakpoint) {
+  .main-content__latest-photos-title {
+    margin-bottom: #{a.$margin-em-spacing-md * 4};
+  }
   .main-content__scroller {
     grid-auto-columns: 45%;
-    margin: 9em;
+    margin: #{a.$margin-em-spacing-lg * 3};
   }
 }
 
@@ -82,7 +86,7 @@
 @media (min-width: a.$lg-breakpoint) {
   .main-content__scroller {
     grid-auto-columns: 65%;
-    margin: 15em;
+    margin: #{a.$margin-em-spacing-sm * 15};
   }
 
   .main-content__scroll-item {

@@ -9,8 +9,7 @@
 }
 
 .sidebar__flex-container {
-  display: flex;
-  flex-direction: column;
+  @include a.flexbox-config($flex-direction: column);
 }
 
 .main-content--red {
@@ -25,7 +24,8 @@
 .imgOfDayWrapper {
   width: 100vw;
   height: auto;
-  display: flex;
+  @include a.flexbox-config($flex-direction: column);
+
   flex-direction: column;
   position: relative;
 }
@@ -41,10 +41,8 @@
 .imgOfDay__Txt {
   background-color: a.$blue;
   color: a.$white;
-  padding: 8em 3em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: a.$padding-xl #{a.$padding-rg-em * 3};
+  @include a.flexbox-config($justify-content: center, $align-items: center);
 }
 
 @keyframes loading {
@@ -62,7 +60,7 @@
 
 @media screen and (min-width: 400px) {
   .imgOfDay__Txt {
-    padding: 8em 3em;
+    padding: a.$padding-xl #{a.$padding-rg-em * 3};
     position: absolute;
     top: 30vh;
     bottom: 0;
@@ -86,7 +84,7 @@
 @media screen and (min-width: 500px) {
   .imgOfDay__Txt {
     top: 35vh;
-    padding: 1em 1em;
+    padding: a.$padding-rg-em;
   }
 }
 
@@ -108,12 +106,11 @@
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: a.$desktop-breakpoint) {
   .sidebar__flex-container {
-    display: flex;
-    flex-direction: row;
+    @include a.flexbox-config($flex-direction: row);
   }
 
   .imgOfDay__Txt {
-    padding: 1em 1em;
+    padding: a.$padding-rg-em;
 
     top: 15vh;
   }
@@ -127,7 +124,7 @@
   }
 
   .imgOfDay__Txt {
-    padding: 8em 3em;
+    padding: a.$padding-xl #{a.$padding-rg-em * 3};
     position: absolute;
     top: 15vh;
 

@@ -20,9 +20,7 @@ main {
   background-color: a.$blue;
   width: 100vw;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include a.flexbox-config($flex-direction: column, $align-items: center);
   padding: {
     top: clamp(2rem, 10vw, 8rem);
     bottom: clamp(3rem, 10vw, 8rem);
@@ -35,7 +33,7 @@ main {
   padding: 0.2em 0.5em;
   color: a.$white;
   font-weight: 700;
-  margin: 2rem 0 2rem 0;
+  margin: a.$margin-rem-spacing-md 0 a.$margin-rem-spacing-md 0;
 }
 
 .mars-intro__text {
@@ -64,15 +62,13 @@ main {
     background-color: a.$blue;
     width: 100vw;
     height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include a.flexbox-config($flex-direction: column, $align-items: center);
   }
 
   .mars-intro__title {
     padding: 0;
 
-    margin-bottom: 1em;
+    margin-bottom: a.$margin-em-spacing-sm;
   }
 
   .mars-intro__text {
@@ -88,17 +84,16 @@ main {
     height: auto;
     display: flex;
 
-    flex-direction: column;
-    align-items: center;
+    @include a.flexbox-config($flex-direction: column, $align-items: center);
   }
 
   .mars-intro__title {
-    padding: 0.2em;
+    padding: #{a.$padding-xxs-em / 2};
     color: a.$white;
   }
 
   .mars-intro__text {
-    padding: 0 4em 0 4em;
+    padding: 0 a.$padding-lg-em 0 a.$padding-lg-em;
   }
 }
 

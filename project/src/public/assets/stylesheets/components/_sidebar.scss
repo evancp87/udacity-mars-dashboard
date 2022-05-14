@@ -4,34 +4,36 @@
 
 .sidebar {
   flex: 0 0 300px;
-  padding: 1rem;
+  padding: a.$font-size-sm-rem;
   height: auto;
 
   .sidebar__rover-name {
-    font-size: 2.5em;
+    font-size: #{a.$font-size-md + 0.5};
     color: a.$white;
     font-weight: 800;
     margin: {
       top: 0;
-      bottom: 1em;
+      bottom: a.$margin-em-spacing-sm;
     }
   }
 }
 
 .sidebar__roverinfo-item {
-  margin: 2em 0 2em 0;
-  padding: 1;
-  font-size: 1.5em;
+  margin: a.$margin-em-spacing-md 0 a.$margin-em-spacing-md 0;
+  font-size: #{a.$font-size-sm * 1.5};
+  @include a.flexbox-config($flex-direction: column);
+
   color: a.$white;
   border-bottom: 1px solid a.$white;
   white-space: nowrap;
 
   &:last-of-type {
-    margin: 2em 0 2em 0;
+    margin: a.$margin-em-spacing-md 0 a.$margin-em-spacing-md 0;
   }
 
   + .sidebar__rover-fact {
-    font-size: 1.5em;
+    font-size: #{a.$font-size-sm * 1.5};
+
     color: a.$white;
   }
 }
@@ -53,8 +55,8 @@
   }
 }
 .sidebar__roverinfo-item > span {
-  display: flex;
-  justify-content: space-between;
+  @include a.flexbox-config($justify-content: space-between);
+
   white-space: nowrap;
   color: a.$orange;
 }
@@ -71,10 +73,19 @@
 
 /* -------------------  TABLET  --------------------- */
 
+@media (min-width: 350px) {
+  .sidebar__roverinfo-item {
+    @include a.flexbox-config(
+      $flex-direction: row,
+      $justify-content: space-between
+    );
+  }
+}
+
 @media (max-width: a.$tablet-breakpoint) {
   .sidebar {
     .sidebar__rover-name {
-      font-size: 2em;
+      font-size: a.$font-size-md;
     }
   }
 }
@@ -88,11 +99,11 @@
 @media (min-width: a.$lg-breakpoint) {
   .sidebar {
     .sidebar__rover-name {
-      font-size: 4em;
+      font-size: a.$font-size-lg;
     }
   }
 
   .sidebar__roverinfo-item {
-    font-size: 2em;
+    font-size: a.$font-size-md;
   }
 }

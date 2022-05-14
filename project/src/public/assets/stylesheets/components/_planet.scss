@@ -130,7 +130,7 @@
     &::after {
       .hero__scroll-down::after {
         top: 70%;
-        animation-delay: 0.3s;
+        @include a.prefix(animation-delay, 0.3s, ms moz webkit);
       }
     }
   }
