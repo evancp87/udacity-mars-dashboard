@@ -1,47 +1,62 @@
 @use '../abstracts' as a;
 
-footer {
-    background-color: a.$mars-red;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    font-size: 0.8em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    height: auto;
-    padding: 1.2em;
-    z-index: 20;
-}
+// footer {
+//   background-color: a.$mars-red;
+//   bottom: 0;
+//   left: 0;
+//   position: fixed;
+//   font-size: 0.8em;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   width: 100%;
+//   height: auto;
+//   padding: 1.2em;
+//   z-index: 20;
+// }
 
+.ftr {
+  background-color: a.$mars-red;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 1.2em;
+  z-index: 20;
+
+  .ftr__copyright {
+    + .ftr__info {
+    }
+  }
+}
 
 /* -------------------  TABLET  --------------------- */
 
 @media (min-width: a.$tablet-breakpoint) {
-   
-    footer {
-   font-size: 1.2em;
+  .ftr {
+    font-size: 1.2em;
     padding: 1em;
-    }
+  }
 }
-
 
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: a.$desktop-breakpoint) {
-    footer {
-
+  .ftr {
     font-size: 1.2em;
     padding: 1em;
-    }
+  }
 }
-
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: a.$lg-breakpoint) {
-    footer {
+  .ftr {
     font-size: 2em;
     padding: 1.5em;
-    }
- }
+  }
+}

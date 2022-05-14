@@ -1,82 +1,64 @@
 @use '../abstracts' as a;
 /* -------------------  MOBILE  --------------------- */
 
-
 // mobile first styles
 
-
-
 body {
-    display: flex;
-    flex-direction: column;
-    font-family: Arial;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.mars-intro {
+  position: relative;
+  z-index: 20;
+  background-color: a.$blue;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: {
+    top: clamp(2rem, 10vw, 8rem);
+    bottom: clamp(3rem, 10vw, 8rem);
+    // 4rem 0 4rem 0;
   }
-  
- 
-  
-  main {
-    flex: 1;
-  }
-  
+}
 
+.mars-intro__title {
+  font-size: clamp(2.5rem, 5vw, 7rem);
+  padding: 0.2em 0.5em;
+  color: a.$white;
+  font-weight: 700;
+  margin: 2rem 0 2rem 0;
+}
 
-  .mars-intro {
-    position: relative;
-    z-index: 20;
-    background-color: a.$blue;
-    width: 100vw;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: {
-      top: clamp(2rem, 10vw, 8rem);
-      bottom: clamp(3rem, 10vw, 8rem)
-      // 4rem 0 4rem 0;
-    }
-      }
-
-      .title {
-        font-size: clamp(2.5rem, 5vw, 7rem);
-        padding: 0.2em 0.5em;
-        color: a.$white;
-        font-weight: 700;
-        margin: 2rem 0 2rem 0;
-      
-      }
-
-
-.intro-text {
+.mars-intro__text {
   color: a.$white;
   padding: 0 1.8em 0 1.8em;
   font-size: clamp(0.8em, 2vw, 2em);
   font-weight: 400;
 }
 
-
 @media screen and (max-width: 450px) {
-  .intro-text {
+  .mars-intro__text {
     padding: 0 1.8em 0 1.8em;
-  
   }
 }
 
- 
+.hero {
+  height: 100vh;
+  width: 100vw;
+  background-color: #003b59;
+  background: radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%);
+}
 
-
-
-  .hero {
-    height: 100vh; 
-    width: 100vw;
-    background-color: #003b59;
-    background: radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%);
-
-   
-  }
-
-
- /* -------------------  TABLET  --------------------- */
+/* -------------------  TABLET  --------------------- */
 @media screen and (min-width: a.$tablet-breakpoint) {
   .mars-intro {
     background-color: a.$blue;
@@ -85,65 +67,44 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-      }
-    
-    
-        .title {
-          padding: 0;
-       
-          margin-bottom: 1em;
-        }
-
-        .intro-text {
-          padding: 0 1.8em 0 1.8em;
-         
-        
-        }
-    
-} 
-
- /* -------------------  DESKTOP  --------------------- */
-  @media (min-width: a.$desktop-breakpoint) {
-  
-    .mars-intro {
-  background-color: a.$blue;
-  width: 100vw;
-  height: auto;
-  display: flex;
-  
-  flex-direction: column;
-  align-items: center;
-  
-    }
-
-    
-  
-  
-  
-      .title {
-    
-        padding: 0.2em;
-        color: a.$white;
-      
-      }
-
-      .intro-text {
-        padding: 0 4em 0 4em;
-  
-   
-      }
-     
   }
-  
+
+  .mars-intro__title {
+    padding: 0;
+
+    margin-bottom: 1em;
+  }
+
+  .mars-intro__text {
+    padding: 0 1.8em 0 1.8em;
+  }
+}
+
+/* -------------------  DESKTOP  --------------------- */
+@media (min-width: a.$desktop-breakpoint) {
+  .mars-intro {
+    background-color: a.$blue;
+    width: 100vw;
+    height: auto;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mars-intro__title {
+    padding: 0.2em;
+    color: a.$white;
+  }
+
+  .mars-intro__text {
+    padding: 0 4em 0 4em;
+  }
+}
 
 /* -------------------  LARGE SCREENS  -------------- */
-  @media (min-width: a.$lg-breakpoint) {
-    .title {
-      padding: 0;
- 
-    }
-
-   
-   }
-  
+@media (min-width: a.$lg-breakpoint) {
+  .mars-intro__title {
+    padding: 0;
+  }
+}

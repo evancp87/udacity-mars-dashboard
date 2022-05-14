@@ -2,107 +2,94 @@
 
 // mobile first styles
 
-.latest-photos-title {
-display: flex;
-justify-content: center;
-font-size: 2.5em;
-color:a.$white;
-margin-top: 1em;
-
+.main-content__latest-photos-title {
+  display: flex;
+  justify-content: center;
+  font-size: 2.5em;
+  color: a.$white;
+  margin-top: 1em;
 }
 
-.scroller {
-display: grid;
-grid-auto-flow: column;
-grid-auto-columns: 100%;
-gap: 1em;
-overflow-x: auto;
-overscroll-behavior-inline: contain;
-margin: 3em;
-cursor: pointer;
-box-shadow: 19px 15px 15px rgb(0 0 0 / 20%);
+.main-content__scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 1em;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  margin: 3em;
+  cursor: pointer;
+  box-shadow: 19px 15px 15px rgb(0 0 0 / 20%);
 
-.scroll-item {
+  .main-content__scroll-item {
     display: grid;
-   
->img {
-    inline-size: 100%;
-aspect-ratio: 16/9;
-object-fit: cover; }
 
-}
-}
-
-
-.snaps-inline {
-    scroll-snap-type: inline mandatory;
-    scroll-padding-inline: 1em;
-
-    > * {
-scroll-snap-align: start;
+    > img {
+      inline-size: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
     }
+  }
 }
 
-.loading-images {
-    @extend %loading;
-    font-size: 2.5em;
-    white-space: nowrap;
-    }
+.main-content--snaps-inline {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 1em;
 
+  > * {
+    scroll-snap-align: start;
+  }
+}
 
-    @keyframes loading{
-        0% {
-      opacity: 1;
-        }  50% {
-          opacity: 0;
-        }
-        
-        100% {
-          opacity: 1;
-        }
-      }
+.main-content__loading-images {
+  @extend %loading;
+  font-size: 2.5em;
+  white-space: nowrap;
+}
 
+@keyframes loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
 /* -------------------  TABLET  --------------------- */
 
 @media (min-width: a.$tablet-breakpoint) {
-
-
-.scroller {
+  .main-content__scroller {
     grid-auto-columns: 40%;
     margin: 4em;
-   
-}
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: a.$desktop-breakpoint) {
-
-    .scroller {
-        grid-auto-columns: 45%;
-        margin: 9em;
-
-        
-    }
+  .main-content__scroller {
+    grid-auto-columns: 45%;
+    margin: 9em;
+  }
 }
-
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: a.$lg-breakpoint) {
-    .scroller {
-        grid-auto-columns: 65%;
-        margin: 15em;
-    
-      
-    }
+  .main-content__scroller {
+    grid-auto-columns: 65%;
+    margin: 15em;
+  }
 
-
-    .scroll-item {
-    >img {
-        inline-size: 100%;
-    aspect-ratio: 20/9;
-    object-fit: cover; }
-    
+  .main-content__scroll-item {
+    > img {
+      inline-size: 100%;
+      aspect-ratio: 20/9;
+      object-fit: cover;
     }
- }
+  }
+}

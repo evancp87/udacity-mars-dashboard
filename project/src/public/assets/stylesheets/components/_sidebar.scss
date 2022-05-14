@@ -2,13 +2,12 @@
 
 // mobile first styles
 
-
 .sidebar {
   flex: 0 0 300px;
   padding: 1rem;
   height: auto;
 
-  .rover-name {
+  .sidebar__rover-name {
     font-size: 2.5em;
     color: a.$white;
     font-weight: 800;
@@ -16,97 +15,84 @@
       top: 0;
       bottom: 1em;
     }
-
-     
   }
 }
 
-.roverinfo-item {
+.sidebar__roverinfo-item {
+  margin: 2em 0 2em 0;
+  padding: 1;
+  font-size: 1.5em;
+  color: a.$white;
+  border-bottom: 1px solid a.$white;
+  white-space: nowrap;
+
+  &:last-of-type {
     margin: 2em 0 2em 0;
-    padding: 1;
+  }
+
+  + .sidebar__rover-fact {
     font-size: 1.5em;
     color: a.$white;
-    border-bottom: 1px solid a.$white;
-    white-space: nowrap;
-
-    &:last-of-type {
-      margin: 2em 0 2em 0;
-    }
-
-  + .rover-fact {
-    font-size: 1.5em;
-    color: a.$white;
-  
   }
 }
 
-.loading-rovers {
-@extend %loading;
+.sidebar__loading-rovers {
+  @extend %loading;
 }
 
-
-@keyframes loading{
+@keyframes loading {
   0% {
-opacity: 1;
-  }  50% {
+    opacity: 1;
+  }
+  50% {
     opacity: 0;
   }
-  
+
   100% {
     opacity: 1;
   }
 }
-.roverinfo-item > span {
-    display: flex;
-    justify-content: space-between;
-    white-space: nowrap;
-    color: a.$orange;
-    
+.sidebar__roverinfo-item > span {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+  color: a.$orange;
 }
 
-
-.blue {
+.sidebar--blue {
   background-color: a.$blue;
   @include a.bgGradient(a.$blue);
 }
 
-
-.main-rover-img {
-  max-width: 100%;height: auto;
+.sidebar__main-rover-img {
+  max-width: 100%;
+  height: auto;
 }
-
 
 /* -------------------  TABLET  --------------------- */
 
 @media (max-width: a.$tablet-breakpoint) {
   .sidebar {
-    
-    .rover-name {
+    .sidebar__rover-name {
       font-size: 2em;
-}
+    }
   }
 }
 
-
 /* -------------------  DESKTOP  -------------------- */
 @media (min-width: a.$desktop-breakpoint) {
-    
 }
-
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: a.$lg-breakpoint) {
   .sidebar {
-    
-    .rover-name {
+    .sidebar__rover-name {
       font-size: 4em;
-}
+    }
   }
 
-
-  .roverinfo-item {
+  .sidebar__roverinfo-item {
     font-size: 2em;
   }
-
- }
+}
