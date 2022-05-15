@@ -14,6 +14,12 @@ main {
   flex: 1;
 }
 
+.hero {
+  height: 100vh;
+  width: 100vw;
+  background-color: #003b59;
+  background: radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%);
+}
 .mars-intro {
   position: relative;
   z-index: 20;
@@ -24,7 +30,19 @@ main {
   padding: {
     top: clamp(2rem, 10vw, 8rem);
     bottom: clamp(3rem, 10vw, 8rem);
-    // 4rem 0 4rem 0;
+  }
+  // breakpoints
+  @include tablet-breakpoint {
+    background-color: a.$blue;
+    width: 100vw;
+    height: auto;
+    @include a.flexbox-config($flex-direction: column, $align-items: center);
+  }
+  @include desktop-breakpoint {
+    background-color: a.$blue;
+    width: 100vw;
+    height: auto;
+    @include a.flexbox-config($flex-direction: column, $align-items: center);
   }
 }
 
@@ -34,6 +52,20 @@ main {
   color: a.$white;
   font-weight: 700;
   margin: a.$margin-rem-spacing-md 0 a.$margin-rem-spacing-md 0;
+
+  // breakpoints
+  @include tablet-breakpoint {
+    padding: 0;
+
+    margin-bottom: a.$margin-em-spacing-sm;
+  }
+  @include desktop-breakpoint {
+    padding: #{a.$padding-xxs-em / 2};
+    color: a.$white;
+  }
+  @include lg-screen-desktop {
+    padding: 0;
+  }
 }
 
 .mars-intro__text {
@@ -41,65 +73,14 @@ main {
   padding: 0 1.8em 0 1.8em;
   font-size: clamp(0.8em, 2vw, 2em);
   font-weight: 400;
-}
 
-@media screen and (max-width: 450px) {
-  .mars-intro__text {
+  @include xs-tablets {
+  }
+
+  @include tablet-breakpoint {
     padding: 0 1.8em 0 1.8em;
   }
-}
-
-.hero {
-  height: 100vh;
-  width: 100vw;
-  background-color: #003b59;
-  background: radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%);
-}
-
-/* -------------------  TABLET  --------------------- */
-@media screen and (min-width: a.$tablet-breakpoint) {
-  .mars-intro {
-    background-color: a.$blue;
-    width: 100vw;
-    height: auto;
-    @include a.flexbox-config($flex-direction: column, $align-items: center);
-  }
-
-  .mars-intro__title {
-    padding: 0;
-
-    margin-bottom: a.$margin-em-spacing-sm;
-  }
-
-  .mars-intro__text {
-    padding: 0 1.8em 0 1.8em;
-  }
-}
-
-/* -------------------  DESKTOP  --------------------- */
-@media (min-width: a.$desktop-breakpoint) {
-  .mars-intro {
-    background-color: a.$blue;
-    width: 100vw;
-    height: auto;
-    display: flex;
-
-    @include a.flexbox-config($flex-direction: column, $align-items: center);
-  }
-
-  .mars-intro__title {
-    padding: #{a.$padding-xxs-em / 2};
-    color: a.$white;
-  }
-
-  .mars-intro__text {
+  @include desktop-breakpoint {
     padding: 0 a.$padding-lg-em 0 a.$padding-lg-em;
-  }
-}
-
-/* -------------------  LARGE SCREENS  -------------- */
-@media (min-width: a.$lg-breakpoint) {
-  .mars-intro__title {
-    padding: 0;
   }
 }

@@ -14,6 +14,36 @@
   background-color: a.$mars-planet;
   animation: planet-orbit 5s ease-in-out infinite;
   z-index: 10;
+  @include tablet-breakpoint {
+    left: 45%;
+
+    &::before,
+    &::after {
+      left: 50%;
+    }
+  }
+  @include desktop-breakpoint {
+    left: 45%;
+
+    &::before,
+    &::after {
+      left: 50%;
+    }
+  }
+
+  @include lg-screen-desktop {
+    left: 50%;
+    width: 240px;
+    height: 240px;
+
+    &::before,
+    &::after {
+      top: 120%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+    }
+  }
 
   &::before,
   &::after {
@@ -132,49 +162,6 @@
         top: 70%;
         @include a.prefix(animation-delay, 0.3s, ms moz webkit);
       }
-    }
-  }
-}
-
-/* -------------------  TABLET  --------------------- */
-
-@media (min-width: a.$tablet-breakpoint) {
-  .hero__scroll-down {
-    left: 45%;
-
-    &::before,
-    &::after {
-      left: 50%;
-    }
-  }
-}
-
-/* -------------------  DESKTOP  -------------------- */
-@media (min-width: a.$desktop-breakpoint) {
-  .hero__scroll-down {
-    left: 45%;
-
-    &::before,
-    &::after {
-      left: 50%;
-    }
-  }
-}
-
-/* -------------------  LARGE SCREENS  -------------- */
-
-@media (min-width: a.$lg-breakpoint) {
-  .hero__scroll-down {
-    left: 50%;
-    width: 240px;
-    height: 240px;
-
-    &::before,
-    &::after {
-      top: 120%;
-      left: 50%;
-      width: 50px;
-      height: 50px;
     }
   }
 }

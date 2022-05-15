@@ -16,34 +16,22 @@
 
   z-index: 20;
 
-  .ftr__copyright {
-    + .ftr__info {
-    }
-  }
-}
-
-/* -------------------  TABLET  --------------------- */
-
-@media (min-width: a.$tablet-breakpoint) {
-  .ftr {
+  @include tablet-breakpoint {
     font-size: #{a.$font-size-sm - 0.2em};
     padding: a.$padding-rg-em;
   }
-}
-
-/* -------------------  DESKTOP  -------------------- */
-@media (min-width: a.$desktop-breakpoint) {
-  .ftr {
+  @include desktop-breakpoint {
     font-size: #{a.$font-size-sm + 0.2em};
     padding: a.$padding-rg-em;
   }
-}
 
-/* -------------------  LARGE SCREENS  -------------- */
-
-@media (min-width: a.$lg-breakpoint) {
-  .ftr {
+  @include lg-screen-desktop {
     font-size: a.$font-size-md;
     padding: #{a.$padding-rg-em * 1.5};
   }
+
+  // .ftr__copyright {
+  //   + .ftr__info {
+  //   }
+  // }
 }

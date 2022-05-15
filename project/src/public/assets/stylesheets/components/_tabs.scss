@@ -23,34 +23,22 @@
   &:active {
     background-color: a.$orange;
   }
-}
 
-// For xs devices only
+  &:focus {
+    background-color: a.$orange;
+  }
 
-@media (max-width: 300px) {
-  .rover-section__btn-tab {
+  // breakpoints
+  @include extra-sm-phones-max {
     padding: a.$padding-md-em 0;
   }
-}
-/* -------------------  TABLET  --------------------- */
-
-@media (min-width: a.$tablet-breakpoint) {
-  .rover-section__btn-tab {
+  @include tablet-breakpoint {
     font-size: #{a.$font-size-sm-rem * 1.5};
   }
-}
-
-/* -------------------  DESKTOP  -------------------- */
-@media (min-width: a.$desktop-breakpoint) {
-  .rover-section__btn-tab {
+  @include desktop-breakpoint {
     font-size: #{a.$font-size-sm-rem * 1.5};
   }
-}
-
-/* -------------------  LARGE SCREENS  -------------- */
-
-@media (min-width: a.$lg-breakpoint) {
-  .rover-section__btn-tab {
+  @include lg-screen-desktop {
     font-size: a.$font-size-md-rem;
   }
 }

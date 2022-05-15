@@ -15,6 +15,12 @@
       top: 0;
       bottom: a.$margin-em-spacing-sm;
     }
+    @include tablet-breakpoint-max-width {
+      font-size: a.$font-size-md;
+    }
+    @include lg-screen-desktop {
+      font-size: a.$font-size-lg;
+    }
   }
 }
 
@@ -26,6 +32,13 @@
   color: a.$white;
   border-bottom: 1px solid a.$white;
   white-space: nowrap;
+  @include a.flexbox-config(
+    $flex-direction: row,
+    $justify-content: space-between
+  );
+  @include lg-screen-desktop {
+    font-size: a.$font-size-md;
+  }
 
   &:last-of-type {
     margin: a.$margin-em-spacing-md 0 a.$margin-em-spacing-md 0;
@@ -69,41 +82,4 @@
 .sidebar__main-rover-img {
   max-width: 100%;
   height: auto;
-}
-
-/* -------------------  TABLET  --------------------- */
-
-@media (min-width: 350px) {
-  .sidebar__roverinfo-item {
-    @include a.flexbox-config(
-      $flex-direction: row,
-      $justify-content: space-between
-    );
-  }
-}
-
-@media (max-width: a.$tablet-breakpoint) {
-  .sidebar {
-    .sidebar__rover-name {
-      font-size: a.$font-size-md;
-    }
-  }
-}
-
-/* -------------------  DESKTOP  -------------------- */
-@media (min-width: a.$desktop-breakpoint) {
-}
-
-/* -------------------  LARGE SCREENS  -------------- */
-
-@media (min-width: a.$lg-breakpoint) {
-  .sidebar {
-    .sidebar__rover-name {
-      font-size: a.$font-size-lg;
-    }
-  }
-
-  .sidebar__roverinfo-item {
-    font-size: a.$font-size-md;
-  }
 }
